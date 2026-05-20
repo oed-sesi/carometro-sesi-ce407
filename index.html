@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ED1C24">
+  <meta name="description" content="Carômetro Escolar — Centro Educacional SESI 407">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Carômetro Escolar — SESI 407</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       CARÔMETRO ESCOLAR — SESI 407
+       Design System v5.0 — Static GitHub Pages Edition
+    ═══════════════════════════════════════════════════════════════ */
+
+    :root {
+      --sesi-red:       #ED1C24;
+      --sesi-red-dark:  #C9131A;
+      --sesi-red-50:    #FFF5F5;
+      --sesi-red-100:   #FED7D7;
+
+      --gray-50:   #F9FAFB;
+      --gray-100:  #F3F4F6;
+      --gray-200:  #E5E7EB;
+      --gray-300:  #D1D5DB;
+      --gray-400:  #9CA3AF;
+      --gray-500:  #6B7280;
+      --gray-600:  #4B5563;
+      --gray-700:  #374151;
+      --gray-800:  #1F2937;
+      --gray-900:  #111827;
+
+      --blue-500:  #3B82F6;
+      --blue-600:  #2563EB;
+      --green-500: #10B981;
+      --green-600: #059669;
+      --amber-500: #F59E0B;
+
+      --sidebar-w:           240px;
+      --sidebar-w-collapsed: 52px;
+      --header-h:  60px;
+      --radius:    8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.05);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.06);
+
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --transition: .15s ease;
+
+      --sidebar-bg:         #111827;
+      --sidebar-border:     rgba(255,255,255,.08);
+      --sidebar-text:       #D1D5DB;
+      --sidebar-text-sub:   #6B7280;
+      --sidebar-hover-bg:   rgba(255,255,255,.06);
+      --sidebar-active-bg:  #ED1C24;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font);
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    input, select, textarea { font-family: inherit; }
+
+    /* ── Screens ───────────────────────────────────────────────── */
+    .screen { display: none; }
+    .screen.active { display: flex; }
+
+    /* ═══════════════════════════════════════════════════════════
+       LOGIN SCREEN
+    ═══════════════════════════════════════════════════════════ */
+    #screen-login {
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background: #111827;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    #screen-login::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(237,28,36,.25), transparent),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23374151' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C%2Fg%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .login-card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 400px;
+      background: rgba(255,255,255,.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 40px 36px 36px;
+      box-shadow: 0 25px 50px rgba(0,0,0,.6);
+      animation: loginSlideUp .4s ease;
+    }
+    @keyframes loginSlideUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .login-logo-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; margin-bottom: 32px;
+    }
+    .login-logo-circle { margin-bottom: 20px; }
+    .login-logo-circle img { width: 180px; height: auto; object-fit: contain; border-radius: 8px; }
+    .login-title { font-size: 1.35rem; font-weight: 800; color: #fff; letter-spacing: -.01em; }
+    .login-subtitle { font-size: .82rem; color: rgba(255,255,255,.45); margin-top: 3px; }
+    .error-banner {
+      background: rgba(237,28,36,.15);
+      border: 1px solid rgba(237,28,36,.3);
+      border-radius: 8px; padding: 10px 14px;
+      color: #FCA5A5; font-size: .84rem;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 20px;
+    }
+    .login-form-group { margin-bottom: 16px; }
+    .login-label {
+      display: block; font-size: .8rem; font-weight: 600;
+      color: rgba(255,255,255,.55); margin-bottom: 6px;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .login-input-wrap { position: relative; }
+    .login-input-icon {
+      position: absolute; left: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.3); pointer-events: none;
+    }
+    .login-input {
+      width: 100%; padding: 11px 12px 11px 38px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px; color: #fff;
+      font-size: .92rem; outline: none;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+    }
+    .login-input::placeholder { color: rgba(255,255,255,.2); }
+    .login-input:focus {
+      border-color: #ED1C24;
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 0 0 3px rgba(237,28,36,.2);
+    }
+    .btn-login {
+      width: 100%; padding: 12px;
+      background: #ED1C24; color: #fff;
+      border-radius: 8px; font-size: .95rem;
+      font-weight: 700; margin-top: 8px;
+      transition: background .15s, transform .1s;
+    }
+    .btn-login:hover { background: #C9131A; }
+    .btn-login:active { transform: scale(.98); }
+    .login-footer {
+      text-align: center; margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: rgba(255,255,255,.2); font-size: .75rem;
+    }
+    .login-footer span { color: rgba(255,255,255,.4); }
+
+    /* ═══════════════════════════════════════════════════════════
+       APP SHELL
+    ═══════════════════════════════════════════════════════════ */
+    #screen-app {
+      flex-direction: row;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w-collapsed);
+      background: var(--sidebar-bg);
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0;
+      z-index: 100; overflow: hidden;
+      transition: width .22s ease, transform .25s ease;
+    }
+    .sidebar:hover, .sidebar.expanded { width: var(--sidebar-w); }
+
+    .sidebar-brand {
+      padding: 0; border-bottom: 1px solid var(--sidebar-border);
+      display: flex; flex-direction: column;
+      align-items: center; overflow: hidden;
+      height: 56px;
+      transition: height .22s ease, padding .22s ease;
+    }
+    .sidebar:hover .sidebar-brand,
+    .sidebar.expanded .sidebar-brand {
+      height: 164px; padding: 18px 16px 14px;
+    }
+    .sidebar-brand-collapsed {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 56px; flex-shrink: 0;
+      transition: opacity .15s ease;
+    }
+    .sidebar:hover .sidebar-brand-collapsed,
+    .sidebar.expanded .sidebar-brand-collapsed { opacity: 0; pointer-events: none; }
+
+    .sidebar-logo {
+      width: 92px; height: 92px; border-radius: 14px;
+      background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.28);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-bottom: 12px; padding: 6px; overflow: hidden;
+      opacity: 0; transform: scale(.88);
+      transition: opacity .2s ease .05s, transform .2s ease .05s;
+    }
+    .sidebar:hover .sidebar-logo,
+    .sidebar.expanded .sidebar-logo { opacity: 1; transform: scale(1); }
+    .sidebar-logo img { width: 80px; height: auto; object-fit: contain; }
+
+    .sidebar-brand-text {
+      text-align: center; width: 100%;
+      opacity: 0; transform: translateY(4px);
+      transition: opacity .2s ease .08s, transform .2s ease .08s;
+    }
+    .sidebar:hover .sidebar-brand-text,
+    .sidebar.expanded .sidebar-brand-text { opacity: 1; transform: translateY(0); }
+
+    .sidebar-brand-name {
+      font-size: .82rem; font-weight: 800;
+      color: #fff; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-brand-sub {
+      font-size: .7rem; color: var(--sidebar-text-sub);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .sidebar-nav { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 8px 6px; }
+    .sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+    .nav-section { margin-bottom: 4px; }
+    .nav-section-label {
+      font-size: .62rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--sidebar-text-sub); padding: 10px 8px 4px;
+      white-space: nowrap; overflow: hidden;
+      opacity: 0; transition: opacity .15s ease;
+    }
+    .sidebar:hover .nav-section-label,
+    .sidebar.expanded .nav-section-label { opacity: 1; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 8px; border-radius: 6px; cursor: pointer;
+      color: var(--sidebar-text); font-size: .84rem; font-weight: 500;
+      white-space: nowrap; overflow: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-item:hover { background: var(--sidebar-hover-bg); }
+    .nav-item.active { background: var(--sidebar-active-bg); color: #fff; font-weight: 700; }
+    .nav-item i { flex-shrink: 0; width: 18px; height: 18px; }
+    .nav-item span { overflow: hidden; text-overflow: ellipsis; }
+
+    .sidebar-footer {
+      padding: 10px 6px; border-top: 1px solid var(--sidebar-border);
+    }
+    .sidebar-user {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px; border-radius: 6px;
+      overflow: hidden;
+    }
+    .sidebar-user-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--sesi-red); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 800; flex-shrink: 0;
+    }
+    .sidebar-user-info { overflow: hidden; opacity: 0; transition: opacity .15s; }
+    .sidebar:hover .sidebar-user-info,
+    .sidebar.expanded .sidebar-user-info { opacity: 1; }
+    .sidebar-user-name { font-size: .8rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sidebar-user-role { font-size: .7rem; color: var(--sidebar-text-sub); white-space: nowrap; }
+
+    /* ── Main Content ──────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      margin-left: var(--sidebar-w-collapsed);
+      display: flex; flex-direction: column;
+      min-height: 100vh;
+      transition: margin-left .22s ease;
+    }
+
+    /* ── Topbar ────────────────────────────────────────────────── */
+    .topbar {
+      height: var(--header-h);
+      background: #fff;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex; align-items: center;
+      padding: 0 20px; gap: 12px;
+      position: sticky; top: 0; z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-toggle {
+      display: none; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 8px;
+      color: var(--gray-500); flex-shrink: 0;
+    }
+    .topbar-toggle:hover { background: var(--gray-100); }
+    .topbar-title {
+      font-size: .95rem; font-weight: 700;
+      color: var(--gray-900); flex: 1;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; }
+    .topbar-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--gray-100); border: 1px solid var(--gray-200);
+      border-radius: 8px; padding: 6px 12px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .topbar-search:focus-within {
+      border-color: var(--sesi-red);
+      box-shadow: 0 0 0 3px rgba(237,28,36,.12);
+      background: #fff;
+    }
+    .topbar-search input {
+      background: none; border: none; outline: none;
+      font-size: .86rem; color: var(--gray-800);
+      width: 200px;
+    }
+    .topbar-search input::placeholder { color: var(--gray-400); }
+
+    /* ── Page ──────────────────────────────────────────────────── */
+    .page { padding: 24px 28px; flex: 1; }
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+
+    .page-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 16px;
+      margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .page-title { font-size: 1.35rem; font-weight: 800; color: var(--gray-900); }
+    .page-subtitle { font-size: .84rem; color: var(--gray-500); margin-top: 2px; }
+    .page-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Cards ─────────────────────────────────────────────────── */
+    .card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--gray-100);
+    }
+    .card-title { font-size: .9rem; font-weight: 700; color: var(--gray-900); }
+    .card-body { padding: 18px; }
+
+    /* ── Stats ─────────────────────────────────────────────────── */
+    .stats-grid { display: grid; gap: 16px; margin-bottom: 24px; }
+    .stat-card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 16px 18px; box-shadow: var(--shadow-sm);
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%; background: var(--gray-200);
+    }
+    .stat-card.red::before   { background: var(--sesi-red); }
+    .stat-card.green::before { background: var(--green-500); }
+    .stat-card.blue::before  { background: var(--blue-500); }
+    .stat-card.amber::before { background: var(--amber-500); }
+    .stat-label { font-size: .75rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
+    .stat-value { font-size: 2rem; font-weight: 900; color: var(--gray-900); letter-spacing: -.04em; line-height: 1; }
+    .stat-sub   { font-size: .76rem; color: var(--gray-400); margin-top: 4px; }
+
+    /* ── Buttons ───────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 8px 14px; border-radius: 7px;
+      font-size: .84rem; font-weight: 600;
+      transition: all var(--transition); cursor: pointer; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--sesi-red); color: #fff; border-color: var(--sesi-red); }
+    .btn-primary:hover { background: var(--sesi-red-dark); border-color: var(--sesi-red-dark); }
+    .btn-secondary { background: #fff; color: var(--gray-700); border-color: var(--gray-300); }
+    .btn-secondary:hover { background: var(--gray-50); border-color: var(--gray-400); }
+    .btn-ghost { background: transparent; color: var(--gray-600); border-color: transparent; }
+    .btn-ghost:hover { background: var(--gray-100); }
+    .btn-sm { padding: 6px 10px; font-size: .8rem; }
+
+    /* ── Badges ────────────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 2px 8px; border-radius: 20px;
+      font-size: .72rem; font-weight: 700;
+    }
+    .badge-green { background: #D1FAE5; color: #065F46; }
+    .badge-red   { background: #FEE2E2; color: #991B1B; }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+    .badge-gray  { background: var(--gray-100); color: var(--gray-600); }
+    .badge-blue  { background: #DBEAFE; color: #1E40AF; }
+
+    /* ── Filter Bar ────────────────────────────────────────────── */
+    .filter-bar {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap; margin-bottom: 20px;
+      background: #fff; border: 1px solid var(--gray-200);
+      border-radius: var(--radius); padding: 10px 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .search-wrap {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: 6px; padding: 6px 10px;
+      flex: 1; min-width: 200px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--sesi-red);
+      box-shadow: 0 0 0 3px rgba(237,28,36,.1);
+      background: #fff;
+    }
+    .search-wrap input {
+      border: none; outline: none; background: none;
+      font-size: .86rem; color: var(--gray-800); width: 100%;
+    }
+    .search-wrap input::placeholder { color: var(--gray-400); }
+    .form-select {
+      padding: 7px 10px; border: 1px solid var(--gray-200);
+      border-radius: 6px; font-size: .84rem; color: var(--gray-700);
+      background: var(--gray-50); outline: none; cursor: pointer;
+      transition: border-color .15s;
+    }
+    .form-select:focus { border-color: var(--sesi-red); }
+
+    /* ── Student Grid ──────────────────────────────────────────── */
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+    .student-card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 12px 10px 10px; text-align: center;
+      cursor: pointer; transition: all .18s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .student-card:hover {
+      border-color: var(--sesi-red);
+      box-shadow: 0 4px 16px rgba(237,28,36,.12);
+      transform: translateY(-2px);
+    }
+    .student-card-photo {
+      width: 72px; height: 96px; border-radius: 6px;
+      object-fit: cover; margin: 0 auto 8px;
+      border: 1px solid var(--gray-200);
+    }
+    .student-card-nophoto {
+      width: 72px; height: 96px; border-radius: 6px;
+      background: var(--gray-100); border: 2px dashed var(--gray-300);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 8px; gap: 4px; color: var(--gray-400);
+    }
+    .student-card-name {
+      font-size: .75rem; font-weight: 700;
+      color: var(--gray-800); line-height: 1.3;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .student-card-meta { font-size: .68rem; color: var(--gray-400); margin-top: 3px; }
+
+    /* ── Student Table ─────────────────────────────────────────── */
+    .table-wrap {
+      border: 1px solid var(--gray-200); border-radius: var(--radius);
+      overflow: hidden; background: #fff; box-shadow: var(--shadow-sm);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: var(--gray-50); padding: 10px 14px;
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: var(--gray-500); text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    tbody tr { border-bottom: 1px solid var(--gray-100); cursor: pointer; transition: background .1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--sesi-red-50); }
+    tbody td { padding: 11px 14px; font-size: .86rem; color: var(--gray-700); }
+
+    /* ── Student Detail ────────────────────────────────────────── */
+    .detail-layout {
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 24px; align-items: start;
+    }
+    .detail-photo-card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 24px 20px; text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .detail-photo {
+      width: 150px; height: 200px; object-fit: cover;
+      border-radius: 8px; border: 1px solid var(--gray-200);
+      margin: 0 auto 14px;
+    }
+    .detail-photo-placeholder {
+      width: 150px; height: 200px; border-radius: 8px;
+      background: var(--gray-100); border: 2px dashed var(--gray-300);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 14px; gap: 8px; color: var(--gray-400);
+    }
+    .detail-name { font-weight: 800; font-size: .95rem; color: var(--gray-900); line-height: 1.3; margin-bottom: 4px; }
+    .detail-rm   { font-size: .8rem; color: var(--gray-400); }
+    .detail-badge-row { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+
+    .field-group { display: grid; gap: 12px 20px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); }
+    .field-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .field-label { font-size: .71rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-400); margin-bottom: 3px; }
+    .field-value { font-size: .9rem; color: var(--gray-800); }
+    .field-empty { font-size: .85rem; color: var(--gray-300); font-style: italic; }
+
+    /* ── Pagination ────────────────────────────────────────────── */
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 20px; flex-wrap: wrap; gap: 12px;
+    }
+    .page-info { font-size: .82rem; color: var(--gray-500); }
+    .page-btns { display: flex; gap: 4px; }
+    .page-btn {
+      min-width: 34px; height: 34px; border-radius: 6px;
+      border: 1px solid var(--gray-200); background: #fff;
+      font-size: .82rem; font-weight: 600; color: var(--gray-600);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .12s;
+    }
+    .page-btn:hover { background: var(--gray-50); border-color: var(--gray-300); }
+    .page-btn.active { background: var(--sesi-red); border-color: var(--sesi-red); color: #fff; }
+    .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Dashboard Turmas ──────────────────────────────────────── */
+    .turma-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px; background: var(--gray-200);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      overflow: hidden;
+    }
+    .tc-item {
+      background: #fff; padding: 20px 18px 18px;
+      cursor: pointer; transition: background .15s; position: relative;
+    }
+    .tc-item:hover { background: var(--gray-50); }
+    .tc-serie {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--gray-400); margin-bottom: 2px;
+    }
+    .tc-turma { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+    .tc-count { display: flex; align-items: baseline; gap: 3px; margin-bottom: 8px; }
+    .tc-count-num { font-size: 1.7rem; font-weight: 900; color: var(--gray-900); line-height: 1; letter-spacing: -.04em; }
+    .tc-count-sep { font-size: .9rem; color: var(--gray-300); }
+    .tc-count-total { font-size: .85rem; color: var(--gray-400); font-weight: 500; }
+    .tc-progress { height: 4px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+    .tc-progress-bar { height: 100%; border-radius: 4px; background: var(--green-500); transition: width .4s ease; }
+    .tc-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: 3px 8px;
+      border-radius: 20px; border: 1px solid;
+    }
+    .tc-badge.tc-green { color: #065f46; background: #d1fae5; border-color: #6ee7b7; }
+    .tc-badge.tc-amber { color: #92400e; background: #fef3c7; border-color: #fcd34d; }
+    .tc-badge.tc-red   { color: #991b1b; background: #fee2e2; border-color: #fca5a5; }
+    .tc-turno { margin-top: 8px; font-size: .7rem; color: var(--gray-400); font-weight: 500; }
+
+    /* ── View Toggle ───────────────────────────────────────────── */
+    .view-toggle { display: flex; gap: 2px; background: var(--gray-100); border-radius: 6px; padding: 3px; }
+    .view-toggle-btn {
+      width: 30px; height: 28px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-400); transition: all .12s;
+    }
+    .view-toggle-btn:hover { background: #fff; color: var(--gray-600); }
+    .view-toggle-btn.active { background: var(--sesi-red); color: #fff; }
+
+    /* ── Toast ─────────────────────────────────────────────────── */
+    #toast-container {
+      position: fixed; bottom: 24px; right: 24px;
+      z-index: 9999; display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border-radius: 10px; min-width: 240px;
+      background: var(--gray-900); color: #fff;
+      font-size: .86rem; font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      animation: toastIn .25s ease;
+    }
+    @keyframes toastIn {
+      from { opacity:0; transform:translateX(60px); }
+      to   { opacity:1; transform:translateX(0); }
+    }
+    .toast-success { background: #065F46; }
+    .toast-error   { background: #991B1B; }
+    .toast-warning { background: #92400E; }
+
+    /* ── Sidebar overlay (mobile) ──────────────────────────────── */
+    #sidebar-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.5); z-index: 99;
+    }
+    #sidebar-overlay.active { display: block; }
+
+    /* ── Breadcrumb ────────────────────────────────────────────── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .82rem; color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+    .breadcrumb a { color: var(--sesi-red); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb-sep { color: var(--gray-300); }
+    .breadcrumb-current { color: var(--gray-700); font-weight: 600; }
+
+    /* ── Alert ─────────────────────────────────────────────────── */
+    .alert {
+      padding: 12px 16px; border-radius: 8px;
+      font-size: .86rem; display: flex; align-items: center; gap: 8px;
+      margin-bottom: 16px;
+    }
+    .alert-info { background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF; }
+    .alert-warning { background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; }
+
+    /* ── Empty State ───────────────────────────────────────────── */
+    .empty-state {
+      text-align: center; padding: 60px 24px; color: var(--gray-400);
+    }
+    .empty-state h3 { font-size: 1rem; color: var(--gray-600); margin-top: 12px; }
+    .empty-state p  { font-size: .86rem; margin-top: 6px; }
+
+    /* ── Dark Mode ─────────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --gray-50:   #12151C;
+      --gray-100:  #1A1D23;
+      --gray-200:  #232836;
+      --gray-300:  #2E3446;
+      --gray-400:  #6B7280;
+      --gray-500:  #9CA3AF;
+      --gray-600:  #CBD5E0;
+      --gray-700:  #E2E8F0;
+      --gray-800:  #F1F5F9;
+      --gray-900:  #F8FAFC;
+      --sidebar-bg: #0F1117;
+    }
+    [data-theme="dark"] body { background: #12151C; color: var(--gray-800); }
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .topbar,
+    [data-theme="dark"] .stat-card,
+    [data-theme="dark"] .student-card,
+    [data-theme="dark"] .table-wrap,
+    [data-theme="dark"] .filter-bar,
+    [data-theme="dark"] .detail-photo-card,
+    [data-theme="dark"] .tc-item { background: #1A1D23; border-color: #2A2F3D; }
+    [data-theme="dark"] .topbar { border-bottom-color: #2A2F3D; }
+    [data-theme="dark"] .card-header { border-bottom-color: #2A2F3D; }
+    [data-theme="dark"] thead th { background: #1F2330; border-bottom-color: #2A2F3D; }
+    [data-theme="dark"] tbody tr { border-bottom-color: #2A2F3D; }
+    [data-theme="dark"] tbody tr:hover { background: #1F2330; }
+    [data-theme="dark"] .form-select { background: #1F2330; border-color: #3A4055; color: var(--gray-800); }
+    [data-theme="dark"] .search-wrap { background: #1F2330; border-color: #3A4055; }
+    [data-theme="dark"] .search-wrap input { color: var(--gray-800); }
+    [data-theme="dark"] .btn-secondary { background: #1F2330; border-color: #3A4055; color: var(--gray-700); }
+    [data-theme="dark"] .page-btn { background: #1A1D23; border-color: #3A4055; color: var(--gray-700); }
+    [data-theme="dark"] .turma-cards-grid { background: #2A2F3D; }
+    [data-theme="dark"] .tc-item:hover { background: #20242E; }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVIDADE
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        width: var(--sidebar-w) !important;
+      }
+      .sidebar.mobile-open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .topbar-toggle { display: flex; }
+      .topbar-search { display: none; }
+      .page { padding: 14px 14px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      .detail-layout { grid-template-columns: 1fr; }
+      .detail-photo-card { display: flex; gap: 16px; text-align: left; align-items: center; }
+      .detail-photo, .detail-photo-placeholder { width: 80px; height: 106px; flex-shrink: 0; margin: 0; }
+      .detail-badge-row { flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .student-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+      .student-card { padding: 8px 6px 6px; }
+      .student-card-photo, .student-card-nophoto { width: 52px; height: 70px; }
+      .student-card-name { font-size: .68rem; }
+      .page-title { font-size: 1.1rem; }
+    }
+    @media (pointer: coarse) {
+      .btn { min-height: 42px; }
+      .btn-sm { min-height: 36px; }
+      .nav-item { padding: 12px 8px; }
+      .page-btn { min-width: 38px; min-height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN: LOGIN
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-login" class="screen active">
+  <div class="login-card">
+    <div class="login-logo-wrap">
+      <div class="login-logo-circle">
+        <img id="login-logo" src="assets/img/logo_sesi.png" alt="SESI 407"
+             onerror="this.style.display='none'">
+      </div>
+      <h1 class="login-title">Carômetro Escolar</h1>
+      <p class="login-subtitle">Centro Educacional SESI 407</p>
+    </div>
+
+    <div id="login-error" class="error-banner" style="display:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span id="login-error-msg">Usuário ou senha incorretos.</span>
+    </div>
+
+    <div>
+      <div class="login-form-group">
+        <label class="login-label" for="login-user">Usuário</label>
+        <div class="login-input-wrap">
+          <svg class="login-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+          <input class="login-input" type="text" id="login-user"
+                 placeholder="seu.usuario" autocomplete="username">
+        </div>
+      </div>
+      <div class="login-form-group">
+        <label class="login-label" for="login-pass">Senha</label>
+        <div class="login-input-wrap">
+          <svg class="login-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <input class="login-input" type="password" id="login-pass"
+                 placeholder="••••••••" autocomplete="current-password">
+        </div>
+      </div>
+      <button class="btn-login" onclick="doLogin()">Entrar no Sistema</button>
+    </div>
+
+    <div class="login-footer">
+      <span>Carômetro Escolar</span> — Sistema de Carômetro Escolar<br>
+      Centro Educacional SESI 407
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN: APP
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-app" class="screen">
+
+  <!-- Overlay mobile -->
+  <div id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-collapsed">
+        <div style="width:36px;height:36px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(0,0,0,.25);overflow:hidden;padding:3px;">
+          <img src="assets/img/logo_sesi.png" alt="SESI"
+               style="width:30px;height:auto;object-fit:contain;"
+               onerror="this.parentElement.style.display='none'">
+        </div>
+      </div>
+      <div class="sidebar-logo">
+        <img src="assets/img/logo_sesi.png" alt="SESI 407" onerror="this.style.display='none'">
+      </div>
+      <div class="sidebar-brand-text">
+        <div class="sidebar-brand-name">Carômetro Escolar</div>
+        <div class="sidebar-brand-sub">Centro Educacional SESI 407</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Principal</div>
+        <a class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
+          <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+        </a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Consultas</div>
+        <a class="nav-item" id="nav-alunos" onclick="showView('alunos')">
+          <i data-lucide="users"></i><span>Todos os Alunos</span>
+        </a>
+        <a class="nav-item" id="nav-turmas" onclick="showView('turmas')">
+          <i data-lucide="layers"></i><span>Por Turma</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar" id="user-avatar-initials">AD</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="user-display-name">Administrador</div>
+          <div class="sidebar-user-role" id="user-display-role">Sistema Carômetro</div>
+        </div>
+      </div>
+      <div style="margin-top:6px;">
+        <button class="nav-item" onclick="doLogout()" style="width:100%;color:#EF4444;">
+          <i data-lucide="log-out"></i><span>Sair</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main" id="main">
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="topbar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+        <i data-lucide="menu" width="20" height="20"></i>
+      </button>
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="topbar-search">
+          <i data-lucide="search" width="14" height="14" style="color:var(--gray-400);flex-shrink:0;"></i>
+          <input type="text" placeholder="Buscar aluno…" id="topbar-search-input"
+                 oninput="topbarSearch(this.value)">
+        </div>
+        <!-- Dark mode toggle -->
+        <button class="btn btn-ghost btn-sm" onclick="toggleTheme()" title="Alternar tema">
+          <i data-lucide="sun" width="16" height="16" id="theme-icon-sun"></i>
+          <i data-lucide="moon" width="16" height="16" id="theme-icon-moon" style="display:none;"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page">
+
+      <!-- ── VIEW: DASHBOARD ─────────────────────────────────── -->
+      <div class="page-view active" id="view-dashboard">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Visão Geral</h1>
+            <p class="page-subtitle" id="dash-subtitle">Resumo do Carômetro Escolar</p>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="dash-stats"
+             style="grid-template-columns:repeat(4,1fr);">
+          <div class="stat-card red">
+            <div class="stat-label"><i data-lucide="users" width="13" height="13"></i> Total de Alunos</div>
+            <div class="stat-value" id="stat-total">—</div>
+            <div class="stat-sub">cadastrados no sistema</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-label"><i data-lucide="camera" width="13" height="13"></i> Com Foto</div>
+            <div class="stat-value" id="stat-com-foto">—</div>
+            <div class="stat-sub" id="stat-com-foto-pct">—</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-label"><i data-lucide="camera-off" width="13" height="13"></i> Sem Foto</div>
+            <div class="stat-value" id="stat-sem-foto">—</div>
+            <div class="stat-sub">pendentes de coleta</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label"><i data-lucide="layers" width="13" height="13"></i> Turmas</div>
+            <div class="stat-value" id="stat-turmas">—</div>
+            <div class="stat-sub" id="stat-series-count">—</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Cobertura por Turma</span>
+            <div class="view-toggle">
+              <button class="view-toggle-btn active" id="dash-btn-cards" onclick="setDashView('cards')" title="Cards">
+                <i data-lucide="grid-3x3" width="14" height="14"></i>
+              </button>
+              <button class="view-toggle-btn" id="dash-btn-table" onclick="setDashView('table')" title="Tabela">
+                <i data-lucide="list" width="14" height="14"></i>
+              </button>
+            </div>
+          </div>
+          <div id="dash-turmas-cards" class="turma-cards-grid"></div>
+          <div id="dash-turmas-table" style="display:none;">
+            <div class="table-wrap" style="border-radius:0;border:none;box-shadow:none;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Série / Turma</th>
+                    <th>Turno</th>
+                    <th style="text-align:center;">Alunos</th>
+                    <th style="text-align:center;">Com Foto</th>
+                    <th style="text-align:center;">Sem Foto</th>
+                    <th style="text-align:center;">Cobertura</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-turmas-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div style="padding:12px 20px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.8rem;color:var(--gray-400);">
+            <span id="dash-footer-text">—</span>
+            <span id="dash-footer-pct">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VIEW: ALUNOS ────────────────────────────────────── -->
+      <div class="page-view" id="view-alunos">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Todos os Alunos</h1>
+            <p class="page-subtitle" id="alunos-subtitle">—</p>
+          </div>
+          <div class="page-actions">
+            <div class="view-toggle">
+              <button class="view-toggle-btn active" id="alunos-btn-grid" onclick="setAlunosView('grid')" title="Grade">
+                <i data-lucide="grid-3x3" width="14" height="14"></i>
+              </button>
+              <button class="view-toggle-btn" id="alunos-btn-table" onclick="setAlunosView('table')" title="Tabela">
+                <i data-lucide="list" width="14" height="14"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));margin-bottom:16px;" id="alunos-stats"></div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="search-wrap">
+            <i data-lucide="search" width="14" height="14" style="color:var(--gray-400);flex-shrink:0;"></i>
+            <input type="text" id="filter-search"
+                   placeholder="Nome, matrícula, responsável…"
+                   oninput="applyFilters()">
+          </div>
+          <select class="form-select" id="filter-serie" onchange="applyFilters()">
+            <option value="">Todas as séries</option>
+          </select>
+          <select class="form-select" id="filter-turma" onchange="applyFilters()">
+            <option value="">Turma</option>
+          </select>
+          <select class="form-select" id="filter-turno" onchange="applyFilters()">
+            <option value="">Turno</option>
+          </select>
+          <select class="form-select" id="filter-foto" onchange="applyFilters()">
+            <option value="">Foto: Todas</option>
+            <option value="sim">Com foto</option>
+            <option value="nao">Sem foto</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="clearFilters()" id="btn-clear-filters" style="display:none;">
+            <i data-lucide="x" width="13" height="13"></i> Limpar
+          </button>
+        </div>
+
+        <!-- Grid view -->
+        <div id="alunos-grid" class="student-grid"></div>
+
+        <!-- Table view -->
+        <div id="alunos-table-wrap" class="table-wrap" style="display:none;">
+          <table>
+            <thead>
+              <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Série / Turma</th>
+                <th>Turno</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="alunos-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Empty -->
+        <div id="alunos-empty" class="empty-state" style="display:none;">
+          <i data-lucide="search-x" width="48" height="48" style="margin:0 auto;color:var(--gray-300);"></i>
+          <h3>Nenhum aluno encontrado</h3>
+          <p>Tente ajustar os filtros da busca.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="alunos-pagination"></div>
+      </div>
+
+      <!-- ── VIEW: TURMAS ────────────────────────────────────── -->
+      <div class="page-view" id="view-turmas">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" id="turmas-title">Por Turma</h1>
+            <p class="page-subtitle" id="turmas-subtitle">Selecione uma turma para visualizar os alunos</p>
+          </div>
+          <div class="page-actions" id="turmas-actions" style="display:none;">
+            <button class="btn btn-secondary btn-sm" onclick="showTurmaSelector()">
+              <i data-lucide="arrow-left" width="14" height="14"></i> Outras Turmas
+            </button>
+          </div>
+        </div>
+
+        <!-- Seletor de turmas -->
+        <div id="turma-selector">
+          <div class="alert alert-info">
+            <i data-lucide="info" width="16" height="16"></i>
+            Clique em uma turma para ver todos os seus alunos com foto.
+          </div>
+          <div class="turma-cards-grid" id="turmas-selector-grid"></div>
+        </div>
+
+        <!-- Alunos da turma -->
+        <div id="turma-alunos" style="display:none;">
+          <!-- stats da turma -->
+          <div class="stats-grid" id="turma-stats"
+               style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));margin-bottom:16px;"></div>
+          <!-- grade -->
+          <div class="student-grid" id="turma-grid"></div>
+          <div id="turma-empty" class="empty-state" style="display:none;">
+            <i data-lucide="users-x" width="48" height="48" style="margin:0 auto;color:var(--gray-300);"></i>
+            <h3>Nenhum aluno nesta turma</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VIEW: DETALHE DO ALUNO ──────────────────────────── -->
+      <div class="page-view" id="view-detalhe">
+        <div class="breadcrumb" id="detalhe-breadcrumb"></div>
+        <div class="detail-layout" id="detalhe-content"></div>
+      </div>
+
+    </div><!-- /page -->
+  </div><!-- /main -->
+</div><!-- /screen-app -->
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CARÔMETRO ESCOLAR — SESI 407
+   app.js v5.0 — Static GitHub Pages Edition
+   Dados lidos de data/alunos.json — sem servidor
+═══════════════════════════════════════════════════════════════ */
+'use strict';
+
+/* ── Estado Global ────────────────────────────────────────────── */
+const APP = {
+  config:      null,
+  alunos:      [],
+  alunosFiltrados: [],
+  currentView: 'dashboard',
+  prevView:    null,
+  prevTurma:   null,
+  paginaAtual: 1,
+  itensPorPagina: 48,
+  viewAlunos:  'grid',
+  viewDash:    'cards',
+  sessionUser: null,
+};
+
+/* ── Inicialização ────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', async () => {
+  lucide.createIcons();
+  checkSession();
+});
+
+async function initApp() {
+  try {
+    const [cfgRes, alunosRes] = await Promise.all([
+      fetch('data/config.json'),
+      fetch('data/alunos.json'),
+    ]);
+    APP.config = await cfgRes.json();
+    APP.alunos = await alunosRes.json();
+  } catch (e) {
+    APP.config = { app: { nome: 'Carômetro Escolar', subtitulo: 'SESI 407', escola: 'SESI 407', ano_letivo: '2025' }, auth: { habilitado: false }, series_ordem: [] };
+    APP.alunos = [];
+    showToast('Aviso: dados não encontrados. Verifique os arquivos JSON.', 'warning');
+  }
+
+  populateFilters();
+  renderDashboard();
+  updateUserUI();
+  document.getElementById('dash-subtitle').textContent =
+    `Resumo do Carômetro Escolar — ${APP.sessionUser?.nome || ''}`;
+
+  lucide.createIcons();
+}
+
+/* ── Autenticação ─────────────────────────────────────────────── */
+async function hashStr(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errDiv = document.getElementById('login-error');
+
+  if (!user || !pass) {
+    errDiv.style.display = 'flex';
+    document.getElementById('login-error-msg').textContent = 'Preencha usuário e senha.';
+    return;
+  }
+
+  // Carregar config para verificar auth
+  let cfg;
+  try {
+    const r = await fetch('data/config.json');
+    cfg = await r.json();
+  } catch {
+    cfg = { auth: { habilitado: false } };
+  }
+
+  if (!cfg.auth.habilitado) {
+    // Auth desabilitada — acesso livre
+    APP.sessionUser = { usuario: user, nome: user, perfil: 'viewer' };
+    sessionStorage.setItem('carometro_session', JSON.stringify(APP.sessionUser));
+    showScreenApp();
+    return;
+  }
+
+  const hash = await hashStr(pass);
+  const found = cfg.auth.usuarios.find(u =>
+    u.usuario === user && u.senha_hash === hash
+  );
+
+  if (found) {
+    APP.sessionUser = { usuario: found.usuario, nome: found.nome, perfil: found.perfil };
+    sessionStorage.setItem('carometro_session', JSON.stringify(APP.sessionUser));
+    errDiv.style.display = 'none';
+    showScreenApp();
+  } else {
+    errDiv.style.display = 'flex';
+    document.getElementById('login-error-msg').textContent = 'Usuário ou senha incorretos.';
+    document.getElementById('login-pass').value = '';
+  }
+}
+
+function checkSession() {
+  const s = sessionStorage.getItem('carometro_session');
+  if (s) {
+    APP.sessionUser = JSON.parse(s);
+    showScreenApp();
+  } else {
+    // Setup: Enter key no login
+    document.getElementById('login-pass').addEventListener('keypress', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+    document.getElementById('login-user').addEventListener('keypress', e => {
+      if (e.key === 'Enter') document.getElementById('login-pass').focus();
+    });
+  }
+}
+
+function showScreenApp() {
+  document.getElementById('screen-login').classList.remove('active');
+  document.getElementById('screen-app').classList.add('active');
+  initApp();
+}
+
+function doLogout() {
+  sessionStorage.removeItem('carometro_session');
+  APP.sessionUser = null;
+  document.getElementById('screen-app').classList.remove('active');
+  document.getElementById('screen-login').classList.add('active');
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  lucide.createIcons();
+}
+
+function updateUserUI() {
+  if (!APP.sessionUser) return;
+  const { nome, perfil } = APP.sessionUser;
+  document.getElementById('user-display-name').textContent = nome;
+  document.getElementById('user-display-role').textContent =
+    perfil === 'admin' ? 'Administrador' : 'Visualizador';
+  document.getElementById('user-avatar-initials').textContent =
+    nome.split(' ').map(p => p[0]).slice(0,2).join('').toUpperCase();
+}
+
+/* ── Navegação ────────────────────────────────────────────────── */
+function showView(view) {
+  document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  APP.currentView = view;
+  document.getElementById(`view-${view}`).classList.add('active');
+  const navEl = document.getElementById(`nav-${view}`);
+  if (navEl) navEl.classList.add('active');
+
+  const titles = {
+    dashboard: 'Dashboard',
+    alunos: 'Todos os Alunos',
+    turmas: 'Por Turma',
+    detalhe: 'Detalhes do Aluno',
+  };
+  document.getElementById('topbar-title').textContent = titles[view] || view;
+
+  if (view === 'alunos') renderAlunos();
+  if (view === 'turmas') renderTurmaSelector();
+  if (window.innerWidth <= 768) closeSidebar();
+  lucide.createIcons();
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('mobile-open', 'expanded');
+  document.getElementById('sidebar-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('mobile-open', 'expanded');
+  document.getElementById('sidebar-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.contains('mobile-open')
+    ? closeSidebar() : openSidebar();
+}
+
+/* ── Tema ─────────────────────────────────────────────────────── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-icon-sun').style.display  = isDark ? '' : 'none';
+  document.getElementById('theme-icon-moon').style.display = isDark ? 'none' : '';
+  localStorage.setItem('carometro_theme', isDark ? 'light' : 'dark');
+}
+(function() {
+  const t = localStorage.getItem('carometro_theme');
+  if (t === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('theme-icon-sun').style.display  = 'none';
+      document.getElementById('theme-icon-moon').style.display = '';
+    });
+  }
+})();
+
+/* ── Dashboard ────────────────────────────────────────────────── */
+function renderDashboard() {
+  const alunos = APP.alunos;
+  const total = alunos.length;
+  const comFoto = alunos.filter(a => a.foto_coletada).length;
+  const semFoto = total - comFoto;
+
+  // Turmas únicas
+  const turmaMap = {};
+  alunos.forEach(a => {
+    const key = `${a.serie}||${a.turma}||${a.turno}`;
+    if (!turmaMap[key]) turmaMap[key] = { serie: a.serie, turma: a.turma, turno: a.turno, total: 0, comFoto: 0 };
+    turmaMap[key].total++;
+    if (a.foto_coletada) turmaMap[key].comFoto++;
+  });
+  const turmas = Object.values(turmaMap);
+  const series = [...new Set(alunos.map(a => a.serie))];
+
+  // Stats
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-com-foto').textContent = comFoto;
+  document.getElementById('stat-com-foto-pct').textContent =
+    total > 0 ? `${Math.round(comFoto/total*100)}% do total` : '—';
+  document.getElementById('stat-sem-foto').textContent = semFoto;
+  document.getElementById('stat-turmas').textContent = turmas.length;
+  document.getElementById('stat-series-count').textContent =
+    `${series.length} série(s)`;
+
+  // Cards
+  const cardsEl = document.getElementById('dash-turmas-cards');
+  const tbodyEl = document.getElementById('dash-turmas-tbody');
+  const sorted = sortTurmas(turmas);
+
+  cardsEl.innerHTML = sorted.map(t => {
+    const pct = t.total > 0 ? Math.round(t.comFoto/t.total*100) : 0;
+    const cls = pct >= 90 ? 'tc-green' : pct >= 50 ? 'tc-amber' : 'tc-red';
+    const label = pct >= 90 ? 'Completo' : pct >= 50 ? 'Parcial' : 'Pendente';
+    return `<div class="tc-item" onclick="openTurma('${esc(t.serie)}','${esc(t.turma)}','${esc(t.turno)}')">
+      <div class="tc-serie">${esc(t.serie)}</div>
+      <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
+      <div class="tc-count">
+        <span class="tc-count-num">${t.comFoto}</span>
+        <span class="tc-count-sep">/</span>
+        <span class="tc-count-total">${t.total}</span>
+      </div>
+      <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${pct>=90?'var(--green-500)':pct>=50?'var(--amber-500)':'var(--sesi-red)'};"></div></div>
+      <span class="tc-badge ${cls}">${label} · ${pct}%</span>
+      <div class="tc-turno">${esc(t.turno)}</div>
+    </div>`;
+  }).join('');
+
+  tbodyEl.innerHTML = sorted.map(t => {
+    const pct = t.total > 0 ? Math.round(t.comFoto/t.total*100) : 0;
+    const cls = pct >= 90 ? 'badge-green' : pct >= 50 ? 'badge-amber' : 'badge-red';
+    return `<tr onclick="openTurma('${esc(t.serie)}','${esc(t.turma)}','${esc(t.turno)}')">
+      <td><strong>${esc(t.serie)} ${esc(t.turma)}</strong></td>
+      <td>${esc(t.turno)}</td>
+      <td style="text-align:center;">${t.total}</td>
+      <td style="text-align:center;">${t.comFoto}</td>
+      <td style="text-align:center;">${t.total - t.comFoto}</td>
+      <td style="text-align:center;"><span class="badge ${cls}">${pct}%</span></td>
+    </tr>`;
+  }).join('');
+
+  const pctGeral = total > 0 ? Math.round(comFoto/total*100) : 0;
+  document.getElementById('dash-footer-text').textContent =
+    `${turmas.length} turma(s) · ${series.length} série(s)`;
+  document.getElementById('dash-footer-pct').textContent =
+    `Cobertura geral: ${pctGeral}%`;
+
+  lucide.createIcons();
+}
+
+function setDashView(v) {
+  APP.viewDash = v;
+  document.getElementById('dash-turmas-cards').style.display = v === 'cards' ? '' : 'none';
+  document.getElementById('dash-turmas-table').style.display = v === 'table' ? '' : 'none';
+  document.getElementById('dash-btn-cards').classList.toggle('active', v === 'cards');
+  document.getElementById('dash-btn-table').classList.toggle('active', v === 'table');
+}
+
+/* ── Alunos ───────────────────────────────────────────────────── */
+function populateFilters() {
+  const series  = [...new Set(APP.alunos.map(a => a.serie))].sort(serieSort);
+  const turmas  = [...new Set(APP.alunos.map(a => a.turma))].sort();
+  const turnos  = [...new Set(APP.alunos.map(a => a.turno))].sort();
+
+  const fSerie = document.getElementById('filter-serie');
+  series.forEach(s => {
+    const o = document.createElement('option'); o.value = s; o.textContent = s;
+    fSerie.appendChild(o);
+  });
+  const fTurma = document.getElementById('filter-turma');
+  turmas.forEach(t => {
+    const o = document.createElement('option'); o.value = t; o.textContent = `Turma ${t}`;
+    fTurma.appendChild(o);
+  });
+  const fTurno = document.getElementById('filter-turno');
+  turnos.forEach(t => {
+    const o = document.createElement('option'); o.value = t; o.textContent = t;
+    fTurno.appendChild(o);
+  });
+}
+
+function applyFilters() {
+  const search = document.getElementById('filter-search').value.toLowerCase().trim();
+  const serie  = document.getElementById('filter-serie').value;
+  const turma  = document.getElementById('filter-turma').value;
+  const turno  = document.getElementById('filter-turno').value;
+  const foto   = document.getElementById('filter-foto').value;
+
+  const hasFilter = search || serie || turma || turno || foto;
+  document.getElementById('btn-clear-filters').style.display = hasFilter ? '' : 'none';
+
+  APP.alunosFiltrados = APP.alunos.filter(a => {
+    if (search && !`${a.nome_completo} ${a.matricula} ${a.mae_nome || ''} ${a.pai_nome || ''}`.toLowerCase().includes(search)) return false;
+    if (serie  && a.serie  !== serie)  return false;
+    if (turma  && a.turma  !== turma)  return false;
+    if (turno  && a.turno  !== turno)  return false;
+    if (foto === 'sim' && !a.foto_coletada)  return false;
+    if (foto === 'nao' &&  a.foto_coletada)  return false;
+    return true;
+  });
+
+  APP.paginaAtual = 1;
+  renderAlunos();
+}
+
+function clearFilters() {
+  document.getElementById('filter-search').value = '';
+  document.getElementById('filter-serie').value  = '';
+  document.getElementById('filter-turma').value  = '';
+  document.getElementById('filter-turno').value  = '';
+  document.getElementById('filter-foto').value   = '';
+  APP.alunosFiltrados = [];
+  document.getElementById('btn-clear-filters').style.display = 'none';
+  APP.paginaAtual = 1;
+  renderAlunos();
+}
+
+function renderAlunos() {
+  const lista = APP.alunosFiltrados.length || document.getElementById('filter-search').value ||
+    document.getElementById('filter-serie').value ||
+    document.getElementById('filter-turma').value ||
+    document.getElementById('filter-turno').value ||
+    document.getElementById('filter-foto').value
+    ? APP.alunosFiltrados
+    : APP.alunos;
+
+  const total = lista.length;
+  const comFoto = lista.filter(a => a.foto_coletada).length;
+
+  // Stats
+  document.getElementById('alunos-subtitle').textContent = `${total} aluno(s) encontrado(s)`;
+  document.getElementById('alunos-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value">${total}</div></div>
+    <div class="stat-card green"><div class="stat-label">Com Foto</div><div class="stat-value">${comFoto}</div><div class="stat-sub">${total>0?Math.round(comFoto/total*100)+'%':'—'}</div></div>
+    <div class="stat-card amber"><div class="stat-label">Sem Foto</div><div class="stat-value" style="color:var(--amber-500);">${total-comFoto}</div></div>
+    <div class="stat-card"><div class="stat-label">Exibindo</div><div class="stat-value" style="font-size:1.4rem;">${Math.min(APP.itensPorPagina, total)}</div><div class="stat-sub">resultado(s)</div></div>
+  `;
+
+  // Paginação
+  const inicio = (APP.paginaAtual - 1) * APP.itensPorPagina;
+  const fim = inicio + APP.itensPorPagina;
+  const pagina = lista.slice(inicio, fim);
+
+  if (total === 0) {
+    document.getElementById('alunos-grid').innerHTML = '';
+    document.getElementById('alunos-tbody').innerHTML = '';
+    document.getElementById('alunos-empty').style.display = '';
+    document.getElementById('alunos-grid').style.display = 'none';
+    document.getElementById('alunos-table-wrap').style.display = 'none';
+    document.getElementById('alunos-pagination').innerHTML = '';
+    lucide.createIcons();
+    return;
+  }
+
+  document.getElementById('alunos-empty').style.display = 'none';
+
+  if (APP.viewAlunos === 'grid') {
+    document.getElementById('alunos-grid').style.display = '';
+    document.getElementById('alunos-table-wrap').style.display = 'none';
+    document.getElementById('alunos-grid').innerHTML = pagina.map(renderStudentCard).join('');
+  } else {
+    document.getElementById('alunos-grid').style.display = 'none';
+    document.getElementById('alunos-table-wrap').style.display = '';
+    document.getElementById('alunos-tbody').innerHTML = pagina.map(renderStudentRow).join('');
+  }
+
+  renderPagination(total, 'alunos');
+  lucide.createIcons();
+}
+
+function setAlunosView(v) {
+  APP.viewAlunos = v;
+  document.getElementById('alunos-btn-grid').classList.toggle('active', v === 'grid');
+  document.getElementById('alunos-btn-table').classList.toggle('active', v === 'table');
+  renderAlunos();
+}
+
+function topbarSearch(val) {
+  if (APP.currentView === 'alunos') {
+    document.getElementById('filter-search').value = val;
+    applyFilters();
+  } else if (val.length >= 2) {
+    showView('alunos');
+    document.getElementById('filter-search').value = val;
+    applyFilters();
+  }
+}
+
+/* ── Turmas ───────────────────────────────────────────────────── */
+function renderTurmaSelector() {
+  const turmaMap = {};
+  APP.alunos.forEach(a => {
+    const key = `${a.serie}||${a.turma}||${a.turno}`;
+    if (!turmaMap[key]) turmaMap[key] = { serie: a.serie, turma: a.turma, turno: a.turno, total: 0, comFoto: 0 };
+    turmaMap[key].total++;
+    if (a.foto_coletada) turmaMap[key].comFoto++;
+  });
+  const turmas = sortTurmas(Object.values(turmaMap));
+
+  document.getElementById('turma-selector').style.display = '';
+  document.getElementById('turma-alunos').style.display = 'none';
+  document.getElementById('turmas-actions').style.display = 'none';
+  document.getElementById('turmas-title').textContent = 'Por Turma';
+  document.getElementById('turmas-subtitle').textContent = 'Selecione uma turma para visualizar os alunos';
+
+  document.getElementById('turmas-selector-grid').innerHTML = turmas.map(t => {
+    const pct = t.total > 0 ? Math.round(t.comFoto/t.total*100) : 0;
+    const cls = pct >= 90 ? 'tc-green' : pct >= 50 ? 'tc-amber' : 'tc-red';
+    const label = pct >= 90 ? 'Completo' : pct >= 50 ? 'Parcial' : 'Pendente';
+    return `<div class="tc-item" onclick="openTurma('${esc(t.serie)}','${esc(t.turma)}','${esc(t.turno)}')">
+      <div class="tc-serie">${esc(t.serie)}</div>
+      <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
+      <div class="tc-count">
+        <span class="tc-count-num">${t.comFoto}</span>
+        <span class="tc-count-sep">/</span>
+        <span class="tc-count-total">${t.total}</span>
+      </div>
+      <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${pct>=90?'var(--green-500)':pct>=50?'var(--amber-500)':'var(--sesi-red)'};"></div></div>
+      <span class="tc-badge ${cls}">${label} · ${pct}%</span>
+      <div class="tc-turno">${esc(t.turno)}</div>
+    </div>`;
+  }).join('');
+
+  lucide.createIcons();
+}
+
+function openTurma(serie, turma, turno) {
+  const alunos = APP.alunos.filter(a =>
+    a.serie === serie && a.turma === turma && a.turno === turno
+  );
+  const comFoto = alunos.filter(a => a.foto_coletada).length;
+  const pct = alunos.length > 0 ? Math.round(comFoto/alunos.length*100) : 0;
+
+  // Se estiver na view turmas, mostrar alunos
+  if (APP.currentView !== 'turmas') showView('turmas');
+
+  document.getElementById('turma-selector').style.display = 'none';
+  document.getElementById('turma-alunos').style.display = '';
+  document.getElementById('turmas-actions').style.display = '';
+  document.getElementById('turmas-title').textContent = `${serie} ${turma} — ${turno}`;
+  document.getElementById('turmas-subtitle').textContent =
+    `${alunos.length} aluno(s) · ${comFoto} com foto · ${pct}% de cobertura`;
+
+  document.getElementById('turma-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value">${alunos.length}</div></div>
+    <div class="stat-card green"><div class="stat-label">Com Foto</div><div class="stat-value">${comFoto}</div><div class="stat-sub">${pct}%</div></div>
+    <div class="stat-card amber"><div class="stat-label">Sem Foto</div><div class="stat-value" style="color:var(--amber-500);">${alunos.length-comFoto}</div></div>
+  `;
+
+  if (alunos.length === 0) {
+    document.getElementById('turma-grid').innerHTML = '';
+    document.getElementById('turma-empty').style.display = '';
+  } else {
+    document.getElementById('turma-empty').style.display = 'none';
+    document.getElementById('turma-grid').innerHTML = alunos.map(renderStudentCard).join('');
+  }
+
+  document.getElementById('topbar-title').textContent = `${serie} ${turma} — ${turno}`;
+  APP.prevTurma = { serie, turma, turno };
+  lucide.createIcons();
+}
+
+function showTurmaSelector() {
+  renderTurmaSelector();
+  document.getElementById('topbar-title').textContent = 'Por Turma';
+}
+
+/* ── Detalhe do Aluno ─────────────────────────────────────────── */
+function openAluno(matricula) {
+  const aluno = APP.alunos.find(a => a.matricula === matricula);
+  if (!aluno) return;
+
+  APP.prevView = APP.currentView;
+  APP.currentView = 'detalhe';
+  document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-detalhe').classList.add('active');
+  document.getElementById('topbar-title').textContent = aluno.nome_completo;
+
+  // Breadcrumb
+  const prevLabel = { dashboard: 'Dashboard', alunos: 'Todos os Alunos', turmas: 'Por Turma' };
+  document.getElementById('detalhe-breadcrumb').innerHTML = `
+    <a href="#" onclick="showView('${APP.prevView||'alunos'}');return false;">
+      ${prevLabel[APP.prevView||'alunos']}
+    </a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current">${esc(aluno.nome_completo)}</span>
+  `;
+
+  // Foto
+  const fotoSrc = `images/${aluno.matricula}.jpg`;
+  const fotoHtml = aluno.foto_coletada
+    ? `<img src="${fotoSrc}" alt="${esc(aluno.nome_completo)}"
+           class="detail-photo"
+           onerror="this.outerHTML='<div class=detail-photo-placeholder><i data-lucide=camera-off width=36 height=36></i><span style=font-size:.78rem>Foto não disponível</span></div>'">`
+    : `<div class="detail-photo-placeholder">
+        <i data-lucide="camera-off" width="36" height="36"></i>
+        <span style="font-size:.78rem;">Sem foto</span>
+      </div>`;
+
+  // Status badge
+  const statusBadge = aluno.status === 'Ativo'
+    ? `<span class="badge badge-green"><i data-lucide="check" width="10" height="10"></i> Ativo</span>`
+    : `<span class="badge badge-gray">${esc(aluno.status)}</span>`;
+
+  // LGPD badge
+  const lgpdBadge = aluno.termo_autorizado
+    ? `<span class="badge badge-green"><i data-lucide="check" width="10" height="10"></i> LGPD Autorizado</span>`
+    : `<span class="badge badge-red"><i data-lucide="x" width="10" height="10"></i> LGPD Não Autorizado</span>`;
+
+  // Foto badge
+  const fotoBadge = aluno.foto_coletada
+    ? `<span class="badge badge-green"><i data-lucide="camera" width="10" height="10"></i> Foto Coletada</span>`
+    : `<span class="badge badge-amber"><i data-lucide="camera-off" width="10" height="10"></i> Sem Foto</span>`;
+
+  function field(label, value, tipo) {
+    if (!value) return `<div><div class="field-label">${label}</div><div class="field-empty">—</div></div>`;
+    let val = esc(value);
+    if (tipo === 'tel') val = `<a href="tel:${esc(value)}" style="color:var(--blue-600)">${val}</a>`;
+    if (tipo === 'email') val = `<a href="mailto:${esc(value)}" style="color:var(--blue-600)">${val}</a>`;
+    if (tipo === 'date') {
+      try {
+        const d = new Date(value + 'T00:00:00');
+        val = d.toLocaleDateString('pt-BR');
+      } catch {}
+    }
+    return `<div><div class="field-label">${label}</div><div class="field-value">${val}</div></div>`;
+  }
+
+  // Responsáveis
+  let respHtml = '';
+  if (aluno.mae_nome || aluno.pai_nome) {
+    respHtml = `<div class="card" style="margin-top:0;">
+      <div class="card-header"><span class="card-title">Responsáveis</span></div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          ${aluno.mae_nome ? `<div>
+            <div style="font-size:.78rem;font-weight:700;color:var(--sesi-red);margin-bottom:10px;">Mãe / Responsável 1</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:.9rem;font-weight:600;">${esc(aluno.mae_nome)}</div>
+              ${aluno.mae_telefone ? `<a href="tel:${esc(aluno.mae_telefone)}" style="font-size:.85rem;color:var(--blue-600);display:flex;align-items:center;gap:5px;"><i data-lucide="phone" width="13" height="13"></i>${esc(aluno.mae_telefone)}</a>` : ''}
+              ${aluno.mae_email ? `<a href="mailto:${esc(aluno.mae_email)}" style="font-size:.85rem;color:var(--blue-600);display:flex;align-items:center;gap:5px;"><i data-lucide="mail" width="13" height="13"></i>${esc(aluno.mae_email)}</a>` : ''}
+            </div>
+          </div>` : ''}
+          ${aluno.pai_nome ? `<div>
+            <div style="font-size:.78rem;font-weight:700;color:var(--gray-600);margin-bottom:10px;">Pai / Responsável 2</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:.9rem;font-weight:600;">${esc(aluno.pai_nome)}</div>
+              ${aluno.pai_telefone ? `<a href="tel:${esc(aluno.pai_telefone)}" style="font-size:.85rem;color:var(--blue-600);display:flex;align-items:center;gap:5px;"><i data-lucide="phone" width="13" height="13"></i>${esc(aluno.pai_telefone)}</a>` : ''}
+              ${aluno.pai_email ? `<a href="mailto:${esc(aluno.pai_email)}" style="font-size:.85rem;color:var(--blue-600);display:flex;align-items:center;gap:5px;"><i data-lucide="mail" width="13" height="13"></i>${esc(aluno.pai_email)}</a>` : ''}
+            </div>
+          </div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Observações
+  const obsHtml = aluno.observacoes
+    ? `<div class="card" style="margin-top:0;">
+        <div class="card-header"><span class="card-title">Observações</span></div>
+        <div class="card-body"><p style="font-size:.9rem;color:var(--gray-700);white-space:pre-wrap;">${esc(aluno.observacoes)}</p></div>
+      </div>`
+    : '';
+
+  document.getElementById('detalhe-content').innerHTML = `
+    <!-- Coluna foto -->
+    <div>
+      <div class="detail-photo-card">
+        ${fotoHtml}
+        <div>
+          <div class="detail-name">${esc(aluno.nome_completo)}</div>
+          <div class="detail-rm">RM ${esc(aluno.matricula)}</div>
+          <div class="detail-badge-row">
+            ${statusBadge}
+            ${fotoBadge}
+            ${lgpdBadge}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna dados -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Identificação</span></div>
+        <div class="card-body">
+          <div class="field-group" style="grid-template-columns:repeat(2,1fr);">
+            ${field('Matrícula', aluno.matricula)}
+            ${field('R.A. Estudante', aluno.ra_estudante)}
+          </div>
+          <div class="field-group" style="grid-template-columns:1fr;">
+            ${field('Nome Completo', aluno.nome_completo)}
+          </div>
+          <div class="field-group" style="grid-template-columns:repeat(2,1fr);">
+            ${field('Série', aluno.serie)}
+            ${field('Turma', aluno.turma)}
+            ${field('Turno', aluno.turno)}
+            ${field('Status', aluno.status)}
+          </div>
+          <div class="field-group" style="grid-template-columns:repeat(2,1fr);">
+            ${field('Data de Nascimento', aluno.data_nascimento, 'date')}
+            ${field('Data de Ingresso', aluno.data_ingresso, 'date')}
+          </div>
+          ${aluno.email_estudante ? `<div class="field-group" style="grid-template-columns:1fr;">
+            ${field('E-mail', aluno.email_estudante, 'email')}
+          </div>` : ''}
+          ${aluno.endereco ? `<div class="field-group" style="grid-template-columns:1fr;border-bottom:none;margin-bottom:0;padding-bottom:0;">
+            ${field('Endereço', aluno.endereco)}
+          </div>` : ''}
+        </div>
+      </div>
+
+      ${respHtml}
+      ${obsHtml}
+    </div>
+  `;
+
+  lucide.createIcons();
+}
+
+/* ── Helpers de render ────────────────────────────────────────── */
+function renderStudentCard(a) {
+  const fotoHtml = a.foto_coletada
+    ? `<img src="images/${a.matricula}.jpg"
+           alt="${esc(a.nome_completo)}"
+           class="student-card-photo"
+           onerror="this.outerHTML='<div class=student-card-nophoto><i data-lucide=camera-off width=22 height=22></i></div>'">`
+    : `<div class="student-card-nophoto">
+        <i data-lucide="camera-off" width="22" height="22"></i>
+      </div>`;
+  return `<div class="student-card" onclick="openAluno('${a.matricula}')">
+    ${fotoHtml}
+    <div class="student-card-name">${esc(a.nome_completo)}</div>
+    <div class="student-card-meta">${esc(a.serie)} ${esc(a.turma)}</div>
+  </div>`;
+}
+
+function renderStudentRow(a) {
+  const mini = a.foto_coletada
+    ? `<img src="images/${a.matricula}.jpg" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
+           onerror="this.outerHTML='<div style=width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;><i data-lucide=camera-off width=14 height=14></i></div>'">`
+    : `<div style="width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
+        <i data-lucide="camera-off" width="14" height="14" style="color:var(--gray-400);"></i>
+      </div>`;
+  const statusBadge = a.status === 'Ativo'
+    ? `<span class="badge badge-green" style="font-size:.65rem;">Ativo</span>`
+    : `<span class="badge badge-gray" style="font-size:.65rem;">${esc(a.status)}</span>`;
+  return `<tr onclick="openAluno('${a.matricula}')">
+    <td>${mini}</td>
+    <td><strong>${esc(a.nome_completo)}</strong></td>
+    <td style="font-family:monospace;font-size:.82rem;">${esc(a.matricula)}</td>
+    <td>${esc(a.serie)} ${esc(a.turma)}</td>
+    <td>${esc(a.turno)}</td>
+    <td>${statusBadge}</td>
+  </tr>`;
+}
+
+/* ── Paginação ────────────────────────────────────────────────── */
+function renderPagination(total, ctx) {
+  const totalPags = Math.ceil(total / APP.itensPorPagina);
+  const cur = APP.paginaAtual;
+  const el = document.getElementById(`${ctx}-pagination`);
+  if (totalPags <= 1) { el.innerHTML = ''; return; }
+
+  const inicio = (cur-1)*APP.itensPorPagina + 1;
+  const fim = Math.min(cur*APP.itensPorPagina, total);
+
+  let btns = `<button class="page-btn" onclick="goPage(${cur-1},'${ctx}')" ${cur===1?'disabled':''}>
+    <i data-lucide="chevron-left" width="14" height="14"></i>
+  </button>`;
+
+  for (let p = Math.max(1,cur-2); p <= Math.min(totalPags,cur+2); p++) {
+    btns += `<button class="page-btn${p===cur?' active':''}" onclick="goPage(${p},'${ctx}')">${p}</button>`;
+  }
+  btns += `<button class="page-btn" onclick="goPage(${cur+1},'${ctx}')" ${cur===totalPags?'disabled':''}>
+    <i data-lucide="chevron-right" width="14" height="14"></i>
+  </button>`;
+
+  el.innerHTML = `
+    <span class="page-info">Exibindo ${inicio}–${fim} de ${total}</span>
+    <div class="page-btns">${btns}</div>
+  `;
+  lucide.createIcons();
+}
+
+function goPage(p, ctx) {
+  const total = APP.alunosFiltrados.length || APP.alunos.length;
+  const totalPags = Math.ceil(total / APP.itensPorPagina);
+  if (p < 1 || p > totalPags) return;
+  APP.paginaAtual = p;
+  renderAlunos();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── Utilities ────────────────────────────────────────────────── */
+function esc(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function sortTurmas(turmas) {
+  const seriesOrdem = (APP.config?.series_ordem) || [];
+  return turmas.sort((a, b) => {
+    const ia = seriesOrdem.indexOf(a.serie);
+    const ib = seriesOrdem.indexOf(b.serie);
+    const sa = ia >= 0 ? ia : 99;
+    const sb = ib >= 0 ? ib : 99;
+    if (sa !== sb) return sa - sb;
+    if (a.turma < b.turma) return -1;
+    if (a.turma > b.turma) return 1;
+    return a.turno.localeCompare(b.turno);
+  });
+}
+
+function serieSort(a, b) {
+  const ordens = APP.config?.series_ordem || [];
+  const ia = ordens.indexOf(a);
+  const ib = ordens.indexOf(b);
+  if (ia >= 0 && ib >= 0) return ia - ib;
+  return a.localeCompare(b);
+}
+
+/* ── Toast ────────────────────────────────────────────────────── */
+function showToast(msg, type = 'success', duration = 3500) {
+  const container = document.getElementById('toast-container');
+  const iconMap = { success:'check-circle', error:'alert-circle', warning:'alert-triangle' };
+  const div = document.createElement('div');
+  div.className = `toast toast-${type}`;
+  div.innerHTML = `<i data-lucide="${iconMap[type]||'info'}" width="18" height="18"></i><span>${esc(msg)}</span>`;
+  container.appendChild(div);
+  lucide.createIcons({ nodes: [div] });
+  setTimeout(() => {
+    div.style.transition = 'opacity .3s, transform .3s';
+    div.style.opacity = '0';
+    div.style.transform = 'translateX(100%)';
+    setTimeout(() => div.remove(), 300);
+  }, duration);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "app": {
+    "nome": "Carômetro Escolar",
+    "subtitulo": "Centro Educacional SESI 407",
+    "escola": "SESI 407",
+    "cidade": "São José do Rio Preto — SP",
+    "ano_letivo": "2025"
+  },
+  "auth": {
+    "habilitado": true,
+    "usuarios": [
+      {
+        "usuario": "admin",
+        "senha_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+        "nome": "Administrador",
+        "perfil": "admin"
+      },
+      {
+        "usuario": "coordenador",
+        "senha_hash": "b96d5d6a3a3f5a16de7a60f82cd51e6f5f58a53a6823f14a7f5d1a12e37f88e4",
+        "nome": "Coordenação Pedagógica",
+        "perfil": "viewer"
+      }
+    ]
+  },
+  "series_ordem": ["6º Ano", "7º Ano", "8º Ano", "9º Ano", "1º EM", "2º EM", "3º EM"]
+}
