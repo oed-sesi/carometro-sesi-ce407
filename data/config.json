@@ -11,7 +11,7 @@
     "usuarios": [
       {
         "usuario": "admin",
-        "senha_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+        "senha_hash": "5e96b048e699b3a5727ef87334fef965af9d038c3886695af1d06d33a3e89e34",
         "nome": "Administrador",
         "perfil": "admin"
       },
