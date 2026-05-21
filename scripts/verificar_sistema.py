@@ -1,140 +1,191 @@
 #!/usr/bin/env python3
 """
 verificar_sistema.py
-Verifica a consistência entre data/alunos.json e a pasta images/
+Carômetro Escolar — SESI 407
 
-Relatório:
-    - Alunos com foto_coletada=true mas sem imagem em images/
-    - Alunos com foto_coletada=false mas com imagem em images/
-    - Alunos sem foto (foto_coletada=false)
-    - Imagens em images/ sem aluno correspondente no JSON
-    - Estatísticas por turma
+Verifica a consistência entre:
+  - data/alunos.json
+  - pasta images/ (fotos originais)
+  - pastas images_<turma>/ (fotos organizadas por turma)
+  - data/config.json
 
 Uso:
     python3 scripts/verificar_sistema.py
+    python3 scripts/verificar_sistema.py --resumo    (apenas estatísticas)
+    python3 scripts/verificar_sistema.py --json      (saída em JSON)
 """
+
+from __future__ import annotations
+
 import json
 import os
+import sys
 from pathlib import Path
 
-BASE = Path(__file__).parent.parent
+BASE        = Path(__file__).resolve().parent.parent
 JSON_PATH   = BASE / "data" / "alunos.json"
-IMAGES_PATH = BASE / "images"
+CONFIG_PATH = BASE / "data" / "config.json"
+IMAGES_DIR  = BASE / "images"
 EXTENSOES   = {".jpg", ".jpeg", ".png", ".webp"}
 
+SEP  = "─" * 60
+SEP2 = "═" * 60
 
-def main():
-    sep = "═" * 55
+
+def coletar_imagens_dir(pasta: Path) -> set[str]:
+    if not pasta.is_dir():
+        return set()
+    return {f.stem for f in pasta.iterdir()
+            if f.is_file() and f.suffix.lower() in EXTENSOES}
+
+
+def main() -> None:
+    modo_resumo = "--resumo" in sys.argv
+    modo_json   = "--json"   in sys.argv
 
     # ── Carregar dados ────────────────────────────────────────
     if not JSON_PATH.is_file():
-        print(f"\n❌  Arquivo não encontrado: {JSON_PATH}\n")
-        return
+        msg = f"❌  Arquivo não encontrado: {JSON_PATH}"
+        if modo_json:
+            print(json.dumps({"erro": msg}))
+        else:
+            print(f"\n{msg}\n")
+        sys.exit(1)
 
     with open(JSON_PATH, encoding="utf-8") as f:
         alunos = json.load(f)
 
-    # Imagens existentes (stem = matrícula)
-    imagens = set()
-    if IMAGES_PATH.is_dir():
-        for f in IMAGES_PATH.iterdir():
-            if f.is_file() and f.suffix.lower() in EXTENSOES:
-                imagens.add(f.stem)
+    # Normalizar: suporte a campo legado "matricula"
+    for a in alunos:
+        if "rm_estudante" not in a:
+            a["rm_estudante"] = a.get("matricula", "")
 
-    print(f"\n{sep}")
-    print("  Carômetro Escolar — Verificação do Sistema")
-    print(sep)
-    print(f"  Alunos no JSON    : {len(alunos)}")
-    print(f"  Imagens em images/: {len(imagens)}")
-    print(sep)
+    # Imagens na pasta principal
+    imgs_principal = coletar_imagens_dir(IMAGES_DIR)
 
-    # ── Análise ───────────────────────────────────────────────
-    flag_sem_imagem  = []  # foto_coletada=true mas arquivo não existe
-    flag_sem_flag    = []  # imagem existe mas foto_coletada=false
-    sem_foto         = []  # foto_coletada=false (esperado)
-    matriculas_json  = set()
+    # Pastas de turmas (images_Xano_Y / images_Xserie_Y)
+    pastas_turma: dict[str, set[str]] = {}
+    for item in sorted(BASE.iterdir()):
+        if item.is_dir() and item.name.startswith("images_") and item.name != "images":
+            pastas_turma[item.name] = coletar_imagens_dir(item)
 
-    turma_stats = {}  # {(serie,turma,turno): {total,com_foto,imagem_ok}}
+    # ── Analisar ─────────────────────────────────────────────
+    flag_sem_imagem : list[dict] = []   # foto_coletada=true, sem arquivo
+    flag_sem_flag   : list[dict] = []   # arquivo existe, foto_coletada=false
+    sem_foto        : list[dict] = []   # foto_coletada=false (esperado)
+    imgs_orfas      : set[str]   = set()
+    turma_stats     : dict       = {}
+
+    matriculas_json = set()
 
     for a in alunos:
-        mat = a["matricula"]
-        matriculas_json.add(mat)
-        key = (a["serie"], a["turma"], a["turno"])
+        rm  = a["rm_estudante"]
+        matriculas_json.add(rm)
+        key = (a.get("serie",""), a.get("turma",""), a.get("turno",""))
         if key not in turma_stats:
-            turma_stats[key] = {"total": 0, "com_foto": 0, "imagem_ok": 0}
+            turma_stats[key] = {"total": 0, "com_foto": 0, "img_ok": 0}
         turma_stats[key]["total"] += 1
 
-        tem_imagem = mat in imagens
-        flag = a.get("foto_coletada", False)
+        tem_img = rm in imgs_principal
+        flag    = a.get("foto_coletada", False)
 
         if flag:
             turma_stats[key]["com_foto"] += 1
-            if tem_imagem:
-                turma_stats[key]["imagem_ok"] += 1
+            if tem_img:
+                turma_stats[key]["img_ok"] += 1
             else:
                 flag_sem_imagem.append(a)
         else:
-            if tem_imagem:
+            if tem_img:
                 flag_sem_flag.append(a)
             else:
                 sem_foto.append(a)
 
-    # Imagens sem aluno
-    imagens_orfas = imagens - matriculas_json
+    imgs_orfas = imgs_principal - matriculas_json
 
-    # ── Relatório de inconsistências ─────────────────────────
+    # ── Saída JSON ────────────────────────────────────────────
+    if modo_json:
+        resultado = {
+            "total_alunos":        len(alunos),
+            "imgs_principal":      len(imgs_principal),
+            "flag_sem_imagem":     [a["rm_estudante"] for a in flag_sem_imagem],
+            "flag_sem_flag":       [a["rm_estudante"] for a in flag_sem_flag],
+            "sem_foto":            [a["rm_estudante"] for a in sem_foto],
+            "imgs_orfas":          sorted(imgs_orfas),
+            "pastas_turma":        {k: len(v) for k, v in pastas_turma.items()},
+            "inconsistencias":     len(flag_sem_imagem) + len(flag_sem_flag) + len(imgs_orfas),
+        }
+        print(json.dumps(resultado, ensure_ascii=False, indent=2))
+        return
+
+    # ── Saída texto ───────────────────────────────────────────
+    print(f"\n{SEP2}")
+    print("  Carômetro Escolar — Verificação do Sistema")
+    print(SEP2)
+    print(f"  Alunos no JSON      : {len(alunos)}")
+    print(f"  Imagens em images/  : {len(imgs_principal)}")
+    print(f"  Pastas de turma     : {len(pastas_turma)}")
     print()
-    if flag_sem_imagem:
-        print(f"  ⚠️  [{len(flag_sem_imagem)}] foto_coletada=true MAS imagem não encontrada em images/:")
-        for a in flag_sem_imagem:
-            print(f"      • {a['matricula']} — {a['nome_completo']} ({a['serie']} {a['turma']})")
-            print(f"        → Crie ou copie: images/{a['matricula']}.jpg")
-        print()
 
-    if flag_sem_flag:
-        print(f"  ℹ️  [{len(flag_sem_flag)}] Imagem existe MAS foto_coletada=false no JSON:")
-        for a in flag_sem_flag:
-            print(f"      • {a['matricula']} — {a['nome_completo']}")
-            print(f"        → Edite data/alunos.json: \"foto_coletada\": true")
-        print()
+    # Inconsistências
+    total_inconsist = len(flag_sem_imagem) + len(flag_sem_flag) + len(imgs_orfas)
+    if total_inconsist == 0:
+        print(f"  ✅  Nenhuma inconsistência encontrada!\n")
+    else:
+        if flag_sem_imagem:
+            print(f"  ⚠️  [{len(flag_sem_imagem)}] foto_coletada=true MAS imagem não existe em images/:")
+            for a in flag_sem_imagem:
+                print(f"      • {a['rm_estudante']} — {a.get('nome_completo','?')} ({a.get('serie','')} {a.get('turma','')})")
+                print(f"        → Adicione: images/{a['rm_estudante']}.jpg")
+            print()
 
-    if imagens_orfas:
-        print(f"  ❓  [{len(imagens_orfas)}] Imagens sem aluno no JSON:")
-        for m in sorted(imagens_orfas):
-            print(f"      • images/{m}.jpg — nenhum aluno com esta matrícula")
-        print()
+        if flag_sem_flag:
+            print(f"  ℹ️  [{len(flag_sem_flag)}] Imagem existe MAS foto_coletada=false no JSON:")
+            for a in flag_sem_flag:
+                print(f"      • {a['rm_estudante']} — {a.get('nome_completo','?')}")
+                print(f"        → Atualize no JSON: \"foto_coletada\": true")
+            print()
 
-    if not flag_sem_imagem and not flag_sem_flag and not imagens_orfas:
-        print("  ✅  Nenhuma inconsistência encontrada!\n")
+        if imgs_orfas:
+            print(f"  ❓  [{len(imgs_orfas)}] Imagens sem aluno correspondente no JSON:")
+            for rm in sorted(imgs_orfas):
+                print(f"      • images/{rm}.jpg")
+            print()
 
-    # ── Estatísticas por turma ────────────────────────────────
-    print(f"\n  {'─'*51}")
-    print("  Cobertura por Turma:")
-    print(f"  {'─'*51}")
-    print(f"  {'Turma':<25} {'Total':>6} {'c/Foto':>7} {'OK':>5} {'%':>5}")
-    print(f"  {'─'*51}")
+    if not modo_resumo:
+        # Pastas de turma
+        if pastas_turma:
+            print(f"  {SEP}")
+            print("  Pastas de turma organizadas:")
+            for nome_pasta, imgs in sorted(pastas_turma.items()):
+                print(f"      📁 {nome_pasta}/  ({len(imgs)} foto(s))")
+            print()
 
-    total_g = com_foto_g = ok_g = 0
-    for key in sorted(turma_stats.keys(), key=lambda k: (k[0], k[1], k[2])):
-        s = turma_stats[key]
-        pct = round(s['imagem_ok'] / s['total'] * 100) if s['total'] > 0 else 0
-        label = f"{key[0]} {key[1]} — {key[2]}"
-        status = "✅" if pct >= 90 else ("⚠️ " if pct >= 50 else "❌")
-        print(f"  {status} {label:<22} {s['total']:>6} {s['com_foto']:>7} {s['imagem_ok']:>5} {pct:>4}%")
-        total_g    += s['total']
-        com_foto_g += s['com_foto']
-        ok_g       += s['imagem_ok']
+    # Estatísticas por turma
+    print(f"  {SEP}")
+    print("  Cobertura por turma:")
+    print(f"  {SEP}")
+    print(f"  {'Turma':<28} {'Total':>6} {'c/Foto':>7} {'OK':>5} {'%':>5}")
+    print(f"  {SEP}")
 
-    print(f"  {'─'*51}")
+    total_g = com_g = ok_g = 0
+    for key in sorted(turma_stats.keys()):
+        s   = turma_stats[key]
+        pct = round(s["img_ok"] / s["total"] * 100) if s["total"] > 0 else 0
+        ico = "✅" if pct >= 90 else ("⚠️ " if pct >= 50 else "❌")
+        lbl = f"{key[0]} {key[1]} — {key[2]}"
+        print(f"  {ico} {lbl:<25} {s['total']:>6} {s['com_foto']:>7} {s['img_ok']:>5} {pct:>4}%")
+        total_g += s["total"]; com_g += s["com_foto"]; ok_g += s["img_ok"]
+
+    print(f"  {SEP}")
     pct_g = round(ok_g / total_g * 100) if total_g > 0 else 0
-    print(f"  {'TOTAL':<25} {total_g:>6} {com_foto_g:>7} {ok_g:>5} {pct_g:>4}%")
-    print(f"  {'─'*51}\n")
+    print(f"  {'TOTAL':<28} {total_g:>6} {com_g:>7} {ok_g:>5} {pct_g:>4}%")
+    print(f"  {SEP}\n")
 
-    # ── Alunos sem foto ───────────────────────────────────────
-    if sem_foto:
+    if not modo_resumo and sem_foto:
         print(f"  📋  [{len(sem_foto)}] Alunos sem foto (foto_coletada=false):")
-        for a in sorted(sem_foto, key=lambda x: (x['serie'], x['turma'], x['nome_completo'])):
-            print(f"      • {a['matricula']} — {a['nome_completo']} ({a['serie']} {a['turma']} {a['turno']})")
+        for a in sorted(sem_foto, key=lambda x: (x.get("serie",""), x.get("turma",""), x.get("nome_completo",""))):
+            print(f"      • {a['rm_estudante']} — {a.get('nome_completo','?')} ({a.get('serie','')} {a.get('turma','')} {a.get('turno','')})")
         print()
 
 

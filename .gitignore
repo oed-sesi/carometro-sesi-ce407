@@ -1,0 +1,47 @@
+# ── Sistema operacional ────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Editor ─────────────────────────────────────────────────────
+.vscode/settings.json
+.vscode/*.log
+*.swp
+*.swo
+*~
+
+# ── Python ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.env
+.venv
+env/
+venv/
+
+# ── Node ───────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Backups locais ─────────────────────────────────────────────
+*.bak
+*.backup
+*.orig
+backup/
+backups/
+
+# ── IMPORTANTE: manter imagens e dados no repositório ─────────
+# images/  ← NÃO ignorar (fotos dos alunos)
+# data/    ← NÃO ignorar (JSON dos alunos)
+# Caso queira ignorar as imagens por tamanho, descomente:
+# images/

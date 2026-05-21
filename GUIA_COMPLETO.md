@@ -1,8 +1,8 @@
 # Carômetro Escolar — SESI 407
 ## Guia Completo de Configuração, Atualização e Manutenção
 
-> **Versão:** 5.0 — Edição GitHub Pages (Frontend Estático)\
-> **Última revisão:** 2025\
+> **Versão:** 5.1 — Edição GitHub Pages (Frontend Estático)\
+> **Última revisão:** 2026\
 > **Ambiente:** Ubuntu 25.04 LTS via WSL2 + Windows 11 + VS Code
 
 ---
@@ -12,35 +12,10 @@
 1. [Visão Geral da Aplicação](#1-visão-geral-da-aplicação)
 2. [Estrutura do Repositório](#2-estrutura-do-repositório)
 3. [Configuração Inicial (uma única vez)](#3-configuração-inicial-uma-única-vez)
-   - 3.1 [Pré-requisitos](#31-pré-requisitos)
-   - 3.2 [Criar o Repositório no GitHub](#32-criar-o-repositório-no-github)
-   - 3.3 [Configurar Git Local no WSL2](#33-configurar-git-local-no-wsl2)
-   - 3.4 [Clonar e Preparar o Projeto](#34-clonar-e-preparar-o-projeto)
-   - 3.5 [Configurar GitHub Pages](#35-configurar-github-pages)
-   - 3.6 [Configurar a Proteção com Login](#36-configurar-a-proteção-com-login)
-   - 3.7 [Configurar Cloudflare Access (recomendado)](#37-configurar-cloudflare-access-recomendado)
 4. [Formato dos Dados](#4-formato-dos-dados)
-   - 4.1 [data/alunos.json](#41-dataalunosjson)
-   - 4.2 [data/config.json](#42-dataconfigjson)
-   - 4.3 [Fotos dos Alunos (images/)](#43-fotos-dos-alunos-images)
-5. [Fluxo de Trabalho Diário](#5-fluxo-de-trabalho-diário)
-   - 5.1 [Via VS Code + WSL2 (recomendado)](#51-via-vs-code--wsl2-recomendado)
-   - 5.2 [Diretamente no GitHub (navegador)](#52-diretamente-no-github-navegador)
-6. [Scripts Utilitários](#6-scripts-utilitários)
-   - 6.1 [Gerar Hash de Senha](#61-gerar-hash-de-senha)
-   - 6.2 [Importar Alunos por CSV](#62-importar-alunos-por-csv)
-   - 6.3 [Renomear Fotos em Lote](#63-renomear-fotos-em-lote)
-   - 6.4 [Verificar Consistência do Sistema](#64-verificar-consistência-do-sistema)
+5. [Scripts Utilitários — Referência Completa](#5-scripts-utilitários--referência-completa)
+6. [Fluxo de Trabalho Diário](#6-fluxo-de-trabalho-diário)
 7. [Operações de Manutenção](#7-operações-de-manutenção)
-   - 7.1 [Adicionar um Novo Aluno](#71-adicionar-um-novo-aluno)
-   - 7.2 [Atualizar Dados de um Aluno](#72-atualizar-dados-de-um-aluno)
-   - 7.3 [Adicionar / Atualizar Foto de Aluno](#73-adicionar--atualizar-foto-de-aluno)
-   - 7.4 [Remover um Aluno](#74-remover-um-aluno)
-   - 7.5 [Adicionar / Remover Turma](#75-adicionar--remover-turma)
-   - 7.6 [Alterar Senha de Acesso](#76-alterar-senha-de-acesso)
-   - 7.7 [Adicionar Novo Usuário de Acesso](#77-adicionar-novo-usuário-de-acesso)
-   - 7.8 [Atualizar o Logo](#78-atualizar-o-logo)
-   - 7.9 [Atualizar o Ano Letivo](#79-atualizar-o-ano-letivo)
 8. [Comandos Git de Referência](#8-comandos-git-de-referência)
 9. [Solução de Problemas](#9-solução-de-problemas)
 10. [Segurança](#10-segurança)
@@ -60,10 +35,11 @@ Navegador do usuário
         ▼
   GitHub Pages (hospedagem gratuita)
         │
-        ├── index.html  ← Toda a lógica da aplicação
-        ├── data/alunos.json  ← Dados dos alunos
-        ├── data/config.json  ← Configuração e login
-        └── images/<matricula>.jpg  ← Fotos
+        ├── index.html              ← Toda a lógica da aplicação
+        ├── data/alunos.json        ← Dados dos alunos
+        ├── data/config.json        ← Configuração e login
+        ├── images/<rm>.jpg         ← Fotos (pasta principal)
+        └── images_<turma>/<rm>.jpg ← Fotos organizadas por turma
 ```
 
 ### Funcionalidades
@@ -85,7 +61,7 @@ Navegador do usuário
 - **JSON** para armazenamento de dados (no próprio repositório)
 - **Git** para versionamento e deploy (`git push` = publicar)
 - **SHA-256** do browser para hash de senhas (Web Crypto API)
-- **Lucide Icons** via CDN
+- **Python 3** para scripts de manutenção locais
 
 ---
 
@@ -94,29 +70,41 @@ Navegador do usuário
 ```
 carometro-sesi-ce407/
 │
-├── index.html              ← Aplicação principal (HTML + CSS + JS em um arquivo)
-├── README.md               ← Descrição do repositório
-├── .gitignore              ← Arquivos ignorados pelo Git
+├── index.html                    ← Aplicação principal (HTML + CSS + JS)
+├── README.md                     ← Descrição do repositório
+├── .gitignore                    ← Arquivos ignorados pelo Git
+├── template_estudantes.csv       ← Template para importação (gerado pelo script)
+├── template_estudantes.xlsx      ← Template Excel para importação (gerado pelo script)
 │
 ├── data/
-│   ├── alunos.json         ← Lista de todos os alunos (PRINCIPAL arquivo de dados)
-│   └── config.json         ← Configuração da escola e usuários de acesso
+│   ├── alunos.json               ← Lista de todos os alunos (PRINCIPAL arquivo de dados)
+│   └── config.json               ← Configuração da escola e usuários de acesso
 │
-├── images/                 ← Fotos dos alunos
-│   ├── 123456.jpg          ← Nomeadas pelo número de matrícula
-│   ├── 123457.jpg
+├── images/                       ← Fotos originais dos alunos
+│   ├── 006810.jpg                ← Nomeadas pelo RM do estudante
+│   └── ...
+│
+├── images_6ano_A/                ← Fotos organizadas por turma (geradas pelo script)
+├── images_6ano_B/
+├── images_7ano_A/
+├── images_1serie_A/              ← EM → "serie"
+├── images_2serie_B/
 │   └── ...
 │
 ├── assets/
 │   └── img/
-│       └── logo_sesi.png   ← Logo da escola
+│       └── logo_sesi.png
 │
-└── scripts/                ← Utilitários de manutenção (rodam localmente)
-    ├── gerar_senha_hash.py        ← Gera hash de senha
-    ├── gerar-senha-hash.js        ← Versão Node.js
-    ├── importar_alunos_csv.py     ← Importa alunos de planilha CSV
-    ├── renomear_fotos.py          ← Renomeia fotos em lote
-    └── verificar_sistema.py       ← Verifica consistência dos dados
+├── backups/                      ← Backups automáticos (gerados pelo script)
+│
+└── scripts/                      ← Utilitários de manutenção (rodam localmente)
+    ├── importar_estudantes.py    ← PRINCIPAL: importa dados + organiza imagens
+    ├── gerenciar_usuarios.py     ← Gerencia usuários de acesso (config.json)
+    ├── verificar_sistema.py      ← Verifica consistência dados ↔ fotos
+    ├── atualizar_foto_status.py  ← Sincroniza foto_coletada com a pasta images/
+    ├── backup_dados.py           ← Cria backup compactado de data/ e images/
+    ├── renomear_fotos.py         ← Renomeia fotos em lote
+    └── gerar_senha_hash.py       ← Gera hash SHA-256 de senhas (utilitário)
 ```
 
 > **Regra de ouro:** qualquer arquivo dentro de `data/` ou `images/` que for editado e commitado, é automaticamente publicado no site após o `git push`.
@@ -127,16 +115,16 @@ carometro-sesi-ce407/
 
 ### 3.1 Pré-requisitos
 
-| Ferramenta | Onde instalar | Verificar |
-|---|---|---|
-| Git | Já instalado no WSL2 | `git --version` |
-| Python 3 | Já instalado no WSL2 | `python3 --version` |
-| VS Code | Windows ou WSL2 | `code --version` |
-| Conta GitHub | https://github.com | — |
+| Ferramenta | Verificar |
+|---|---|
+| Git | `git --version` |
+| Python 3 | `python3 --version` |
+| pip | `pip3 --version` |
+| VS Code | `code --version` |
 
-No WSL2 (Ubuntu 25.04), instale o Git se necessário:
 ```bash
-sudo apt update && sudo apt install git -y
+# Instalar dependências Python necessárias para os scripts
+pip3 install pandas openpyxl --break-system-packages
 ```
 
 ### 3.2 Criar o Repositório no GitHub
@@ -145,187 +133,138 @@ sudo apt update && sudo apt install git -y
 2. Preencha:
    - **Repository name:** `carometro-sesi-ce407`
    - **Visibility:** `Private` ← **IMPORTANTE: deixar privado**
-   - Não marque nenhuma opção de inicialização (README, .gitignore)
+   - Não inicialize com nenhum arquivo
 3. Clique em **Create repository**
-4. Anote a URL: `https://github.com/SEU-USUARIO/carometro-sesi-ce407.git`
 
 ### 3.3 Configurar Git Local no WSL2
 
-Abra o terminal WSL2 e configure:
-
 ```bash
-# Configurar identidade (use seus dados reais)
 git config --global user.name "Seu Nome"
 git config --global user.email "seu@email.com"
-
-# Configurar branch padrão como 'main'
 git config --global init.defaultBranch main
-
-# Verificar configurações
-git config --list
-```
-
-**Autenticação com o GitHub (Personal Access Token):**
-
-1. No GitHub: clique no avatar → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)** → **Generate new token**
-2. Em **Note**: coloque `carometro-sesi-ce407`
-3. **Expiration**: escolha `No expiration` (ou 1 year)
-4. Marque a permissão: **repo** (acesso completo)
-5. Clique **Generate token** e **copie o token** (só aparece uma vez)
-
-No WSL2, configure o armazenamento de credenciais:
-```bash
 git config --global credential.helper store
 ```
 
-Na primeira vez que usar `git push`, o Git pedirá usuário e senha:
-- **Username:** seu usuário do GitHub
-- **Password:** cole o Personal Access Token (não sua senha do GitHub)
+**Personal Access Token (GitHub):**
+
+1. GitHub → Avatar → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token
+2. Note: `carometro-sesi-ce407` | Expiration: No expiration | Permissão: **repo**
+3. Copie o token gerado (aparece apenas uma vez)
 
 ### 3.4 Clonar e Preparar o Projeto
 
 ```bash
-# Ir para a pasta home do WSL2
 cd ~
-
-# Clonar o repositório (ainda vazio)
 git clone https://github.com/SEU-USUARIO/carometro-sesi-ce407.git
-
-# Entrar na pasta
 cd carometro-sesi-ce407
 ```
 
-Agora copie os arquivos do projeto para dentro desta pasta:
-- `index.html`
-- `README.md`
-- `.gitignore`
-- `data/alunos.json`
-- `data/config.json`
-- `assets/img/logo_sesi.png`
-- `scripts/` (todos os arquivos)
+Copie os arquivos do projeto para esta pasta, adicione as fotos em `images/` e:
 
-Adicione as fotos dos alunos na pasta `images/` com o nome `<matricula>.jpg`.
-
-Faça o primeiro commit:
 ```bash
-# Verificar o que será commitado
-git status
-
-# Adicionar todos os arquivos
 git add .
-
-# Commit inicial
 git commit -m "feat: inicialização do Carômetro Escolar SESI 407"
-
-# Enviar para o GitHub
 git push -u origin main
 ```
 
 ### 3.5 Configurar GitHub Pages
 
-1. No repositório do GitHub, clique em **Settings**
-2. No menu lateral, clique em **Pages**
-3. Em **Source**, selecione:
-   - Branch: `main`
-   - Folder: `/ (root)`
-4. Clique em **Save**
-5. Aguarde 1-2 minutos. O link aparecerá como:
-   `https://SEU-USUARIO.github.io/carometro-sesi-ce407/`
+1. Repositório → **Settings** → **Pages**
+2. Source: Branch `main` | Folder `/ (root)`
+3. Clique **Save**
+4. Aguarde 1-2 min → URL: `https://SEU-USUARIO.github.io/carometro-sesi-ce407/`
 
-> ⚠️ **Atenção:** Para repositórios **privados**, o GitHub Pages só funciona com planos pagos (GitHub Pro, Team, ou Enterprise). Se precisar gratuito, o repositório precisa ser **público**.
->
-> Se o repositório for público, qualquer pessoa pode ver o código-fonte — mas não conseguirá fazer login sem as credenciais.
+### 3.6 Configurar Usuários de Acesso
 
-### 3.6 Configurar a Proteção com Login
+```bash
+# Modo interativo (recomendado)
+python3 scripts/gerenciar_usuarios.py
 
-A aplicação já vem com sistema de login embutido. Para configurar:
-
-1. Gere o hash da sua senha (veja [seção 6.1](#61-gerar-hash-de-senha))
-2. Edite `data/config.json` e substitua a senha:
-
-```json
-{
-  "auth": {
-    "habilitado": true,
-    "usuarios": [
-      {
-        "usuario": "admin",
-        "senha_hash": "SEU_HASH_AQUI",
-        "nome": "Administrador",
-        "perfil": "admin"
-      }
-    ]
-  }
-}
+# Ou direto
+python3 scripts/gerenciar_usuarios.py --adicionar
 ```
 
-3. Commite e faça push (o login estará ativo imediatamente)
+Após configurar os usuários, commite o `config.json`:
 
-> **Nível de segurança:** O login em JavaScript impede acesso casual. Para proteção mais robusta (bloqueia acesso ao código-fonte), use o Cloudflare Access descrito abaixo.
-
-### 3.7 Configurar Cloudflare Access (recomendado)
-
-O Cloudflare Access adiciona uma tela de login **antes** que o navegador carregue qualquer arquivo do site. É gratuito para até 50 usuários.
-
-**Pré-requisito:** Ter um domínio no Cloudflare (ex: `sesi407.com.br`).
-
-**Passos:**
-
-1. Acesse **https://dash.cloudflare.com** → **Zero Trust** → **Access** → **Applications**
-2. Clique **Add an application** → **SaaS**...
-
-   *(Alternativamente, use o subdomain de pages.dev do Cloudflare Pages como proxy — mais simples)*
-
-**Alternativa mais simples — Cloudflare Pages como proxy:**
-
-1. Acesse **https://dash.cloudflare.com** → **Pages**
-2. **Create a project** → **Connect to Git** → selecione seu repositório
-3. Em **Build settings**: deixe vazio (não há build)
-4. Publique. O Cloudflare Pages servirá o site em `carometro-sesi-ce407.pages.dev`
-5. Em **Settings** → **Access Policy** → Adicione uma política de acesso por e-mail
+```bash
+git add data/config.json
+git commit -m "config: configurar usuários de acesso"
+git push
+```
 
 ---
 
 ## 4. Formato dos Dados
 
-### 4.1 data/alunos.json
+### 4.1 Template de importação (template_estudantes)
 
-Array JSON com um objeto por aluno. Todos os campos de texto vazios devem ser `""`.
-
-```json
-[
-  {
-    "matricula":      "123456",         ← OBRIGATÓRIO - único, 4-10 dígitos
-    "nome_completo":  "Ana Clara Santos",← OBRIGATÓRIO
-    "serie":          "7º Ano",          ← OBRIGATÓRIO
-    "turma":          "A",               ← OBRIGATÓRIO
-    "turno":          "Manhã",           ← OBRIGATÓRIO
-    "status":         "Ativo",           ← "Ativo" ou "Inativo"
-    "ra_estudante":   "12345678901234",  ← RA (pode ser vazio "")
-    "email_estudante":"ana@sesi.org.br", ← E-mail (pode ser vazio "")
-    "data_nascimento":"2010-03-15",      ← formato YYYY-MM-DD (pode ser "")
-    "data_ingresso":  "2023-02-01",      ← formato YYYY-MM-DD (pode ser "")
-    "mae_nome":       "Maria Santos",    ← pode ser ""
-    "mae_telefone":   "(17) 99999-0001", ← pode ser ""
-    "mae_email":      "maria@email.com", ← pode ser ""
-    "pai_nome":       "Carlos Santos",   ← pode ser ""
-    "pai_telefone":   "(17) 99999-0002", ← pode ser ""
-    "pai_email":      "",                ← pode ser ""
-    "endereco":       "Rua das Flores, 123 — SJRP",  ← pode ser ""
-    "observacoes":    "",                ← pode ser ""
-    "termo_autorizado": true,            ← true ou false
-    "foto_coletada":    true             ← true = tem foto em images/
-  }
-]
+Gere os templates com:
+```bash
+python3 scripts/importar_estudantes.py
 ```
 
-**Campos obrigatórios:** `matricula`, `nome_completo`, `serie`, `turma`, `turno`
+Isso cria `template_estudantes.csv` e `template_estudantes.xlsx` na raiz do projeto.
 
-**Séries válidas (exemplos):** `6º Ano`, `7º Ano`, `8º Ano`, `9º Ano`, `1º EM`, `2º EM`, `3º EM`
+**Colunas do template:**
 
-**Turnos válidos:** `Manhã`, `Tarde`, `Integral`
+| Coluna | Obrig. | Exemplo | Notas |
+|---|---|---|---|
+| `rm_estudante` | ✅ | `006810` | RM/Matrícula do aluno |
+| `ra_estudante` | | `000120628062-1` | Registro do Aluno SESI |
+| `nome_estudante` | ✅ | `ANA BEATRIZ SILVA SANTOS` | Nome completo |
+| `serie` | ✅ | `6º Ano` | Ver valores válidos abaixo |
+| `turma` | ✅ | `A` | Letra da turma |
+| `turno` | ✅ | `Manhã` | Manhã \| Tarde \| Integral |
+| `data_nascimento` | | `15/03/2012` | Formato DD/MM/AAAA |
+| `email_estudante` | | `ana@portalsesisp.org.br` | |
+| `status` | | `Ativo` | Ativo \| Inativo \| Transferido |
+| `data_ingresso` | | `01/02/2024` | Formato DD/MM/AAAA |
+| `mae_nome` | | `MARIA DA SILVA SANTOS` | |
+| `mae_telefone` | | `(16) 99999-8888` | |
+| `mae_email` | | `maria@email.com` | |
+| `pai_nome` | | `JOSÉ CARLOS SANTOS` | |
+| `pai_telefone` | | `(16) 98888-7777` | |
+| `pai_email` | | `jose@email.com` | |
+| `endereco_estudante` | | `Rua das Flores, 123` | |
+| `termo_autorizado` | | `Sim` | Sim \| Não |
+| `foto_coletada` | | `Não` | Sim \| Não |
+| `observacoes` | | `Restrição alimentar` | |
 
-### 4.2 data/config.json
+**Séries válidas:** `6º Ano` · `7º Ano` · `8º Ano` · `9º Ano` · `1º EM` · `2º EM` · `3º EM`
+
+### 4.2 data/alunos.json
+
+O arquivo é gerado automaticamente pelo script de importação. Estrutura de cada objeto:
+
+```json
+{
+  "matricula":        "006810",
+  "rm_estudante":     "006810",
+  "ra_estudante":     "000120628062-1",
+  "nome_completo":    "ANA BEATRIZ SILVA SANTOS",
+  "serie":            "6º Ano",
+  "turma":            "A",
+  "turno":            "Manhã",
+  "status":           "Ativo",
+  "data_nascimento":  "2012-03-15",
+  "data_ingresso":    "2024-02-01",
+  "email_estudante":  "ana.santos@portalsesisp.org.br",
+  "mae_nome":         "MARIA DA SILVA SANTOS",
+  "mae_telefone":     "(16) 99999-8888",
+  "mae_email":        "maria.santos@email.com",
+  "pai_nome":         "JOSÉ CARLOS SANTOS",
+  "pai_telefone":     "(16) 98888-7777",
+  "pai_email":        "jose.santos@email.com",
+  "endereco":         "Rua das Flores, 123",
+  "observacoes":      "Estudante com restrição alimentar",
+  "termo_autorizado": true,
+  "foto_coletada":    false
+}
+```
+
+> **Nota:** o campo `rm_estudante` é o identificador principal. O campo `matricula` é mantido por compatibilidade.
+
+### 4.3 data/config.json
 
 ```json
 {
@@ -333,382 +272,356 @@ Array JSON com um objeto por aluno. Todos os campos de texto vazios devem ser `"
     "nome":       "Carômetro Escolar",
     "subtitulo":  "Centro Educacional SESI 407",
     "escola":     "SESI 407",
-    "cidade":     "São José do Rio Preto — SP",
-    "ano_letivo": "2025"
+    "cidade":     "São Carlos — SP",
+    "ano_letivo": "2026"
   },
   "auth": {
-    "habilitado": true,              ← false = desativa o login
+    "habilitado": true,
     "usuarios": [
       {
-        "usuario":    "admin",       ← nome de login
-        "senha_hash": "HASH_SHA256", ← hash da senha
-        "nome":       "Administrador",← nome exibido no sistema
-        "perfil":     "admin"        ← "admin" ou "viewer" (ambos só visualizam)
+        "usuario":    "admin",
+        "senha_hash": "HASH_SHA256_DA_SENHA",
+        "nome":       "Administrador",
+        "perfil":     "admin"
       }
     ]
   },
-  "series_ordem": [                  ← ordem de exibição das séries
-    "6º Ano", "7º Ano", "8º Ano", "9º Ano",
-    "1º EM", "2º EM", "3º EM"
-  ]
+  "series_ordem": ["6º Ano","7º Ano","8º Ano","9º Ano","1º EM","2º EM","3º EM"]
 }
 ```
 
-### 4.3 Fotos dos Alunos (images/)
+> ⚠️ **Nunca coloque senhas em texto puro.** Use sempre o hash SHA-256 gerado pelo script.
 
-| Requisito | Detalhe |
+### 4.4 Fotos dos Alunos
+
+| Regra | Detalhe |
 |---|---|
-| **Nome do arquivo** | `<matricula>.jpg` (ex: `123456.jpg`) |
-| **Formato** | JPEG preferencialmente (`.jpg`) |
-| **Tamanho recomendado** | 240×320 px (3×4) — máximo 500KB por foto |
-| **Proporção** | 3:4 (retrato) — o sistema recorta automaticamente |
-| **Quando não existe** | O sistema exibe ícone de "sem foto" automaticamente |
+| **Nome do arquivo** | `<rm_estudante>.jpg` (ex: `006810.jpg`) |
+| **Localização** | Pasta `images/` na raiz do projeto |
+| **Formato** | JPEG preferencial (`.jpg`) |
+| **Tamanho recomendado** | 240×320 px (proporção 3:4) — máx 500 KB |
+| **Após importar** | O script cria pastas `images_<turma>/` automaticamente |
 
-> **Conversão de PNG para JPG** (no WSL2):
-> ```bash
-> # Instalar ImageMagick se necessário
-> sudo apt install imagemagick -y
->
-> # Converter todas as PNG para JPG na pasta images/
-> for f in images/*.png; do convert "$f" "${f%.png}.jpg"; done
->
-> # Remover os PNG originais após verificar
-> rm images/*.png
-> ```
+**Nomenclatura das pastas por turma:**
+
+| Série | Turma | Pasta gerada |
+|---|---|---|
+| 6º Ano | A | `images_6ano_A/` |
+| 7º Ano | B | `images_7ano_B/` |
+| 1º EM | A | `images_1serie_A/` |
+| 2º EM | B | `images_2serie_B/` |
+| 3º EM | C | `images_3serie_C/` |
 
 ---
 
-## 5. Fluxo de Trabalho Diário
+## 5. Scripts Utilitários — Referência Completa
 
-### 5.1 Via VS Code + WSL2 (recomendado)
+### 5.1 importar_estudantes.py ⭐ (principal)
 
-Este é o fluxo para qualquer atualização local (dados, fotos, configuração):
+Script central do workflow. Três modos de uso:
 
+**Modo 1 — Gerar templates (sem argumentos):**
 ```bash
-# 1. Abrir o terminal WSL2 e ir para a pasta do projeto
-cd ~/carometro-sesi-ce407
-
-# 2. Verificar o status atual
-git status
-
-# 3. Sincronizar com o GitHub (puxar atualizações)
-git pull
-
-# 4. Fazer as alterações necessárias
-#    - Editar data/alunos.json no VS Code
-#    - Adicionar/substituir fotos em images/
-#    - Editar data/config.json
-
-# 5. Verificar o que mudou
-git diff
-
-# 6. Adicionar os arquivos modificados
-git add .
-
-# 7. Criar o commit com mensagem descritiva
-git commit -m "feat: adicionar alunos do 7º Ano A"
-
-# 8. Enviar para o GitHub (publicar no site)
-git push
-
-# ✅ O site é atualizado automaticamente em 30-60 segundos.
+python3 scripts/importar_estudantes.py
 ```
+Cria `template_estudantes.csv` e `template_estudantes.xlsx` com cabeçalho + linha de exemplo.
+Não sobrescreve se já existirem.
 
-**Abrindo o projeto no VS Code direto do WSL2:**
+**Modo 2 — Importar dados (com arquivo):**
 ```bash
-cd ~/carometro-sesi-ce407
-code .
+# Com CSV
+python3 scripts/importar_estudantes.py template_estudantes.csv
+
+# Com Excel
+python3 scripts/importar_estudantes.py template_estudantes.xlsx
+
+# Com caminho completo
+python3 scripts/importar_estudantes.py /home/usuario/planilha_alunos.xlsx
 ```
-
-**Mensagens de commit recomendadas:**
-
-| Tipo | Exemplo |
-|---|---|
-| Adicionar alunos | `feat: adicionar turmas do 8º Ano` |
-| Atualizar dados | `fix: corrigir data de nascimento aluno 123456` |
-| Adicionar fotos | `feat: fotos dos alunos do 9º Ano A` |
-| Alterar configuração | `config: atualizar ano letivo 2026` |
-| Atualizar logo | `assets: atualizar logo da escola` |
-
-### 5.2 Diretamente no GitHub (navegador)
-
-Para alterações simples sem precisar do computador local:
-
-**Editar dados de um aluno:**
-1. Acesse o repositório: `https://github.com/SEU-USUARIO/carometro-sesi-ce407`
-2. Clique em `data/` → `alunos.json`
-3. Clique no ícone de lápis ✏️ (Edit this file)
-4. Faça a alteração desejada
-5. No final da página, em **Commit changes**:
-   - Escreva uma mensagem descritiva (ex: `fix: atualizar telefone aluno 123456`)
-   - Clique em **Commit changes**
-6. ✅ O site atualiza em 30-60 segundos
-
-**Adicionar uma foto pelo navegador:**
-1. Vá para a pasta `images/`
-2. Clique em **Add file** → **Upload files**
-3. Arraste a foto renomeada como `<matricula>.jpg`
-4. Escreva a mensagem de commit
-5. Clique em **Commit changes**
-
----
-
-## 6. Scripts Utilitários
-
-Todos os scripts ficam na pasta `scripts/` e são executados localmente no WSL2.
-
-### 6.1 Gerar Hash de Senha
-
-Use este script para criar o hash SHA-256 de uma senha antes de colocá-la no `config.json`.
-
-```bash
-# Com Python (recomendado)
-python3 scripts/gerar_senha_hash.py SuaSenhaAqui
-
-# Com Node.js (alternativa)
-node scripts/gerar-senha-hash.js SuaSenhaAqui
-```
-
-**Saída:**
-```
-─────────────────────────────────────────────────────
-  Carômetro Escolar — Gerador de Hash de Senha
-─────────────────────────────────────────────────────
-  Senha informada : SuaSenhaAqui
-  Hash SHA-256    : a1b2c3d4e5f6...
-─────────────────────────────────────────────────────
-
-  Cole o hash acima no campo "senha_hash" do usuário
-  em data/config.json
-```
-
-### 6.2 Importar Alunos por CSV
-
-Importa uma planilha de alunos diretamente para `data/alunos.json`.
-
-**Preparar o CSV:**
-
-Crie um arquivo `.csv` com as colunas (o nome da coluna não diferencia maiúsculas/minúsculas):
-
-```csv
-matricula,nome_completo,serie,turma,turno,data_nascimento,status,mae_nome,mae_telefone,termo_autorizado,foto_coletada
-123456,Ana Clara Santos,7º Ano,A,Manhã,2010-03-15,Ativo,Maria Santos,(17) 99999-0001,sim,nao
-123457,Bruno Lima,7º Ano,A,Manhã,2010-07-22,Ativo,Fernanda Lima,(17) 99999-0003,sim,nao
-```
-
-**Executar:**
-```bash
-python3 scripts/importar_alunos_csv.py meus_alunos.csv
-```
-
 O script:
-- Mantém alunos já existentes no JSON (atualiza se a matrícula já existir)
-- Adiciona novos alunos
+- Lê o arquivo (CSV ou XLSX)
+- Pula automaticamente a linha de descrições do template XLSX
+- Cria/atualiza `data/alunos.json`
+- Organiza fotos de `images/` para as pastas de turma correspondentes
 - Exibe relatório detalhado
-- Não remove alunos existentes que não estão no CSV
 
-Após importar, faça o commit:
+**Modo 3 — Apenas reorganizar imagens:**
 ```bash
-git add data/alunos.json
-git commit -m "feat: importar alunos do 7º Ano"
-git push
+python3 scripts/importar_estudantes.py --organizar-imagens
+```
+Reorganiza as fotos baseando-se no `alunos.json` existente, sem reimportar dados.
+
+---
+
+### 5.2 gerenciar_usuarios.py ⭐
+
+Gerencia usuários em `data/config.json`.
+
+```bash
+# Modo interativo (menu completo)
+python3 scripts/gerenciar_usuarios.py
+
+# Comandos diretos
+python3 scripts/gerenciar_usuarios.py --listar
+python3 scripts/gerenciar_usuarios.py --adicionar
+python3 scripts/gerenciar_usuarios.py --alterar-senha <usuario>
+python3 scripts/gerenciar_usuarios.py --remover <usuario>
+python3 scripts/gerenciar_usuarios.py --verificar-senha <usuario>
+python3 scripts/gerenciar_usuarios.py --ativar-login
+python3 scripts/gerenciar_usuarios.py --desativar-login
+python3 scripts/gerenciar_usuarios.py --config-escola
 ```
 
-### 6.3 Renomear Fotos em Lote
+**Exemplo — adicionar usuário:**
+```
+python3 scripts/gerenciar_usuarios.py --adicionar
+  Usuário (login): prof.silva
+  Nome de exibição: Prof. João Silva
+  Perfil: 1 → viewer
+  Senha: ••••••••
+  Confirmar senha: ••••••••
+  ✅  Usuário 'prof.silva' adicionado com sucesso!
+```
 
-Renomeia fotos da nomenclatura original para `<matricula>.jpg`.
+---
+
+### 5.3 verificar_sistema.py
+
+Relatório completo de consistência.
 
 ```bash
-# Renomear e mover para images/ automaticamente
+python3 scripts/verificar_sistema.py            # relatório completo
+python3 scripts/verificar_sistema.py --resumo   # só estatísticas
+python3 scripts/verificar_sistema.py --json     # saída JSON (para automação)
+```
+
+Verifica:
+- Alunos com `foto_coletada=true` mas sem imagem em `images/`
+- Imagens existentes sem `foto_coletada=true` no JSON
+- Imagens sem aluno correspondente no JSON
+- Cobertura percentual por turma
+- Pastas de turma organizadas
+
+---
+
+### 5.4 atualizar_foto_status.py
+
+Sincroniza o campo `foto_coletada` no JSON com base nas imagens físicas.
+
+```bash
+# Ativa foto_coletada=true para quem tem imagem em images/
+python3 scripts/atualizar_foto_status.py
+
+# Também desativa foto_coletada=false para quem não tem imagem
+python3 scripts/atualizar_foto_status.py --limpar
+
+# Simula sem salvar (dry-run)
+python3 scripts/atualizar_foto_status.py --dry-run
+```
+
+**Quando usar:** após copiar um lote de fotos para `images/` sem alterar o JSON manualmente.
+
+---
+
+### 5.5 backup_dados.py
+
+Cria backups compactados de `data/` e `images/`.
+
+```bash
+# Criar backup (salva em backups/)
+python3 scripts/backup_dados.py
+
+# Salvar em pasta específica
+python3 scripts/backup_dados.py --destino /home/usuario/meus_backups/
+
+# Listar backups disponíveis
+python3 scripts/backup_dados.py --listar
+
+# Restaurar um backup
+python3 scripts/backup_dados.py --restaurar backups/carometro_backup_2026-01-01_12-00.zip
+```
+
+**Recomendação:** executar antes de grandes atualizações.
+
+---
+
+### 5.6 renomear_fotos.py
+
+Renomeia fotos em lote da nomenclatura original para `<rm_estudante>.jpg`.
+
+```bash
+# Renomear e mover para images/
 python3 scripts/renomear_fotos.py --pasta fotos_originais/ --destino images/
 
-# Ou renomear na mesma pasta
+# Renomear na mesma pasta
 python3 scripts/renomear_fotos.py --pasta fotos_originais/
 ```
 
-O script reconhece:
-- Arquivos já nomeados com matrícula: `123456.jpg` → copiado direto
-- Arquivos com nome do aluno: `Ana Clara Santos.jpg` → busca no JSON pelo nome
+Reconhece:
+- Arquivos já com RM numérico: `006810.jpg` → copiado diretamente
+- Arquivos com nome do aluno: busca no `alunos.json` por correspondência parcial de nome
 
-Após renomear, lembre de atualizar `foto_coletada: true` nos alunos correspondentes e commitar tudo.
+---
 
-### 6.4 Verificar Consistência do Sistema
+### 5.7 gerar_senha_hash.py
 
-Verifica se os dados do JSON estão coerentes com as fotos na pasta `images/`.
+Gera hash SHA-256 de uma senha (utilitário de linha de comando).
 
 ```bash
+python3 scripts/gerar_senha_hash.py MinhaSenh@123
+```
+
+> **Alternativa:** use o `gerenciar_usuarios.py --adicionar` que já faz o hash automaticamente.
+
+---
+
+## 6. Fluxo de Trabalho Diário
+
+### Workflow completo de início de ano letivo
+
+```bash
+# 1. Gerar templates
+python3 scripts/importar_estudantes.py
+
+# 2. Preencher template_estudantes.xlsx no Excel/LibreOffice
+
+# 3. Importar dados + organizar fotos
+python3 scripts/importar_estudantes.py template_estudantes.xlsx
+
+# 4. Verificar consistência
 python3 scripts/verificar_sistema.py
+
+# 5. Commitar e publicar
+git add .
+git commit -m "feat: importar alunos ano letivo 2026"
+git push
 ```
 
-**Saída de exemplo:**
-```
-═══════════════════════════════════════════════════════
-  Carômetro Escolar — Verificação do Sistema
-═══════════════════════════════════════════════════════
-  Alunos no JSON    : 120
-  Imagens em images/: 87
+### Workflow de adição de fotos em lote
 
-  ⚠️  [3] foto_coletada=true MAS imagem não encontrada:
-      • 123460 — Eduarda Martins Souza (8º Ano A)
-        → Crie ou copie: images/123460.jpg
+```bash
+# 1. Copiar fotos para images/ (nomeadas como <rm>.jpg)
+cp /caminho/fotos/*.jpg images/
 
-  ─────────────────────────────────────────────────────
-  Cobertura por Turma:
-  ─────────────────────────────────────────────────────
-  Turma                     Total  c/Foto    OK    %
-  ─────────────────────────────────────────────────────
-  ✅  7º Ano A — Manhã          28      26    26   93%
-  ⚠️  8º Ano A — Manhã          30      20    20   67%
-  ❌  9º Ano B — Tarde          25       5     5   20%
+# 2. Atualizar status automaticamente
+python3 scripts/atualizar_foto_status.py
+
+# 3. Reorganizar por turma
+python3 scripts/importar_estudantes.py --organizar-imagens
+
+# 4. Verificar
+python3 scripts/verificar_sistema.py --resumo
+
+# 5. Commitar
+git add images/ data/alunos.json
+git commit -m "feat: adicionar fotos 7º Ano A (28 fotos)"
+git push
 ```
+
+### Via VS Code + WSL2 (qualquer atualização)
+
+```bash
+cd ~/carometro-sesi-ce407
+git pull                    # sincronizar com GitHub
+# ... faz alterações ...
+git status                  # ver o que mudou
+git add .
+git commit -m "descrição"
+git push                    # ✅ site atualiza em 30-60s
+```
+
+### Diretamente pelo GitHub (navegador)
+
+Para alterações simples sem abrir o terminal:
+
+1. Acesse o repositório no GitHub
+2. Navegue até o arquivo desejado
+3. Clique em ✏️ (Edit this file)
+4. Faça a alteração
+5. Clique em **Commit changes** com mensagem descritiva
 
 ---
 
 ## 7. Operações de Manutenção
 
-### 7.1 Adicionar um Novo Aluno
+### Adicionar novos alunos
 
-**Opção A — Editar o JSON no VS Code:**
+```bash
+# Opção A: via template (recomendado para vários alunos)
+# 1. Edite template_estudantes.xlsx com os novos alunos
+python3 scripts/importar_estudantes.py template_estudantes.xlsx
+git add data/ && git commit -m "feat: novos alunos" && git push
 
-1. Abra `data/alunos.json` no VS Code
-2. Adicione um novo objeto ao array (copie um existente como modelo)
-3. Preencha todos os campos obrigatórios
-4. Defina `"foto_coletada": false` (se ainda não tiver foto)
-5. Salve e faça commit
+# Opção B: editar o JSON diretamente (um aluno)
+# Edite data/alunos.json e adicione o objeto do aluno
+git add data/alunos.json && git commit -m "feat: adicionar aluno RM 006811" && git push
+```
 
-**Opção B — Pelo navegador no GitHub:**
+### Atualizar dados de um aluno
 
-1. Acesse `data/alunos.json` no repositório
-2. Clique em ✏️ para editar
-3. Adicione o objeto JSON no array
-4. Clique em **Commit changes**
-
-**Opção C — Via CSV:**
-
-Crie um CSV com o novo aluno e use o script de importação (seção 6.2).
-
-### 7.2 Atualizar Dados de um Aluno
-
-1. Abra `data/alunos.json`
-2. Use `Ctrl+F` para buscar pela matrícula ou nome
-3. Edite os campos necessários
-4. Salve e commite
-
+Edite diretamente `data/alunos.json` (busque pelo `rm_estudante`):
 ```bash
 git add data/alunos.json
-git commit -m "fix: atualizar dados do aluno 123456"
+git commit -m "fix: corrigir telefone responsável RM 006810"
 git push
 ```
 
-### 7.3 Adicionar / Atualizar Foto de Aluno
-
-1. Renomeie a foto para `<matricula>.jpg` (ex: `123456.jpg`)
-2. Coloque-a na pasta `images/`
-3. No `data/alunos.json`, atualize o aluno: `"foto_coletada": true`
-4. Commite tudo:
+### Adicionar / atualizar foto de aluno
 
 ```bash
-git add images/123456.jpg data/alunos.json
-git commit -m "feat: foto do aluno 123456 — Ana Clara Santos"
+cp /caminho/foto.jpg images/006810.jpg
+python3 scripts/atualizar_foto_status.py          # atualiza foto_coletada
+python3 scripts/importar_estudantes.py --organizar-imagens
+git add images/ data/alunos.json
+git commit -m "feat: foto do aluno RM 006810"
 git push
 ```
 
-**Adicionar várias fotos de uma vez:**
-```bash
-# Após colocar todas as fotos na pasta images/
-git add images/
-git add data/alunos.json
-git commit -m "feat: fotos dos alunos do 7º Ano A (26 fotos)"
-git push
-```
-
-### 7.4 Remover um Aluno
-
-1. Abra `data/alunos.json`
-2. Encontre e delete o objeto JSON do aluno
-3. Opcionalmente, remova a foto: `rm images/123456.jpg`
-4. Commite:
+### Alterar senha de acesso
 
 ```bash
-git add data/alunos.json
-git rm images/123456.jpg   # se quiser remover a foto também
-git commit -m "chore: remover aluno 123456 (transferido)"
+python3 scripts/gerenciar_usuarios.py --alterar-senha admin
+# ... digitar senha atual e nova senha ...
+git add data/config.json
+git commit -m "security: atualizar senha de acesso"
 git push
 ```
 
-### 7.5 Adicionar / Remover Turma
+### Adicionar novo usuário de acesso
 
-As turmas são criadas automaticamente conforme os dados dos alunos. Para adicionar uma nova turma, basta adicionar alunos com a nova combinação de `serie + turma + turno`.
-
-Para controlar a **ordem de exibição** das séries, edite `data/config.json`:
-
-```json
-"series_ordem": ["6º Ano", "7º Ano", "8º Ano", "9º Ano", "1º EM", "2º EM", "3º EM"]
+```bash
+python3 scripts/gerenciar_usuarios.py --adicionar
+# ... preencher usuário, nome, perfil, senha ...
+git add data/config.json
+git commit -m "config: adicionar usuário prof.silva"
+git push
 ```
 
-### 7.6 Alterar Senha de Acesso
+### Remover aluno
 
-1. Gere o hash da nova senha:
-   ```bash
-   python3 scripts/gerar_senha_hash.py NovaSenha123
-   ```
-
-2. Copie o hash gerado
-
-3. Edite `data/config.json` e substitua o campo `senha_hash` do usuário:
-   ```json
-   "senha_hash": "NOVO_HASH_AQUI"
-   ```
-
-4. Commite:
-   ```bash
-   git add data/config.json
-   git commit -m "security: atualizar senha de acesso"
-   git push
-   ```
-
-> ⚠️ **Atenção:** Após o push, a senha antiga para de funcionar imediatamente. Se tiver sessão aberta, precisará fazer login novamente.
-
-### 7.7 Adicionar Novo Usuário de Acesso
-
-1. Gere o hash da senha do novo usuário
-2. Edite `data/config.json` e adicione um objeto ao array `usuarios`:
-
-```json
-"usuarios": [
-  {
-    "usuario":    "admin",
-    "senha_hash": "hash_existente",
-    "nome":       "Administrador",
-    "perfil":     "admin"
-  },
-  {
-    "usuario":    "professor.silva",
-    "senha_hash": "HASH_DO_NOVO_USUARIO",
-    "nome":       "Prof. João Silva",
-    "perfil":     "viewer"
-  }
-]
+```bash
+# Editar data/alunos.json e remover o objeto do aluno
+# Opcionalmente remover a foto:
+rm images/006810.jpg
+git add data/alunos.json images/
+git commit -m "chore: remover aluno RM 006810 (transferido)"
+git push
 ```
 
-3. Commite e faça push.
+### Atualizar ano letivo / configurações da escola
 
-### 7.8 Atualizar o Logo
+```bash
+python3 scripts/gerenciar_usuarios.py --config-escola
+git add data/config.json
+git commit -m "config: atualizar ano letivo 2026"
+git push
+```
 
-1. Substitua o arquivo `assets/img/logo_sesi.png` pelo novo logo
-2. Mantenha o mesmo nome de arquivo (`logo_sesi.png`)
-3. Commite:
-   ```bash
-   git add assets/img/logo_sesi.png
-   git commit -m "assets: atualizar logo da escola"
-   git push
-   ```
+### Fazer backup antes de atualizações grandes
 
-### 7.9 Atualizar o Ano Letivo
-
-Edite `data/config.json` e altere o campo `ano_letivo`:
-```json
-"ano_letivo": "2026"
+```bash
+python3 scripts/backup_dados.py
+# Backup salvo em backups/carometro_backup_YYYY-MM-DD_HH-MM-SS.zip
 ```
 
 ---
@@ -718,36 +631,37 @@ Edite `data/config.json` e altere o campo `ano_letivo`:
 ```bash
 # ── Verificar status ──────────────────────────────────────────
 git status                    # Ver o que mudou
-git diff                      # Ver as diferenças detalhadas
-git log --oneline -10         # Ver os últimos 10 commits
+git diff                      # Ver diferenças detalhadas
+git log --oneline -10         # Últimos 10 commits
 
 # ── Sincronizar ───────────────────────────────────────────────
 git pull                      # Baixar atualizações do GitHub
-git push                      # Enviar atualizações para o GitHub
+git push                      # Enviar atualizações (publicar no site)
 
 # ── Adicionar e commitar ──────────────────────────────────────
-git add .                     # Adicionar TODOS os arquivos modificados
-git add data/alunos.json      # Adicionar um arquivo específico
-git add images/               # Adicionar toda uma pasta
-git commit -m "mensagem"      # Criar o commit
+git add .                     # Todos os arquivos modificados
+git add data/alunos.json      # Arquivo específico
+git add images/               # Toda uma pasta
+git commit -m "mensagem"      # Criar commit
 
-# ── Desfazer (use com cuidado) ────────────────────────────────
+# ── Fluxo completo ────────────────────────────────────────────
+git pull && git add . && git commit -m "descrição" && git push
+
+# ── Desfazer ─────────────────────────────────────────────────
 git restore data/alunos.json  # Descartar alterações não commitadas
-git revert HEAD               # Desfazer o último commit (cria commit inverso)
-
-# ── Verificar diferenças antes de commitar ────────────────────
-git diff data/alunos.json     # Ver o que mudou num arquivo específico
-git diff --staged              # Ver o que está preparado para commit
+git revert HEAD               # Desfazer o último commit (preserva histórico)
 ```
 
-**Fluxo completo mais comum:**
-```bash
-git pull
-# ... faz as alterações ...
-git add .
-git commit -m "descrição clara do que foi feito"
-git push
-```
+**Mensagens de commit recomendadas:**
+
+| Tipo | Exemplo |
+|---|---|
+| Novos alunos | `feat: importar alunos 7º Ano A` |
+| Fotos | `feat: fotos 8º Ano B (30 fotos)` |
+| Correção de dados | `fix: corrigir RM e telefone RM 006810` |
+| Usuários/config | `config: adicionar usuário coordenação` |
+| Segurança | `security: renovar senha de acesso` |
+| Atualização geral | `chore: atualizar dados início de semestre` |
 
 ---
 
@@ -756,66 +670,66 @@ git push
 ### Site não atualizou após o push
 
 - Aguarde até 60 segundos (GitHub Pages tem delay)
-- Limpe o cache do navegador: `Ctrl+Shift+R` (ou `Cmd+Shift+R` no Mac)
-- Verifique o status do deploy em: **GitHub → Settings → Pages**
-- Se houver erro, clique no link do deploy para ver os detalhes
+- Limpe o cache: `Ctrl+Shift+R`
+- Verifique em: GitHub → Settings → Pages → status do deploy
 
 ### Login não funciona
 
-1. Verifique se o `config.json` tem `"habilitado": true`
-2. Confirme que o hash está correto:
-   ```bash
-   python3 scripts/gerar_senha_hash.py SuaSenha
-   ```
-   Compare com o `senha_hash` no `config.json`
-3. Confirme que o `config.json` foi commitado e pusheado
+```bash
+# Verificar a senha
+python3 scripts/gerenciar_usuarios.py --verificar-senha admin
+
+# Ver usuários cadastrados
+python3 scripts/gerenciar_usuarios.py --listar
+```
 
 ### Foto não aparece
 
-1. Verifique se o arquivo existe: `ls images/123456.jpg`
-2. Verifique se o campo `"foto_coletada": true` está no JSON
-3. Verifique se o nome do arquivo é exatamente `<matricula>.jpg`
-4. Execute: `python3 scripts/verificar_sistema.py`
-
-### Aluno não aparece no sistema
-
-1. Verifique se o `alunos.json` é um JSON válido:
-   ```bash
-   python3 -c "import json; json.load(open('data/alunos.json'))"
-   ```
-   Se não mostrar nada, o JSON está válido. Se mostrar erro, há problema de formatação.
-2. Verifique se os campos obrigatórios estão preenchidos
-
-### Erro de JSON inválido
-
-Se editar o JSON manualmente e cometer um erro de formatação, o site ficará em branco ou exibirá aviso.
-
-Para verificar:
 ```bash
-# Verificar JSON
-python3 -c "
-import json
-with open('data/alunos.json') as f:
-    data = json.load(f)
-print(f'OK: {len(data)} alunos carregados')
-"
+# Verificar consistência completa
+python3 scripts/verificar_sistema.py
+
+# Sincronizar status automaticamente
+python3 scripts/atualizar_foto_status.py --dry-run   # simular
+python3 scripts/atualizar_foto_status.py              # aplicar
 ```
 
-Erros comuns:
+### alunos.json com erro de sintaxe
+
+```bash
+# Validar o JSON
+python3 -c "import json; json.load(open('data/alunos.json')); print('JSON válido ✅')"
+```
+
+Erros comuns de JSON:
 - Vírgula faltando entre objetos: `} {` → `}, {`
-- Vírgula sobrando após o último objeto: `},` → `}`
-- Aspas faltando em campos: `nome_completo: "Ana"` → `"nome_completo": "Ana"`
+- Vírgula sobrando no final: `},` → `}`
+- Aspas simples em vez de duplas: `'nome'` → `"nome"`
 
 ### Erro ao fazer git push
 
 ```
 error: failed to push some refs
 ```
-
-Solução: alguém editou o arquivo direto no GitHub. Execute:
 ```bash
 git pull --rebase
 git push
+```
+
+### Script Python com erro de módulo
+
+```bash
+pip3 install pandas openpyxl --break-system-packages
+```
+
+### Imagens não aparecem nas pastas de turma
+
+```bash
+# Verificar se as imagens estão em images/ com o nome correto (RM.jpg)
+ls images/
+
+# Reorganizar
+python3 scripts/importar_estudantes.py --organizar-imagens
 ```
 
 ---
@@ -824,75 +738,51 @@ git push
 
 ### Nível de segurança do login embutido
 
-O login em JavaScript no `index.html` **não é segurança real de servidor** — é uma barreira de acesso casual. Um usuário técnico que inspecione o código-fonte e a rede consegue contornar.
-
-| O que o login protege | O que NÃO protege |
+| O que protege | O que NÃO protege |
 |---|---|
-| Acesso casual/direto ao site | Acesso direto à URL dos arquivos JSON |
-| Usuários sem conhecimento técnico | Download das fotos por URL direta |
-| Sessão (expira ao fechar o browser) | Engenharia reversa do código |
+| Acesso casual ao site | Acesso direto à URL dos arquivos JSON/imagens |
+| Usuários sem conhecimento técnico | Download do código-fonte (se repo público) |
+| Sessão expira ao fechar o browser | Engenharia reversa do hash de senha |
 
 ### Recomendações
 
-1. **Use repositório privado** — impede que o código-fonte fique público
-2. **Configure o Cloudflare Access** — bloqueia o site antes de carregar qualquer arquivo (nível de segurança real)
-3. **Não coloque dados sensíveis** que não devam jamais ser acessados por alguém tecnicamente habilidoso
-4. **Não inclua senhas em texto puro** — use sempre o hash SHA-256
-5. **Rotacione as senhas** periodicamente (a cada semestre letivo, por exemplo)
+1. **Repositório privado** — impede acesso ao código-fonte
+2. **Cloudflare Access** (gratuito) — proteção real antes de carregar o site
+3. **Nunca coloque senhas em texto puro** no config.json
+4. **Rotacione senhas** a cada semestre letivo
+5. **Mantenha backups** antes de grandes atualizações
 
-### Sobre os dados de alunos (LGPD)
-
-Os dados ficam armazenados em arquivos JSON no repositório GitHub. Recomendações:
+### Sobre LGPD
 
 - Use repositório **privado**
 - Limite o acesso ao repositório apenas aos responsáveis
-- Mantenha apenas os dados necessários para a função do sistema
-- O campo `termo_autorizado` controla o registro de autorização LGPD
-- Documente o uso de dados conforme exigência da LGPD
+- O campo `termo_autorizado` registra autorização LGPD
+- Exclua dados de alunos transferidos/formados periodicamente
 
 ---
 
 ## 11. Escalabilidade
 
-### Limites do sistema atual
+### Limites práticos
 
-| Recurso | Limite prático |
+| Recurso | Limite |
 |---|---|
-| Número de alunos | Até ~2.000 (o JSON inteiro carrega na memória) |
-| Fotos | Até ~500MB no repositório (GitHub impõe 1GB por repo) |
-| Usuários de acesso | Sem limite (todos no `config.json`) |
-| Turmas | Sem limite |
+| Alunos | Até ~2.000 (JSON carregado inteiro em memória) |
+| Fotos | Até ~500 MB no repositório |
+| Usuários de acesso | Sem limite |
+| Turmas / séries | Sem limite |
 
-### Dicas para manter o sistema rápido
+### Dicas de performance
 
-1. **Comprima as fotos** antes de adicionar ao repositório:
-   ```bash
-   # Instalar ImageMagick
-   sudo apt install imagemagick -y
-
-   # Redimensionar e comprimir todas as fotos para 240x320px
-   for f in images/*.jpg; do
-     convert "$f" -resize 240x320^ -gravity center -extent 240x320 -quality 80 "$f"
-   done
-   ```
-
-2. **Mantenha apenas alunos ativos** — remova alunos transferidos/formados periodicamente
-
-3. **Use o campo `status: "Inativo"`** para alunos que não devem aparecer sem removê-los do sistema
-
-### Evolução futura (se necessário)
-
-Se o sistema crescer muito ou precisar de mais funcionalidades:
-
-| Necessidade | Solução |
-|---|---|
-| Edição pelo navegador sem Git | Netlify CMS ou Decap CMS |
-| Mais de 2.000 alunos | Paginar o JSON em múltiplos arquivos |
-| Busca muito lenta | Gerar índice de busca no build |
-| Upload de fotos sem Git | Cloudinary ou Imgur API (gratuito) |
-| Relatórios PDF | Adicionar biblioteca jsPDF ao index.html |
+```bash
+# Comprimir fotos antes de adicionar (ImageMagick)
+sudo apt install imagemagick -y
+for f in images/*.jpg; do
+  convert "$f" -resize 240x320^ -gravity center -extent 240x320 -quality 80 "$f"
+done
+```
 
 ---
 
-*Carômetro Escolar — Centro Educacional SESI 407 — São José do Rio Preto — SP*
-*Desenvolvido para uso interno. Todos os dados são restritos à equipe escolar.*
+*Carômetro Escolar — Centro Educacional SESI 407 — São Carlos — SP*
+*Uso interno restrito. Todos os dados são de acesso exclusivo da equipe escolar.*

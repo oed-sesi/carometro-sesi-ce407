@@ -1562,9 +1562,10 @@ function showTurmaSelector() {
 }
 
 /* ── Detalhe do Aluno ─────────────────────────────────────────── */
-function openAluno(matricula) {
-  const aluno = APP.alunos.find(a => a.matricula === matricula);
+function openAluno(rm) {
+  const aluno = APP.alunos.find(a => (a.rm_estudante || a.matricula) === rm);
   if (!aluno) return;
+  const rmKey = aluno.rm_estudante || aluno.matricula;
 
   APP.prevView = APP.currentView;
   APP.currentView = 'detalhe';
@@ -1583,7 +1584,7 @@ function openAluno(matricula) {
   `;
 
   // Foto
-  const fotoSrc = `images/${aluno.matricula}.jpg`;
+  const fotoSrc = `images/${rmKey}.jpg`;
   const fotoHtml = aluno.foto_coletada
     ? `<img src="${fotoSrc}" alt="${esc(aluno.nome_completo)}"
            class="detail-photo"
@@ -1665,7 +1666,7 @@ function openAluno(matricula) {
         ${fotoHtml}
         <div>
           <div class="detail-name">${esc(aluno.nome_completo)}</div>
-          <div class="detail-rm">RM ${esc(aluno.matricula)}</div>
+          <div class="detail-rm">RM ${esc(rmKey)}</div>
           <div class="detail-badge-row">
             ${statusBadge}
             ${fotoBadge}
@@ -1681,7 +1682,7 @@ function openAluno(matricula) {
         <div class="card-header"><span class="card-title">Identificação</span></div>
         <div class="card-body">
           <div class="field-group" style="grid-template-columns:repeat(2,1fr);">
-            ${field('Matrícula', aluno.matricula)}
+            ${field('RM / Matrícula', rmKey)}
             ${field('R.A. Estudante', aluno.ra_estudante)}
           </div>
           <div class="field-group" style="grid-template-columns:1fr;">
@@ -1716,15 +1717,16 @@ function openAluno(matricula) {
 
 /* ── Helpers de render ────────────────────────────────────────── */
 function renderStudentCard(a) {
+  const rm = a.rm_estudante || a.matricula;
   const fotoHtml = a.foto_coletada
-    ? `<img src="images/${a.matricula}.jpg"
+    ? `<img src="images/${rm}.jpg"
            alt="${esc(a.nome_completo)}"
            class="student-card-photo"
            onerror="this.outerHTML='<div class=student-card-nophoto><i data-lucide=camera-off width=22 height=22></i></div>'">`
     : `<div class="student-card-nophoto">
         <i data-lucide="camera-off" width="22" height="22"></i>
       </div>`;
-  return `<div class="student-card" onclick="openAluno('${a.matricula}')">
+  return `<div class="student-card" onclick="openAluno('${rm}')">
     ${fotoHtml}
     <div class="student-card-name">${esc(a.nome_completo)}</div>
     <div class="student-card-meta">${esc(a.serie)} ${esc(a.turma)}</div>
@@ -1732,8 +1734,9 @@ function renderStudentCard(a) {
 }
 
 function renderStudentRow(a) {
+  const rm = a.rm_estudante || a.matricula;
   const mini = a.foto_coletada
-    ? `<img src="images/${a.matricula}.jpg" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
+    ? `<img src="images/${rm}.jpg" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
            onerror="this.outerHTML='<div style=width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;><i data-lucide=camera-off width=14 height=14></i></div>'">`
     : `<div style="width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
         <i data-lucide="camera-off" width="14" height="14" style="color:var(--gray-400);"></i>
@@ -1741,10 +1744,10 @@ function renderStudentRow(a) {
   const statusBadge = a.status === 'Ativo'
     ? `<span class="badge badge-green" style="font-size:.65rem;">Ativo</span>`
     : `<span class="badge badge-gray" style="font-size:.65rem;">${esc(a.status)}</span>`;
-  return `<tr onclick="openAluno('${a.matricula}')">
+  return `<tr onclick="openAluno('${rm}')">
     <td>${mini}</td>
     <td><strong>${esc(a.nome_completo)}</strong></td>
-    <td style="font-family:monospace;font-size:.82rem;">${esc(a.matricula)}</td>
+    <td style="font-family:monospace;font-size:.82rem;">${esc(rm)}</td>
     <td>${esc(a.serie)} ${esc(a.turma)}</td>
     <td>${esc(a.turno)}</td>
     <td>${statusBadge}</td>
