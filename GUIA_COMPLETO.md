@@ -336,7 +336,7 @@ python3 scripts/importar_estudantes.py template_estudantes.csv
 python3 scripts/importar_estudantes.py template_estudantes.xlsx
 
 # Com caminho completo
-python3 scripts/importar_estudantes.py /home/usuario/planilha_alunos.xlsx
+python3 scripts/importar_estudantes.py /home/usuario/planilha_estudantes.xlsx
 ```
 O script:
 - Lê o arquivo (CSV ou XLSX)
