@@ -193,105 +193,253 @@
       display: flex; flex-direction: column;
       position: fixed; top: 0; left: 0; bottom: 0;
       z-index: 100; overflow: hidden;
-      transition: width .22s ease, transform .25s ease;
+      transition: width .2s cubic-bezier(.4,0,.2,1), transform .25s ease;
+      border-right: 1px solid var(--sidebar-border);
     }
     .sidebar:hover, .sidebar.expanded { width: var(--sidebar-w); }
 
+    /* ── Brand / Logo área ─────────────────────────────────────── */
     .sidebar-brand {
-      padding: 0; border-bottom: 1px solid var(--sidebar-border);
+      position: relative;
       display: flex; flex-direction: column;
-      align-items: center; overflow: hidden;
-      height: 56px;
-      transition: height .22s ease, padding .22s ease;
+      align-items: center; justify-content: center;
+      flex-shrink: 0;
+      height: 54px;
+      border-bottom: 1px solid var(--sidebar-border);
+      overflow: hidden;
+      transition: height .2s cubic-bezier(.4,0,.2,1),
+                  padding .2s cubic-bezier(.4,0,.2,1);
     }
     .sidebar:hover .sidebar-brand,
     .sidebar.expanded .sidebar-brand {
-      height: 164px; padding: 18px 16px 14px;
+      height: 148px;
+      padding: 16px 14px 14px;
+      justify-content: flex-start;
     }
+
+    /* Mini logo — visível só quando recolhida */
     .sidebar-brand-collapsed {
+      position: absolute;
       display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 56px; flex-shrink: 0;
+      width: 100%; height: 54px;
+      top: 0; left: 0;
+      opacity: 1; pointer-events: auto;
       transition: opacity .15s ease;
+      z-index: 2;
+    }
+    .sidebar-brand-collapsed-inner {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,.3);
+      overflow: hidden; padding: 3px; flex-shrink: 0;
+    }
+    .sidebar-brand-collapsed-inner img {
+      width: 28px; height: auto; object-fit: contain; display: block;
     }
     .sidebar:hover .sidebar-brand-collapsed,
-    .sidebar.expanded .sidebar-brand-collapsed { opacity: 0; pointer-events: none; }
+    .sidebar.expanded .sidebar-brand-collapsed {
+      opacity: 0; pointer-events: none;
+    }
 
+    /* Logo grande — visível só quando expandida */
     .sidebar-logo {
-      width: 92px; height: 92px; border-radius: 14px;
-      background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.28);
+      width: 86px; height: 86px; border-radius: 14px;
+      background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.32);
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-bottom: 12px; padding: 6px; overflow: hidden;
-      opacity: 0; transform: scale(.88);
-      transition: opacity .2s ease .05s, transform .2s ease .05s;
+      flex-shrink: 0; padding: 7px; overflow: hidden;
+      margin-bottom: 8px; align-self: center;
+      margin-top: 4px;
+      opacity: 0; transform: scale(.84) translateY(4px);
+      transition: opacity .18s ease .04s,
+                  transform .2s cubic-bezier(.34,1.2,.64,1) .04s;
+      pointer-events: none;
     }
     .sidebar:hover .sidebar-logo,
-    .sidebar.expanded .sidebar-logo { opacity: 1; transform: scale(1); }
-    .sidebar-logo img { width: 80px; height: auto; object-fit: contain; }
+    .sidebar.expanded .sidebar-logo {
+      opacity: 1; transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+    .sidebar-logo img { width: 72px; height: auto; object-fit: contain; display: block; }
 
+    /* Textos da brand */
     .sidebar-brand-text {
       text-align: center; width: 100%;
-      opacity: 0; transform: translateY(4px);
-      transition: opacity .2s ease .08s, transform .2s ease .08s;
+      opacity: 0; transform: translateY(5px);
+      transition: opacity .18s ease .09s, transform .18s ease .09s;
+      pointer-events: none;
     }
     .sidebar:hover .sidebar-brand-text,
-    .sidebar.expanded .sidebar-brand-text { opacity: 1; transform: translateY(0); }
-
+    .sidebar.expanded .sidebar-brand-text {
+      opacity: 1; transform: translateY(0);
+    }
     .sidebar-brand-name {
-      font-size: .82rem; font-weight: 800;
+      font-size: .8rem; font-weight: 800;
       color: #fff; white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis;
+      overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
     }
     .sidebar-brand-sub {
-      font-size: .7rem; color: var(--sidebar-text-sub);
+      font-size: .67rem; color: var(--sidebar-text-sub);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-top: 1px;
     }
 
-    .sidebar-nav { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 8px 6px; }
-    .sidebar-nav::-webkit-scrollbar { width: 4px; }
-    .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+    /* ── Nav ───────────────────────────────────────────────────── */
+    .sidebar-nav { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 6px 6px; }
+    .sidebar-nav::-webkit-scrollbar { width: 3px; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
 
-    .nav-section { margin-bottom: 4px; }
+    .nav-section { margin-bottom: 2px; }
+
+    /* Label da seção — slide + fade */
     .nav-section-label {
-      font-size: .62rem; font-weight: 700;
+      font-size: .6rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .1em;
-      color: var(--sidebar-text-sub); padding: 10px 8px 4px;
-      white-space: nowrap; overflow: hidden;
-      opacity: 0; transition: opacity .15s ease;
+      color: var(--sidebar-text-sub);
+      padding: 10px 10px 4px;
+      white-space: nowrap;
+      display: flex; align-items: center;
+      /* Animação: começa invisível e deslocado */
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity .15s ease, transform .15s ease;
+      overflow: hidden;
     }
     .sidebar:hover .nav-section-label,
-    .sidebar.expanded .nav-section-label { opacity: 1; }
+    .sidebar.expanded .nav-section-label {
+      opacity: 1; transform: translateX(0);
+    }
 
+    /* Nav item */
     .nav-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 8px; border-radius: 6px; cursor: pointer;
+      display: flex; align-items: center;
+      padding: 8px 10px; border-radius: 6px; cursor: pointer;
       color: var(--sidebar-text); font-size: .84rem; font-weight: 500;
       white-space: nowrap; overflow: hidden;
       transition: background var(--transition), color var(--transition);
+      position: relative;
+      text-decoration: none;
     }
-    .nav-item:hover { background: var(--sidebar-hover-bg); }
+    .nav-item:hover { background: var(--sidebar-hover-bg); color: #fff; }
     .nav-item.active { background: var(--sidebar-active-bg); color: #fff; font-weight: 700; }
-    .nav-item i { flex-shrink: 0; width: 18px; height: 18px; }
-    .nav-item span { overflow: hidden; text-overflow: ellipsis; }
 
-    .sidebar-footer {
-      padding: 10px 6px; border-top: 1px solid var(--sidebar-border);
+    /* Ícone — sempre centralizado quando recolhida, alinhado à esquerda quando expandida */
+    .nav-item i,
+    .nav-item svg {
+      flex-shrink: 0;
+      width: 16px; height: 16px;
+      /* Quando recolhida: ícone fica centralizado na largura da sidebar */
+      transition: margin .2s ease;
     }
-    .sidebar-user {
-      display: flex; align-items: center; gap: 10px;
-      padding: 8px; border-radius: 6px;
+
+    /* Span com o texto do nav-item — animação framer-like */
+    .nav-item span {
+      display: inline-block;
       overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-left: 10px;
+      /* Estado recolhido: invisível e deslocado para a esquerda */
+      opacity: 0;
+      transform: translateX(-12px);
+      max-width: 0;
+      transition:
+        opacity .15s ease,
+        transform .15s ease,
+        max-width .2s ease,
+        margin-left .2s ease;
+    }
+    .sidebar:hover .nav-item span,
+    .sidebar.expanded .nav-item span {
+      opacity: 1;
+      transform: translateX(0);
+      max-width: 180px;
+    }
+
+    /* Stagger nos spans — cada item aparece ligeiramente depois */
+    .sidebar:hover .nav-section:nth-child(1) .nav-item:nth-child(1) span,
+    .sidebar.expanded .nav-section:nth-child(1) .nav-item:nth-child(1) span { transition-delay: .03s; }
+    .sidebar:hover .nav-section:nth-child(1) .nav-item:nth-child(2) span,
+    .sidebar.expanded .nav-section:nth-child(1) .nav-item:nth-child(2) span { transition-delay: .05s; }
+    .sidebar:hover .nav-section:nth-child(2) .nav-item:nth-child(1) span,
+    .sidebar.expanded .nav-section:nth-child(2) .nav-item:nth-child(1) span { transition-delay: .07s; }
+    .sidebar:hover .nav-section:nth-child(2) .nav-item:nth-child(2) span,
+    .sidebar.expanded .nav-section:nth-child(2) .nav-item:nth-child(2) span { transition-delay: .09s; }
+    .sidebar:hover .nav-section:nth-child(2) .nav-item:nth-child(3) span,
+    .sidebar.expanded .nav-section:nth-child(2) .nav-item:nth-child(3) span { transition-delay: .11s; }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    .sidebar-footer {
+      padding: 8px 6px 10px;
+      border-top: 1px solid var(--sidebar-border);
+      flex-shrink: 0;
+    }
+
+    /* Usuário logado */
+    .sidebar-user {
+      display: flex; align-items: center;
+      padding: 7px 8px; border-radius: 6px;
+      overflow: hidden; gap: 0;
+      margin-bottom: 2px;
     }
     .sidebar-user-avatar {
-      width: 28px; height: 28px; border-radius: 50%;
+      width: 26px; height: 26px; border-radius: 50%;
       background: var(--sesi-red); color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: .72rem; font-weight: 800; flex-shrink: 0;
+      font-size: .7rem; font-weight: 800; flex-shrink: 0;
+      letter-spacing: -.5px;
     }
-    .sidebar-user-info { overflow: hidden; opacity: 0; transition: opacity .15s; }
+    .sidebar-user-info {
+      overflow: hidden;
+      /* Estado recolhido */
+      opacity: 0;
+      transform: translateX(-10px);
+      max-width: 0;
+      margin-left: 0;
+      transition:
+        opacity .15s ease .08s,
+        transform .15s ease .08s,
+        max-width .2s ease,
+        margin-left .2s ease;
+    }
     .sidebar:hover .sidebar-user-info,
-    .sidebar.expanded .sidebar-user-info { opacity: 1; }
-    .sidebar-user-name { font-size: .8rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .sidebar-user-role { font-size: .7rem; color: var(--sidebar-text-sub); white-space: nowrap; }
+    .sidebar.expanded .sidebar-user-info {
+      opacity: 1; transform: translateX(0);
+      max-width: 160px; margin-left: 10px;
+    }
+    .sidebar-user-name {
+      font-size: .78rem; font-weight: 700; color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .sidebar-user-role {
+      font-size: .67rem; color: var(--sidebar-text-sub);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* Botão Sair — span com mesma animação */
+    .nav-item-logout {
+      display: flex; align-items: center;
+      padding: 7px 10px; border-radius: 6px; cursor: pointer;
+      color: #EF4444; font-size: .84rem; font-weight: 500;
+      white-space: nowrap; overflow: hidden;
+      transition: background var(--transition);
+      width: 100%; background: none; border: none; text-align: left;
+    }
+    .nav-item-logout:hover { background: rgba(239,68,68,.12); }
+    .nav-item-logout i, .nav-item-logout svg { flex-shrink: 0; width: 16px; height: 16px; }
+    .nav-item-logout span {
+      display: inline-block; overflow: hidden;
+      white-space: nowrap; text-overflow: ellipsis;
+      margin-left: 10px;
+      opacity: 0; transform: translateX(-12px);
+      max-width: 0;
+      transition: opacity .15s ease .1s, transform .15s ease .1s, max-width .2s ease, margin-left .2s ease;
+    }
+    .sidebar:hover .nav-item-logout span,
+    .sidebar.expanded .nav-item-logout span {
+      opacity: 1; transform: translateX(0); max-width: 140px;
+    }
 
     /* ── Main Content ──────────────────────────────────────────── */
     .main {
@@ -700,7 +848,18 @@
         transform: translateX(-100%);
         width: var(--sidebar-w) !important;
       }
-      .sidebar.mobile-open { transform: translateX(0); }
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+      /* Quando aberta no mobile: mostrar tudo como expandida */
+      .sidebar.mobile-open .sidebar-brand { height: 148px; padding: 16px 14px 14px; justify-content: flex-start; }
+      .sidebar.mobile-open .sidebar-brand-collapsed { opacity: 0; pointer-events: none; }
+      .sidebar.mobile-open .sidebar-logo { opacity: 1; transform: scale(1) translateY(0); }
+      .sidebar.mobile-open .sidebar-brand-text { opacity: 1; transform: translateY(0); }
+      .sidebar.mobile-open .nav-section-label { opacity: 1; transform: translateX(0); }
+      .sidebar.mobile-open .nav-item span { opacity: 1; transform: translateX(0); max-width: 180px; }
+      .sidebar.mobile-open .nav-item-logout span { opacity: 1; transform: translateX(0); max-width: 140px; }
+      .sidebar.mobile-open .sidebar-user-info { opacity: 1; transform: translateX(0); max-width: 160px; margin-left: 10px; }
       .main { margin-left: 0; }
       .topbar-toggle { display: flex; }
       .topbar-search { display: none; }
@@ -721,7 +880,8 @@
     @media (pointer: coarse) {
       .btn { min-height: 42px; }
       .btn-sm { min-height: 36px; }
-      .nav-item { padding: 12px 8px; }
+      .nav-item { padding: 11px 10px; }
+      .nav-item-logout { padding: 11px 10px; }
       .page-btn { min-width: 38px; min-height: 38px; }
     }
   </style>
@@ -790,16 +950,20 @@
 
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
+
+    <!-- ── Brand ──────────────────────────────────────────────── -->
     <div class="sidebar-brand">
+      <!-- Mini ícone (recolhida) -->
       <div class="sidebar-brand-collapsed">
-        <div style="width:36px;height:36px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(0,0,0,.25);overflow:hidden;padding:3px;">
+        <div class="sidebar-brand-collapsed-inner">
           <img src="assets/img/logo_sesi.png" alt="SESI"
-               style="width:30px;height:auto;object-fit:contain;"
-               onerror="this.parentElement.style.display='none'">
+               onerror="this.parentElement.style.background='#ED1C24';this.style.display='none'">
         </div>
       </div>
+      <!-- Logo grande + textos (expandida) -->
       <div class="sidebar-logo">
-        <img src="assets/img/logo_sesi.png" alt="SESI 407" onerror="this.style.display='none'">
+        <img src="assets/img/logo_sesi.png" alt="SESI 407"
+             onerror="this.style.display='none'">
       </div>
       <div class="sidebar-brand-text">
         <div class="sidebar-brand-name">Carômetro Escolar</div>
@@ -807,24 +971,29 @@
       </div>
     </div>
 
+    <!-- ── Nav ─────────────────────────────────────────────────── -->
     <nav class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-label">Principal</div>
         <a class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
-          <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+          <i data-lucide="layout-dashboard" width="16" height="16"></i>
+          <span>Dashboard</span>
         </a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Consultas</div>
         <a class="nav-item" id="nav-alunos" onclick="showView('alunos')">
-          <i data-lucide="users"></i><span>Todos os Alunos</span>
+          <i data-lucide="users" width="16" height="16"></i>
+          <span>Todos os Alunos</span>
         </a>
         <a class="nav-item" id="nav-turmas" onclick="showView('turmas')">
-          <i data-lucide="layers"></i><span>Por Turma</span>
+          <i data-lucide="layers" width="16" height="16"></i>
+          <span>Por Turma</span>
         </a>
       </div>
     </nav>
 
+    <!-- ── Footer ──────────────────────────────────────────────── -->
     <div class="sidebar-footer">
       <div class="sidebar-user">
         <div class="sidebar-user-avatar" id="user-avatar-initials">AD</div>
@@ -833,12 +1002,12 @@
           <div class="sidebar-user-role" id="user-display-role">Sistema Carômetro</div>
         </div>
       </div>
-      <div style="margin-top:6px;">
-        <button class="nav-item" onclick="doLogout()" style="width:100%;color:#EF4444;">
-          <i data-lucide="log-out"></i><span>Sair</span>
-        </button>
-      </div>
+      <button class="nav-item-logout" onclick="doLogout()">
+        <i data-lucide="log-out" width="16" height="16"></i>
+        <span>Sair</span>
+      </button>
     </div>
+
   </aside>
 
   <!-- Main -->
