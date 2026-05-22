@@ -1,8 +1,8 @@
 # Carômetro Escolar — SESI 407
 ## Guia Completo de Configuração, Atualização e Manutenção
 
-> **Versão:** 5.1 — Edição GitHub Pages (Frontend Estático)\
-> **Última revisão:** 2026\
+> **Versão:** 5.1 — Edição GitHub Pages (Frontend Estático)
+> **Última revisão:** 2026
 > **Ambiente:** Ubuntu 25.04 LTS via WSL2 + Windows 11 + VS Code
 
 ---
@@ -68,7 +68,7 @@ Navegador do usuário
 ## 2. Estrutura do Repositório
 
 ```
-carometro-sesi-ce407/
+carometro-sesi407/
 │
 ├── index.html                    ← Aplicação principal (HTML + CSS + JS)
 ├── README.md                     ← Descrição do repositório
@@ -131,7 +131,7 @@ pip3 install pandas openpyxl --break-system-packages
 
 1. Acesse **https://github.com/new**
 2. Preencha:
-   - **Repository name:** `carometro-sesi-ce407`
+   - **Repository name:** `carometro-sesi407`
    - **Visibility:** `Private` ← **IMPORTANTE: deixar privado**
    - Não inicialize com nenhum arquivo
 3. Clique em **Create repository**
@@ -148,15 +148,15 @@ git config --global credential.helper store
 **Personal Access Token (GitHub):**
 
 1. GitHub → Avatar → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token
-2. Note: `carometro-sesi-ce407` | Expiration: No expiration | Permissão: **repo**
+2. Note: `carometro-sesi407` | Expiration: No expiration | Permissão: **repo**
 3. Copie o token gerado (aparece apenas uma vez)
 
 ### 3.4 Clonar e Preparar o Projeto
 
 ```bash
 cd ~
-git clone https://github.com/SEU-USUARIO/carometro-sesi-ce407.git
-cd carometro-sesi-ce407
+git clone https://github.com/SEU-USUARIO/carometro-sesi407.git
+cd carometro-sesi407
 ```
 
 Copie os arquivos do projeto para esta pasta, adicione as fotos em `images/` e:
@@ -172,7 +172,7 @@ git push -u origin main
 1. Repositório → **Settings** → **Pages**
 2. Source: Branch `main` | Folder `/ (root)`
 3. Clique **Save**
-4. Aguarde 1-2 min → URL: `https://SEU-USUARIO.github.io/carometro-sesi-ce407/`
+4. Aguarde 1-2 min → URL: `https://SEU-USUARIO.github.io/carometro-sesi407/`
 
 ### 3.6 Configurar Usuários de Acesso
 
@@ -336,7 +336,7 @@ python3 scripts/importar_estudantes.py template_estudantes.csv
 python3 scripts/importar_estudantes.py template_estudantes.xlsx
 
 # Com caminho completo
-python3 scripts/importar_estudantes.py /home/usuario/planilha_estudantes.xlsx
+python3 scripts/importar_estudantes.py /home/usuario/planilha_alunos.xlsx
 ```
 O script:
 - Lê o arquivo (CSV ou XLSX)
@@ -521,7 +521,7 @@ git push
 ### Via VS Code + WSL2 (qualquer atualização)
 
 ```bash
-cd ~/carometro-sesi-ce407
+cd ~/carometro-sesi407
 git pull                    # sincronizar com GitHub
 # ... faz alterações ...
 git status                  # ver o que mudou

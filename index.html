@@ -1698,7 +1698,7 @@ function applyFilters() {
   document.getElementById('btn-clear-filters').style.display = hasFilter ? '' : 'none';
 
   APP.alunosFiltrados = APP.alunos.filter(a => {
-    if (search && !`${a.nome_completo} ${a.matricula} ${a.mae_nome || ''} ${a.pai_nome || ''}`.toLowerCase().includes(search)) return false;
+    if (search && !`${a.nome_completo} ${a.matricula} ${a.rm_estudante || ''} ${a.mae_nome || ''} ${a.pai_nome || ''} ${a.rg_estudante || ''} ${a.cpf_estudante || ''} ${a.nu_chamada || ''}`.toLowerCase().includes(search)) return false;
     if (serie  && a.serie  !== serie)  return false;
     if (turma  && a.turma  !== turma)  return false;
     if (turno  && a.turno  !== turno)  return false;
@@ -2009,9 +2009,10 @@ function openAluno(rm) {
       <div class="card">
         <div class="card-header"><span class="card-title">Identificação</span></div>
         <div class="card-body">
-          <div class="field-group" style="grid-template-columns:repeat(2,1fr);">
+          <div class="field-group" style="grid-template-columns:repeat(3,1fr);">
             ${field('RM / Matrícula', rmKey)}
             ${field('R.A. Estudante', aluno.ra_estudante)}
+            ${field('Nº Chamada', aluno.nu_chamada)}
           </div>
           <div class="field-group" style="grid-template-columns:1fr;">
             ${field('Nome Completo', aluno.nome_completo)}
@@ -2034,6 +2035,23 @@ function openAluno(rm) {
           </div>` : ''}
         </div>
       </div>
+
+      ${(aluno.rg_estudante || aluno.cpf_estudante) ? `
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Documentos</span>
+        </div>
+        <div class="card-body">
+          <div class="field-group" style="grid-template-columns:repeat(3,1fr);">
+            ${field('RG', aluno.rg_estudante)}
+            ${field('UF do RG', aluno.uf_rg)}
+            ${field('Órgão Emissor', aluno.org_emissor_rg)}
+          </div>
+          <div class="field-group" style="grid-template-columns:1fr;border-bottom:none;margin-bottom:0;padding-bottom:0;">
+            ${field('CPF', aluno.cpf_estudante)}
+          </div>
+        </div>
+      </div>` : ''}
 
       ${respHtml}
       ${obsHtml}
