@@ -709,40 +709,165 @@
     .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 
     /* ── Dashboard Turmas ──────────────────────────────────────── */
+    /* ── Turma Cards Grid ──────────────────────────────────────── */
     .turma-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1px; background: var(--gray-200);
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-      overflow: hidden;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 4px 2px 8px;   /* espaço para a sombra não ser cortada */
     }
+
+    /* Card individual */
     .tc-item {
-      background: #fff; padding: 20px 18px 18px;
-      cursor: pointer; transition: background .15s; position: relative;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px 20px 18px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      /* Animação de entrada */
+      opacity: 0;
+      transform: translateY(18px);
+      animation: tcCardIn .35s ease forwards;
+      transition:
+        transform .22s cubic-bezier(.34,1.2,.64,1),
+        box-shadow .22s ease,
+        border-color .18s ease;
     }
-    .tc-item:hover { background: var(--gray-50); }
+    .tc-item:hover {
+      transform: translateY(-3px) scale(1.025);
+      box-shadow: 0 8px 24px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);
+      border-color: var(--gray-300);
+    }
+    [data-theme="dark"] .tc-item {
+      background: #1A1D23;
+      border-color: #2A2F3D;
+      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    }
+    [data-theme="dark"] .tc-item:hover {
+      border-color: #3A4055;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+
+    /* Stagger de entrada — cada card aparece 0.07s depois do anterior */
+    .tc-item:nth-child(1)  { animation-delay: .03s; }
+    .tc-item:nth-child(2)  { animation-delay: .10s; }
+    .tc-item:nth-child(3)  { animation-delay: .17s; }
+    .tc-item:nth-child(4)  { animation-delay: .24s; }
+    .tc-item:nth-child(5)  { animation-delay: .31s; }
+    .tc-item:nth-child(6)  { animation-delay: .38s; }
+    .tc-item:nth-child(7)  { animation-delay: .45s; }
+    .tc-item:nth-child(8)  { animation-delay: .52s; }
+    .tc-item:nth-child(9)  { animation-delay: .59s; }
+    .tc-item:nth-child(10) { animation-delay: .66s; }
+    .tc-item:nth-child(n+11) { animation-delay: .70s; }
+
+    @keyframes tcCardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Header do card: ícone + título + seta ─────────────────── */
+    .tc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .tc-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .tc-icon-wrap {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .tc-icon-wrap.tc-green { background: #ECFDF5; }
+    .tc-icon-wrap.tc-amber { background: #FFFBEB; }
+    .tc-icon-wrap.tc-red   { background: #FFF5F5; }
+    [data-theme="dark"] .tc-icon-wrap.tc-green { background: rgba(16,185,129,.12); border-color: rgba(16,185,129,.15); }
+    [data-theme="dark"] .tc-icon-wrap.tc-amber { background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.15); }
+    [data-theme="dark"] .tc-icon-wrap.tc-red   { background: rgba(237,28,36,.10);  border-color: rgba(237,28,36,.15);  }
+
+    /* Seta ArrowUpRight */
+    .tc-arrow {
+      width: 18px; height: 18px;
+      color: var(--gray-300);
+      flex-shrink: 0;
+      transition: color .18s ease,
+                  transform .22s cubic-bezier(.34,1.4,.64,1);
+    }
+    .tc-item:hover .tc-arrow {
+      color: var(--gray-500);
+      transform: translate(3px, -3px);
+    }
+    [data-theme="dark"] .tc-arrow { color: #374151; }
+    [data-theme="dark"] .tc-item:hover .tc-arrow { color: #9CA3AF; }
+
+    /* Textos do header */
     .tc-serie {
-      font-size: .68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .07em; color: var(--gray-400); margin-bottom: 2px;
+      font-size: .65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--gray-400); margin-bottom: 1px;
     }
-    .tc-turma { font-size: .95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
-    .tc-count { display: flex; align-items: baseline; gap: 3px; margin-bottom: 8px; }
-    .tc-count-num { font-size: 1.7rem; font-weight: 900; color: var(--gray-900); line-height: 1; letter-spacing: -.04em; }
-    .tc-count-sep { font-size: .9rem; color: var(--gray-300); }
-    .tc-count-total { font-size: .85rem; color: var(--gray-400); font-weight: 500; }
-    .tc-progress { height: 4px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
-    .tc-progress-bar { height: 100%; border-radius: 4px; background: var(--green-500); transition: width .4s ease; }
+    .tc-turma {
+      font-size: .97rem; font-weight: 700; color: var(--gray-900);
+      line-height: 1.2;
+    }
+    [data-theme="dark"] .tc-turma { color: #F1F5F9; }
+
+    /* ── Corpo do card: contagem + barra + badge ────────────────── */
+    .tc-body {}
+
+    .tc-count {
+      display: flex; align-items: baseline; gap: 4px; margin-bottom: 10px;
+    }
+    .tc-count-num {
+      font-size: 1.9rem; font-weight: 900; color: var(--gray-900);
+      line-height: 1; letter-spacing: -.05em;
+    }
+    [data-theme="dark"] .tc-count-num { color: #F1F5F9; }
+    .tc-count-sep  { font-size: .95rem; color: var(--gray-300); font-weight: 400; }
+    .tc-count-total{ font-size: .88rem; color: var(--gray-400); font-weight: 500; }
+
+    .tc-progress {
+      height: 5px; background: var(--gray-200); border-radius: 99px;
+      overflow: hidden; margin-bottom: 10px;
+    }
+    [data-theme="dark"] .tc-progress { background: #2A2F3D; }
+    .tc-progress-bar {
+      height: 100%; border-radius: 99px;
+      transition: width .5s cubic-bezier(.4,0,.2,1);
+    }
+
+    .tc-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 2px;
+    }
     .tc-badge {
       display: inline-flex; align-items: center; gap: 4px;
-      font-size: .68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .05em; padding: 3px 8px;
-      border-radius: 20px; border: 1px solid;
+      font-size: .67rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: 3px 9px;
+      border-radius: 99px; border: 1px solid;
     }
-    .tc-badge.tc-green { color: #065f46; background: #d1fae5; border-color: #6ee7b7; }
-    .tc-badge.tc-amber { color: #92400e; background: #fef3c7; border-color: #fcd34d; }
-    .tc-badge.tc-red   { color: #991b1b; background: #fee2e2; border-color: #fca5a5; }
-    .tc-turno { margin-top: 8px; font-size: .7rem; color: var(--gray-400); font-weight: 500; }
+    .tc-badge.tc-green { color: #065f46; background: #D1FAE5; border-color: #6EE7B7; }
+    .tc-badge.tc-amber { color: #92400e; background: #FEF3C7; border-color: #FCD34D; }
+    .tc-badge.tc-red   { color: #991b1b; background: #FEE2E2; border-color: #FCA5A5; }
+    [data-theme="dark"] .tc-badge.tc-green { color: #6EE7B7; background: rgba(16,185,129,.1);  border-color: rgba(110,231,183,.3); }
+    [data-theme="dark"] .tc-badge.tc-amber { color: #FCD34D; background: rgba(245,158,11,.1);  border-color: rgba(252,211,77,.3);  }
+    [data-theme="dark"] .tc-badge.tc-red   { color: #FCA5A5; background: rgba(237,28,36,.1);   border-color: rgba(252,165,165,.3); }
+
+    .tc-turno {
+      font-size: .7rem; color: var(--gray-400); font-weight: 500;
+      white-space: nowrap;
+    }
 
     /* ── View Toggle ───────────────────────────────────────────── */
     .view-toggle { display: flex; gap: 2px; background: var(--gray-100); border-radius: 6px; padding: 3px; }
@@ -830,8 +955,7 @@
     [data-theme="dark"] .student-card,
     [data-theme="dark"] .table-wrap,
     [data-theme="dark"] .filter-bar,
-    [data-theme="dark"] .detail-photo-card,
-    [data-theme="dark"] .tc-item { background: #1A1D23; border-color: #2A2F3D; }
+    [data-theme="dark"] .detail-photo-card { background: #1A1D23; border-color: #2A2F3D; }
     [data-theme="dark"] .topbar { border-bottom-color: #2A2F3D; }
     [data-theme="dark"] .card-header { border-bottom-color: #2A2F3D; }
     [data-theme="dark"] thead th { background: #1F2330; border-bottom-color: #2A2F3D; }
@@ -842,8 +966,6 @@
     [data-theme="dark"] .search-wrap input { color: var(--gray-800); }
     [data-theme="dark"] .btn-secondary { background: #1F2330; border-color: #3A4055; color: var(--gray-700); }
     [data-theme="dark"] .page-btn { background: #1A1D23; border-color: #3A4055; color: var(--gray-700); }
-    [data-theme="dark"] .turma-cards-grid { background: #2A2F3D; }
-    [data-theme="dark"] .tc-item:hover { background: #20242E; }
 
     /* ═══════════════════════════════════════════════════════════
        RESPONSIVIDADE
@@ -1085,7 +1207,7 @@
               </button>
             </div>
           </div>
-          <div id="dash-turmas-cards" class="turma-cards-grid"></div>
+          <div id="dash-turmas-cards" class="turma-cards-grid" style="padding:16px 16px 8px;"></div>
           <div id="dash-turmas-table" style="display:none;">
             <div class="table-wrap" style="border-radius:0;border:none;box-shadow:none;">
               <table>
@@ -1210,7 +1332,7 @@
             <i data-lucide="info" width="16" height="16"></i>
             Clique em uma turma para ver todos os seus alunos com foto.
           </div>
-          <div class="turma-cards-grid" id="turmas-selector-grid"></div>
+          <div class="turma-cards-grid" id="turmas-selector-grid" style="padding:4px 2px 8px;"></div>
         </div>
 
         <!-- Alunos da turma -->
@@ -1482,17 +1604,33 @@ function renderDashboard() {
     const pct = t.total > 0 ? Math.round(t.comFoto/t.total*100) : 0;
     const cls = pct >= 90 ? 'tc-green' : pct >= 50 ? 'tc-amber' : 'tc-red';
     const label = pct >= 90 ? 'Completo' : pct >= 50 ? 'Parcial' : 'Pendente';
+    const barColor = pct >= 90 ? 'var(--green-500)' : pct >= 50 ? 'var(--amber-500)' : 'var(--sesi-red)';
+    const emoji = pct >= 90 ? '🎓' : pct >= 50 ? '📚' : '📋';
     return `<div class="tc-item" onclick="openTurma('${esc(t.serie)}','${esc(t.turma)}','${esc(t.turno)}')">
-      <div class="tc-serie">${esc(t.serie)}</div>
-      <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
-      <div class="tc-count">
-        <span class="tc-count-num">${t.comFoto}</span>
-        <span class="tc-count-sep">/</span>
-        <span class="tc-count-total">${t.total}</span>
+      <div class="tc-header">
+        <div class="tc-header-left">
+          <div class="tc-icon-wrap ${cls}">${emoji}</div>
+          <div>
+            <div class="tc-serie">${esc(t.serie)}</div>
+            <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
+          </div>
+        </div>
+        <svg class="tc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+        </svg>
       </div>
-      <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${pct>=90?'var(--green-500)':pct>=50?'var(--amber-500)':'var(--sesi-red)'};"></div></div>
-      <span class="tc-badge ${cls}">${label} · ${pct}%</span>
-      <div class="tc-turno">${esc(t.turno)}</div>
+      <div class="tc-body">
+        <div class="tc-count">
+          <span class="tc-count-num">${t.comFoto}</span>
+          <span class="tc-count-sep">/</span>
+          <span class="tc-count-total">${t.total} alunos</span>
+        </div>
+        <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${barColor};"></div></div>
+        <div class="tc-footer">
+          <span class="tc-badge ${cls}">${label} · ${pct}%</span>
+          <span class="tc-turno">${esc(t.turno)}</span>
+        </div>
+      </div>
     </div>`;
   }).join('');
 
@@ -1677,17 +1815,33 @@ function renderTurmaSelector() {
     const pct = t.total > 0 ? Math.round(t.comFoto/t.total*100) : 0;
     const cls = pct >= 90 ? 'tc-green' : pct >= 50 ? 'tc-amber' : 'tc-red';
     const label = pct >= 90 ? 'Completo' : pct >= 50 ? 'Parcial' : 'Pendente';
+    const barColor = pct >= 90 ? 'var(--green-500)' : pct >= 50 ? 'var(--amber-500)' : 'var(--sesi-red)';
+    const emoji = pct >= 90 ? '🎓' : pct >= 50 ? '📚' : '📋';
     return `<div class="tc-item" onclick="openTurma('${esc(t.serie)}','${esc(t.turma)}','${esc(t.turno)}')">
-      <div class="tc-serie">${esc(t.serie)}</div>
-      <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
-      <div class="tc-count">
-        <span class="tc-count-num">${t.comFoto}</span>
-        <span class="tc-count-sep">/</span>
-        <span class="tc-count-total">${t.total}</span>
+      <div class="tc-header">
+        <div class="tc-header-left">
+          <div class="tc-icon-wrap ${cls}">${emoji}</div>
+          <div>
+            <div class="tc-serie">${esc(t.serie)}</div>
+            <div class="tc-turma">${esc(t.serie)} ${esc(t.turma)}</div>
+          </div>
+        </div>
+        <svg class="tc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+        </svg>
       </div>
-      <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${pct>=90?'var(--green-500)':pct>=50?'var(--amber-500)':'var(--sesi-red)'};"></div></div>
-      <span class="tc-badge ${cls}">${label} · ${pct}%</span>
-      <div class="tc-turno">${esc(t.turno)}</div>
+      <div class="tc-body">
+        <div class="tc-count">
+          <span class="tc-count-num">${t.comFoto}</span>
+          <span class="tc-count-sep">/</span>
+          <span class="tc-count-total">${t.total} alunos</span>
+        </div>
+        <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%;background:${barColor};"></div></div>
+        <div class="tc-footer">
+          <span class="tc-badge ${cls}">${label} · ${pct}%</span>
+          <span class="tc-turno">${esc(t.turno)}</span>
+        </div>
+      </div>
     </div>`;
   }).join('');
 
