@@ -447,7 +447,12 @@
       margin-left: var(--sidebar-w-collapsed);
       display: flex; flex-direction: column;
       min-height: 100vh;
-      transition: margin-left .22s ease;
+      transition: margin-left .2s cubic-bezier(.4,0,.2,1);
+    }
+    /* Empurra o main quando a sidebar expande (hover ou classe) */
+    .sidebar:hover ~ .main,
+    .sidebar.expanded ~ .main {
+      margin-left: var(--sidebar-w);
     }
 
     /* ── Topbar ────────────────────────────────────────────────── */
