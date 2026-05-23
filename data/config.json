@@ -3,17 +3,17 @@
     "nome": "Carômetro Escolar",
     "subtitulo": "Centro Educacional SESI 407",
     "escola": "SESI 407",
-    "cidade": "São Carlos — SP",
-    "ano_letivo": "2026"
+    "cidade": "São José do Rio Preto — SP",
+    "ano_letivo": "2025"
   },
   "auth": {
     "habilitado": true,
     "usuarios": [
       {
-        "usuario": "teste",
-        "senha_hash": "5e96b048e699b3a5727ef87334fef965af9d038c3886695af1d06d33a3e89e34",
+        "usuario": "admin",
+        "senha_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
         "nome": "Administrador",
-        "perfil": "viewer"
+        "perfil": "admin"
       },
       {
         "usuario": "coordenador",
@@ -22,8 +22,8 @@
         "perfil": "viewer"
       },
       {
-        "usuario": "701190",
-        "senha_hash": "65044b6f69ff0c97128ccb780ac023647cb5eba0881d5c9c9e414cb40b455f99",
+        "usuario": "0701190",
+        "senha_hash": "587aa3e56d3c8cb60166364e111c1b938723a5717ca622eb8614f6e38dbc47c3",
         "nome": "Andréa Polo",
         "funcao": "Diretora",
         "perfil": "viewer"
@@ -46,7 +46,7 @@
         "usuario": "1074243",
         "senha_hash": "4bd7af9828f7e505d0103019feab2656eb3cf18ebd324ba89b0388ee09bea599",
         "nome": "Ana Carolina Graminha",
-        "funcao": "",
+        "funcao": "Auxiliar de Cozinha",
         "perfil": "viewer"
       },
       {
@@ -60,7 +60,7 @@
         "usuario": "1057880",
         "senha_hash": "5fec5ba493da9a439f43e7e36171807b4f28191e9b6854c9843301f0434437d6",
         "nome": "Angelita Prado Assoni de Camargo",
-        "funcao": "",
+        "funcao": "Cozinheira",
         "perfil": "viewer"
       },
       {
@@ -109,14 +109,14 @@
         "usuario": "1093772",
         "senha_hash": "324c73f1172e5ba037bd7f504e4a1f78e032df4856772c2d4770cd86312f9265",
         "nome": "Cristiane Aparecida Ribeiro",
-        "funcao": "Professora",
+        "funcao": "Professora Educaçação Inclusiva",
         "perfil": "viewer"
       },
       {
         "usuario": "1092185",
         "senha_hash": "bf0573ad0644ec274571c1bd1e37d219954d2da7be826e6cb4ec30df0d9a4f9e",
         "nome": "Daniele Fernanda Traldi",
-        "funcao": "",
+        "funcao": "Professora Tutora",
         "perfil": "viewer"
       },
       {
@@ -134,15 +134,15 @@
         "perfil": "viewer"
       },
       {
-        "usuario": "123080",
-        "senha_hash": "6d5ac6772118c2a3ba9ad412a0124f1ff5d082548ed7d6cfa1ece180ca377e7c",
+        "usuario": "0123080",
+        "senha_hash": "bf841a0f5a62877e939bf8cfa1a2067e5c5e1152b03bb2da0cf089262fd74900",
         "nome": "Dinorá Franco Antunes",
         "funcao": "Professora",
         "perfil": "viewer"
       },
       {
-        "usuario": "707295",
-        "senha_hash": "79355e87ed70b2beb6f55ff9e002f5e5a1ad0de0576aba90e55ab29f5200ea06",
+        "usuario": "0707295",
+        "senha_hash": "0899aa77b2b093eafd34bb3ed7b30c593ce340687ffedd663b296399096efa6c",
         "nome": "Eliane Paes de Camargo",
         "funcao": "Inspetora",
         "perfil": "viewer"
@@ -179,12 +179,12 @@
         "usuario": "1096048",
         "senha_hash": "bb5c0aba02255d349def6d7a0eb9884f86c079a795f8db76f00c19baad6583a4",
         "nome": "Grazielle dos Santos Nunes",
-        "funcao": "",
+        "funcao": "Auxiliar de Cozinha",
         "perfil": "viewer"
       },
       {
-        "usuario": "142204",
-        "senha_hash": "80db4037c2562d4260cc510a947e2b60735f498a776e31abe4ab2767ced924db",
+        "usuario": "0142204",
+        "senha_hash": "fb73e08c85b64b34db4e5b1f765763b4719ad6ee7927db981637ade88b6baf8b",
         "nome": "Jaqueline Marisa de Souza Antoneli",
         "funcao": "Professora",
         "perfil": "viewer"
@@ -197,8 +197,8 @@
         "perfil": "viewer"
       },
       {
-        "usuario": "711101",
-        "senha_hash": "0895f66573ca533e0a01a14ea0795a61e45beecacf3bb33afc6ad755300dc4a8",
+        "usuario": "0711101",
+        "senha_hash": "c818125a710339c4b4dcaf9cc451edc7a5148a3d85a9b48be01f51418f1077f6",
         "nome": "Joseane Aparecida Garbuio Bettoni",
         "funcao": "Inspetora",
         "perfil": "viewer"
@@ -214,7 +214,7 @@
         "usuario": "1076635",
         "senha_hash": "582650d096535730811e2d018d2e2724bd0eaa09aa1fd63ac6ef5d14a994d77e",
         "nome": "Maíra Gesualdo de Oliveira",
-        "funcao": "Coordenado Ensino Fundamental",
+        "funcao": "Coordenadora EF",
         "perfil": "viewer"
       },
       {
@@ -225,8 +225,8 @@
         "perfil": "viewer"
       },
       {
-        "usuario": "718874",
-        "senha_hash": "e9ebb17d9bcfb9580490af7dc91fc5ff2f19eaaa8e18fdcda255bc9d44252b56",
+        "usuario": "0718874",
+        "senha_hash": "0dcb88b17714b3a7f8965c1bf3430aa0a4da649d42b959ea0b4d83c699dca81a",
         "nome": "Marcia Cristina Gansella da Rocha Segnini",
         "funcao": "Secretária",
         "perfil": "viewer"
@@ -235,7 +235,7 @@
         "usuario": "1102149",
         "senha_hash": "17bc63aca76157e8dc3ae59af11cf7d0a34b9ee1f10d8c4a0c4d5a2a5b1222d4",
         "nome": "Maria Aparecida Andrade Guimarães dos Santos",
-        "funcao": "",
+        "funcao": "Auxiliar de Cozinha",
         "perfil": "viewer"
       },
       {
@@ -284,14 +284,14 @@
         "usuario": "1003762",
         "senha_hash": "7f1c81c908a852387af871ce2e44e136d037d3b893cf34768ffb28b1ce32066e",
         "nome": "Roberta Maria Biasioli Reis",
-        "funcao": "Coordenado Ensino Médio",
+        "funcao": "Coordenadora EM",
         "perfil": "viewer"
       },
       {
         "usuario": "1092727",
         "senha_hash": "173aa04b099109493986fb4e8d8273164a5cc17874afa32f6cf122fa6391465f",
         "nome": "Rosana Cristina Aparecida Merola Rodrigues",
-        "funcao": "",
+        "funcao": "Auxiliar de Cozinha",
         "perfil": "viewer"
       },
       {
@@ -334,6 +334,48 @@
         "senha_hash": "a909fba2120cd5b78586fcb271b4e28f6374ee2a54e2acc30306c25e0c0362b1",
         "nome": "Zaias Bispo dos Santos",
         "funcao": "Professor",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "701190",
+        "senha_hash": "65044b6f69ff0c97128ccb780ac023647cb5eba0881d5c9c9e414cb40b455f99",
+        "nome": "Andréa Polo",
+        "funcao": "Diretora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "123080",
+        "senha_hash": "6d5ac6772118c2a3ba9ad412a0124f1ff5d082548ed7d6cfa1ece180ca377e7c",
+        "nome": "Dinorá Franco Antunes",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "707295",
+        "senha_hash": "79355e87ed70b2beb6f55ff9e002f5e5a1ad0de0576aba90e55ab29f5200ea06",
+        "nome": "Eliane Paes de Camargo",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "142204",
+        "senha_hash": "80db4037c2562d4260cc510a947e2b60735f498a776e31abe4ab2767ced924db",
+        "nome": "Jaqueline Marisa de Souza Antoneli",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "711101",
+        "senha_hash": "0895f66573ca533e0a01a14ea0795a61e45beecacf3bb33afc6ad755300dc4a8",
+        "nome": "Joseane Aparecida Garbuio Bettoni",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "718874",
+        "senha_hash": "e9ebb17d9bcfb9580490af7dc91fc5ff2f19eaaa8e18fdcda255bc9d44252b56",
+        "nome": "Marcia Cristina Gansella da Rocha Segnini",
+        "funcao": "Secretária",
         "perfil": "viewer"
       }
     ]

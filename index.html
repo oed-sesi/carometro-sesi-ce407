@@ -408,13 +408,14 @@
       max-width: 160px; margin-left: 10px;
     }
     .sidebar-user-name {
-      font-size: .78rem; font-weight: 700; color: #fff;
+      font-size: .75rem; font-weight: 700; color: #fff;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       line-height: 1.3;
     }
     .sidebar-user-role {
-      font-size: .67rem; color: var(--sidebar-text-sub);
+      font-size: .65rem; color: var(--sidebar-text-sub);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.3; margin-top: 1px;
     }
 
     /* Botão Sair — span com mesma animação */
@@ -1442,7 +1443,7 @@ async function doLogin() {
 
   if (!cfg.auth.habilitado) {
     // Auth desabilitada — acesso livre
-    APP.sessionUser = { usuario: user, nome: user, perfil: 'viewer' };
+    APP.sessionUser = { usuario: user, nome: user, perfil: 'viewer', funcao: '' };
     sessionStorage.setItem('carometro_session', JSON.stringify(APP.sessionUser));
     showScreenApp();
     return;
@@ -1454,7 +1455,7 @@ async function doLogin() {
   );
 
   if (found) {
-    APP.sessionUser = { usuario: found.usuario, nome: found.nome, perfil: found.perfil };
+    APP.sessionUser = { usuario: found.usuario, nome: found.nome, perfil: found.perfil, funcao: found.funcao || '' };
     sessionStorage.setItem('carometro_session', JSON.stringify(APP.sessionUser));
     errDiv.style.display = 'none';
     showScreenApp();
@@ -1497,14 +1498,114 @@ function doLogout() {
   lucide.createIcons();
 }
 
+/* ── Mapa de funções → tratamento de saudação ─────────────────── */
+const FUNCAO_SAUDACAO = {
+  // ── Sigla ──────────────────────────────────────────────────
+  'orientador de educação digital':   'OED',
+  'orientadora de educação digital':  'OED',
+
+  // ── Orientação Educacional — título completo ───────────────
+  'orientadora educacional':          'Orientadora Educacional',
+  'orientador educacional':           'Orientador Educacional',
+
+  // ── Coordenação — curta (EF / EM) já vem com gênero ───────
+  'coordenadora ef':  'Coordenadora',
+  'coordenador ef':   'Coordenador',
+  'coordenadora em':  'Coordenadora',
+  'coordenador em':   'Coordenador',
+  // Formas longas (legado / variações futuras)
+  'coordenadora ensino fundamental':  'Coordenadora',
+  'coordenador ensino fundamental':   'Coordenador',
+  'coordenado ensino fundamental':    'Coordenador',
+  'coordenadora ensino médio':        'Coordenadora',
+  'coordenador ensino médio':         'Coordenador',
+  'coordenado ensino médio':          'Coordenador',
+
+  // ── Professor / Professora e variações ────────────────────
+  'professora':                         'Professora',
+  'professor':                          'Professor',
+  'professora educaçação inclusiva':    'Professora',
+  'professora educação inclusiva':      'Professora',
+  'professor educação inclusiva':       'Professor',
+  'professora tutora':                  'Professora',
+  'professor tutor':                    'Professor',
+
+  // ── Demais funções ─────────────────────────────────────────
+  'diretora':           'Diretora',
+  'diretor':            'Diretor',
+  'inspetora':          'Inspetora',
+  'inspetor':           'Inspetor',
+  'nutricionista':      'Nutricionista',
+  'cozinheira':         'Cozinheira',
+  'cozinheiro':         'Cozinheiro',
+  'auxiliar doscente':  'Auxiliar',
+  'auxiliar docente':   'Auxiliar',
+  'auxiliar de cozinha':'Auxiliar',
+  'secretária':         'Secretária',
+  'secretário':         'Secretário',
+  'bibliotecária':      'Bibliotecária',
+  'bibliotecário':      'Bibliotecário',
+
+  // ── Sem tratamento antes do nome ──────────────────────────
+  'manutenção':   '',
+  'manutencao':   '',
+};
+
+function gerarSaudacao(nomeCompleto, funcao, perfil) {
+  // Extrair primeiro nome (ignorar partículas como "de", "da", "do", "dos")
+  const PARTICULAS = new Set(['de','da','do','dos','das','e']);
+  const partes = (nomeCompleto || '').trim().split(/\s+/);
+  const primeiroNome = partes.find(p => !PARTICULAS.has(p.toLowerCase())) || partes[0] || '';
+
+  // Caso admin sem função configurada
+  if (!funcao && perfil === 'admin') {
+    return `Olá, Administrador`;
+  }
+
+  // Buscar tratamento no mapa
+  const chave = (funcao || '').toLowerCase().trim();
+  const tratamento = chave in FUNCAO_SAUDACAO ? FUNCAO_SAUDACAO[chave] : null;
+
+  // Função desconhecida ou "Atualizar..." → só o primeiro nome
+  if (tratamento === null) {
+    return `Olá, ${primeiroNome}`;
+  }
+  // Função sem tratamento antes do nome (ex: Manutenção)
+  if (tratamento === '') {
+    return `Olá, ${primeiroNome}`;
+  }
+  // Com tratamento
+  return `Olá, ${tratamento} ${primeiroNome}`;
+}
+
 function updateUserUI() {
   if (!APP.sessionUser) return;
-  const { nome, perfil } = APP.sessionUser;
-  document.getElementById('user-display-name').textContent = nome;
-  document.getElementById('user-display-role').textContent =
-    perfil === 'admin' ? 'Administrador' : 'Visualizador';
-  document.getElementById('user-avatar-initials').textContent =
-    nome.split(' ').map(p => p[0]).slice(0,2).join('').toUpperCase();
+  const { nome, perfil, funcao } = APP.sessionUser;
+
+  // Saudação completa
+  const saudacao = gerarSaudacao(nome, funcao, perfil);
+
+  // Sidebar: nome de exibição = saudação
+  document.getElementById('user-display-name').textContent = saudacao;
+
+  // Sidebar: cargo abaixo do nome
+  const cargoExib = funcao && funcao !== 'Atualizar...'
+    ? funcao
+    : (perfil === 'admin' ? 'Administrador' : 'SESI 407');
+  document.getElementById('user-display-role').textContent = cargoExib;
+
+  // Avatar: iniciais do primeiro e último nome real
+  const partes = nome.trim().split(/\s+/).filter(p => p.length > 1);
+  const iniciais = partes.length >= 2
+    ? (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
+    : (partes[0] || nome)[0].toUpperCase();
+  document.getElementById('user-avatar-initials').textContent = iniciais;
+
+  // Dashboard subtitle
+  const subtitleEl = document.getElementById('dash-subtitle');
+  if (subtitleEl) {
+    subtitleEl.textContent = `Resumo do Carômetro Escolar — ${saudacao}`;
+  }
 }
 
 /* ── Navegação ────────────────────────────────────────────────── */

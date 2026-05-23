@@ -91,6 +91,84 @@ MAPA_PERFIL = {
     "diretor":      "viewer",
 }
 
+# ── Mapa função → tratamento de saudação ──────────────────────
+FUNCAO_SAUDACAO: dict[str, str] = {
+    # ── Sigla ─────────────────────────────────────────────────
+    "orientador de educação digital":   "OED",
+    "orientadora de educação digital":  "OED",
+
+    # ── Orientação Educacional — título completo ──────────────
+    "orientadora educacional":          "Orientadora Educacional",
+    "orientador educacional":           "Orientador Educacional",
+
+    # ── Coordenação — curta (EF / EM) já vem com gênero ──────
+    "coordenadora ef":  "Coordenadora",
+    "coordenador ef":   "Coordenador",
+    "coordenadora em":  "Coordenadora",
+    "coordenador em":   "Coordenador",
+    # Formas longas (legado / variações futuras)
+    "coordenadora ensino fundamental":  "Coordenadora",
+    "coordenador ensino fundamental":   "Coordenador",
+    "coordenado ensino fundamental":    "Coordenador",
+    "coordenadora ensino médio":        "Coordenadora",
+    "coordenador ensino médio":         "Coordenador",
+    "coordenado ensino médio":          "Coordenador",
+
+    # ── Professor / Professora e variações ───────────────────
+    "professora":                         "Professora",
+    "professor":                          "Professor",
+    "professora educaçação inclusiva":    "Professora",
+    "professora educação inclusiva":      "Professora",
+    "professor educação inclusiva":       "Professor",
+    "professora tutora":                  "Professora",
+    "professor tutor":                    "Professor",
+
+    # ── Demais funções ────────────────────────────────────────
+    "diretora":           "Diretora",
+    "diretor":            "Diretor",
+    "inspetora":          "Inspetora",
+    "inspetor":           "Inspetor",
+    "nutricionista":      "Nutricionista",
+    "cozinheira":         "Cozinheira",
+    "cozinheiro":         "Cozinheiro",
+    "auxiliar doscente":  "Auxiliar",
+    "auxiliar docente":   "Auxiliar",
+    "auxiliar de cozinha":"Auxiliar",
+    "secretária":         "Secretária",
+    "secretário":         "Secretário",
+    "bibliotecária":      "Bibliotecária",
+    "bibliotecário":      "Bibliotecário",
+
+    # ── Sem tratamento antes do nome ─────────────────────────
+    "manutenção":   "",
+    "manutencao":   "",
+}
+
+_PARTICULAS = {"de", "da", "do", "dos", "das", "e"}
+
+def primeiro_nome(nome_completo: str) -> str:
+    """Retorna o primeiro nome real (ignora partículas)."""
+    for parte in nome_completo.strip().split():
+        if parte.lower() not in _PARTICULAS:
+            return parte
+    return nome_completo.strip().split()[0] if nome_completo.strip() else ""
+
+def gerar_saudacao(nome_completo: str, funcao: str, perfil: str) -> str:
+    """Gera 'Olá, <tratamento> <PrimeiroNome>' conforme o mapa de funções."""
+    pnome = primeiro_nome(nome_completo)
+
+    if not funcao and perfil == "admin":
+        return f"Olá, Administrador"
+
+    chave     = (funcao or "").lower().strip()
+    tratamento = FUNCAO_SAUDACAO.get(chave)   # None = desconhecida
+
+    if tratamento is None or chave in ("", "atualizar..."):
+        return f"Olá, {pnome}"
+    if tratamento == "":
+        return f"Olá, {pnome}"
+    return f"Olá, {tratamento} {pnome}"
+
 # ── Hash ───────────────────────────────────────────────────────
 def sha256(texto: str) -> str:
     return hashlib.sha256(texto.encode("utf-8")).hexdigest()
@@ -162,13 +240,14 @@ def print_usuarios(cfg: dict, filtro_perfil: str | None = None) -> None:
         print("  ℹ️   Nenhum usuário encontrado.")
         return
 
-    print(f"  {'#':<4} {'NIF/Usuário':<14} {'Nome':<32} {'Função':<26} {'Perfil'}")
+    print(f"  {'#':<4} {'NIF/Usuário':<14} {'Nome':<32} {'Função':<26} {'Perfil':<8} {'Saudação'}")
     print(f"  {SEP}")
     for i, u in enumerate(lista, 1):
-        icone = "🔴" if u.get("perfil") == "admin" else "🔵"
-        funcao = u.get("funcao", "—")[:25]
-        nome_exib = u.get("nome", "—")[:31]
-        print(f"  {i:<4} {u['usuario']:<14} {nome_exib:<32} {funcao:<26} {icone} {u.get('perfil','viewer')}")
+        icone    = "🔴" if u.get("perfil") == "admin" else "🔵"
+        funcao   = u.get("funcao", "—")[:25]
+        nome_exib= u.get("nome", "—")[:31]
+        saudacao = gerar_saudacao(u.get("nome",""), u.get("funcao",""), u.get("perfil","viewer"))
+        print(f"  {i:<4} {u['usuario']:<14} {nome_exib:<32} {funcao:<26} {icone} {u.get('perfil','viewer'):<8} {saudacao}")
     print()
 
 # ═══════════════════════════════════════════════════════════════
@@ -269,14 +348,15 @@ def acao_importar_lista(
         tipo_ac = normalizar_str(row.get("tipo_acesso", "viewer")).lower()
 
         linha_info = {
-            "numero_nif":       nif,
-            "nome_colaborador": nome,
-            "funcao":           funcao,
-            "tipo_acesso":      tipo_ac,
-            "senha_acesso":     f"{nif}@sesi407" if nif else "",
-            "status_cadastro":  "",
-            "data_cadastro":    "",
-            "observacao":       "",
+            "numero_nif":        nif,
+            "nome_colaborador":  nome,
+            "funcao":            funcao,
+            "tipo_acesso":       tipo_ac,
+            "senha_acesso":      f"{nif}@sesi407" if nif else "",
+            "saudacao_preview":  "",
+            "status_cadastro":   "",
+            "data_cadastro":     "",
+            "observacao":        "",
         }
 
         # Validações básicas
@@ -324,28 +404,28 @@ def acao_importar_lista(
 
         if nif in existentes_map:
             existente = existentes_map[nif]
-            # Atualizar nome, função e perfil sempre
             existente["nome"]    = obj_usuario["nome"]
             existente["funcao"]  = obj_usuario["funcao"]
             existente["perfil"]  = obj_usuario["perfil"]
-            # Senha: só redefinir se --forcar-senha ou se não tinha senha
             if forcar_senha or not existente.get("senha_hash"):
                 existente["senha_hash"] = obj_usuario["senha_hash"]
                 obs = "senha redefinida"
             else:
                 obs = "senha preservada"
             atualizados.append({"nif": nif, "nome": nome, "perfil": perfil, "obs": obs})
-            linha_info["status_cadastro"] = "🔄 ATUALIZADO"
-            linha_info["data_cadastro"]   = ts_agora
-            linha_info["observacao"]      = obs
+            linha_info["saudacao_preview"] = gerar_saudacao(nome, obj_usuario["funcao"], perfil)
+            linha_info["status_cadastro"]  = "🔄 ATUALIZADO"
+            linha_info["data_cadastro"]    = ts_agora
+            linha_info["observacao"]       = obs
         else:
             if not dry_run:
                 usuarios(cfg).append(obj_usuario)
                 existentes_map[nif] = obj_usuario
             novos.append({"nif": nif, "nome": nome, "perfil": perfil})
-            linha_info["status_cadastro"] = "✅ CADASTRADO" if not dry_run else "🔍 SIMULADO"
-            linha_info["data_cadastro"]   = ts_agora if not dry_run else ""
-            linha_info["observacao"]      = f"senha: {senha_padrao}"
+            linha_info["saudacao_preview"] = gerar_saudacao(nome, obj_usuario["funcao"], perfil)
+            linha_info["status_cadastro"]  = "✅ CADASTRADO" if not dry_run else "🔍 SIMULADO"
+            linha_info["data_cadastro"]    = ts_agora if not dry_run else ""
+            linha_info["observacao"]       = f"senha: {senha_padrao}"
 
         linhas_resultado.append(linha_info)
 
@@ -422,7 +502,7 @@ def _exportar_resultado_xlsx(
 
     df_out = pd.DataFrame(linhas, columns=[
         "numero_nif", "nome_colaborador", "funcao",
-        "tipo_acesso", "senha_acesso",
+        "tipo_acesso", "senha_acesso", "saudacao_preview",
         "status_cadastro", "data_cadastro", "observacao",
     ])
 
@@ -462,7 +542,7 @@ def _exportar_resultado_xlsx(
                 cell.fill = PatternFill("solid", start_color=cor)
 
         # Larguras
-        larguras = [14, 38, 28, 14, 20, 16, 18, 32]
+        larguras = [14, 38, 28, 14, 20, 32, 16, 18, 36]
         for i, w in enumerate(larguras, 1):
             from openpyxl.utils import get_column_letter
             ws.column_dimensions[get_column_letter(i)].width = w
