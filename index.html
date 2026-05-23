@@ -1409,8 +1409,6 @@ async function initApp() {
   populateFilters();
   renderDashboard();
   updateUserUI();
-  document.getElementById('dash-subtitle').textContent =
-    `Resumo do Carômetro Escolar — ${APP.sessionUser?.nome || ''}`;
 
   lucide.createIcons();
 }
@@ -1582,13 +1580,13 @@ function updateUserUI() {
   if (!APP.sessionUser) return;
   const { nome, perfil, funcao } = APP.sessionUser;
 
-  // Saudação completa
+  // Saudação completa (usada só no Dashboard)
   const saudacao = gerarSaudacao(nome, funcao, perfil);
 
-  // Sidebar: nome de exibição = saudação
-  document.getElementById('user-display-name').textContent = saudacao;
+  // Sidebar linha 1: nome_colaborador completo (sem "Olá")
+  document.getElementById('user-display-name').textContent = nome;
 
-  // Sidebar: cargo abaixo do nome
+  // Sidebar linha 2: funcao (ou fallback)
   const cargoExib = funcao && funcao !== 'Atualizar...'
     ? funcao
     : (perfil === 'admin' ? 'Administrador' : 'SESI 407');
@@ -1601,7 +1599,7 @@ function updateUserUI() {
     : (partes[0] || nome)[0].toUpperCase();
   document.getElementById('user-avatar-initials').textContent = iniciais;
 
-  // Dashboard subtitle
+  // Dashboard subtitle: saudação completa com "Olá, Função Nome"
   const subtitleEl = document.getElementById('dash-subtitle');
   if (subtitleEl) {
     subtitleEl.textContent = `Resumo do Carômetro Escolar — ${saudacao}`;
