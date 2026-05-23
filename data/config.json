@@ -10,15 +10,330 @@
     "habilitado": true,
     "usuarios": [
       {
-        "usuario": "admin",
+        "usuario": "teste",
         "senha_hash": "5e96b048e699b3a5727ef87334fef965af9d038c3886695af1d06d33a3e89e34",
         "nome": "Administrador",
-        "perfil": "admin"
+        "perfil": "viewer"
       },
       {
         "usuario": "coordenador",
         "senha_hash": "b96d5d6a3a3f5a16de7a60f82cd51e6f5f58a53a6823f14a7f5d1a12e37f88e4",
         "nome": "Coordenação Pedagógica",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "701190",
+        "senha_hash": "65044b6f69ff0c97128ccb780ac023647cb5eba0881d5c9c9e414cb40b455f99",
+        "nome": "Andréa Polo",
+        "funcao": "Diretora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1090637",
+        "senha_hash": "6cd5ed344482fd729e1686d91850540573a7eb14a290ab49e89bb4ae820f9009",
+        "nome": "Adriana Regina Pereira",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1025663",
+        "senha_hash": "7d812073f71fc40c8bdfa4732383c723931c5cfeceec666b158dda4e7376afa4",
+        "nome": "Aline Pedro",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1074243",
+        "senha_hash": "4bd7af9828f7e505d0103019feab2656eb3cf18ebd324ba89b0388ee09bea599",
+        "nome": "Ana Carolina Graminha",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1028456",
+        "senha_hash": "4e26f4752d4fbcdac822883f7846327b9d1a43c659ac2a8165a4b4dce99a017d",
+        "nome": "André Moura Blundi Filardi",
+        "funcao": "Professor",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1057880",
+        "senha_hash": "5fec5ba493da9a439f43e7e36171807b4f28191e9b6854c9843301f0434437d6",
+        "nome": "Angelita Prado Assoni de Camargo",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1104186",
+        "senha_hash": "64f05e9184778aca62865a37618204d394a6e351882eb191269f752bd41242c7",
+        "nome": "Antonio Rafael de Oliveira",
+        "funcao": "Orientador de Educação Digital",
+        "perfil": "admin"
+      },
+      {
+        "usuario": "1044741",
+        "senha_hash": "39720864f2c707354e1e4d38709b00b5aa9216bc4c917f1e4dc1a41fe4fcb2c9",
+        "nome": "Ariane Lia Covre",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1039247",
+        "senha_hash": "3c01b168592802f0da33bdf0afe953cb5517e564d55a70e7cf52f275b6e9f4ed",
+        "nome": "Bárbara Elen Martinez Petrilli",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1004224",
+        "senha_hash": "76b6cd0b0bd5b387680f92915f3eca732844a975bfefe7cdb0ae043d93a5f094",
+        "nome": "Bruna Fiorim Lopes",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1108073",
+        "senha_hash": "b79d08fff62c561302b28a7d393b157c607c66e9ded8388040bb7bba1fd47c45",
+        "nome": "Caroline Veiga Manfio",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1010372",
+        "senha_hash": "a122594f3201ea34a57009b9937296c45c5084e10746758cbc86c54aed270d80",
+        "nome": "Cibele Cristina Morasco",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1093772",
+        "senha_hash": "324c73f1172e5ba037bd7f504e4a1f78e032df4856772c2d4770cd86312f9265",
+        "nome": "Cristiane Aparecida Ribeiro",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1092185",
+        "senha_hash": "bf0573ad0644ec274571c1bd1e37d219954d2da7be826e6cb4ec30df0d9a4f9e",
+        "nome": "Daniele Fernanda Traldi",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1063879",
+        "senha_hash": "ce519ab929fba328d7a12432e287cdfaaf49d914dd7276b7d0bf0226948f9aaf",
+        "nome": "Denise Helena de Campos Damin",
+        "funcao": "Nutricionista",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1107213",
+        "senha_hash": "f28560cf77703e8ecde5b42ec4b9b6d5cd1e9e315ca447ec8596e796d6bd70eb",
+        "nome": "Bárbara Pavaneli",
+        "funcao": "Nutricionista",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "123080",
+        "senha_hash": "6d5ac6772118c2a3ba9ad412a0124f1ff5d082548ed7d6cfa1ece180ca377e7c",
+        "nome": "Dinorá Franco Antunes",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "707295",
+        "senha_hash": "79355e87ed70b2beb6f55ff9e002f5e5a1ad0de0576aba90e55ab29f5200ea06",
+        "nome": "Eliane Paes de Camargo",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1004029",
+        "senha_hash": "233f4c9ef5ad92bf3eb09af1fcd96d3fe3492029e8b1184d4245309abca5d6e4",
+        "nome": "Elisama Rodrigues dos Santos Barbosa",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1068161",
+        "senha_hash": "e2c23f25bce29392b870c77befd56c90ef86832da1087684b3408be1be6d49b7",
+        "nome": "Elizangela Alves de Moura",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1049127",
+        "senha_hash": "b86e30dc0c139fa03e464bd72e75807ad6f12ca47b7d8331262ec336fb62548b",
+        "nome": "Fabiana Brianez",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1105478",
+        "senha_hash": "95b3ae0851e969963e5cedf26fddb855cf79ce8bc5c4d0f7954b0129f1aabbd9",
+        "nome": "Gissiani Forner",
+        "funcao": "Auxiliar Doscente",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1096048",
+        "senha_hash": "bb5c0aba02255d349def6d7a0eb9884f86c079a795f8db76f00c19baad6583a4",
+        "nome": "Grazielle dos Santos Nunes",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "142204",
+        "senha_hash": "80db4037c2562d4260cc510a947e2b60735f498a776e31abe4ab2767ced924db",
+        "nome": "Jaqueline Marisa de Souza Antoneli",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1094653",
+        "senha_hash": "9a431145b1df5cec31c0664e504687deb29352ba326bdb0353f0859f8a6d8c9d",
+        "nome": "Jenefer Pereira dos Anjos",
+        "funcao": "Orientadora Educacional",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "711101",
+        "senha_hash": "0895f66573ca533e0a01a14ea0795a61e45beecacf3bb33afc6ad755300dc4a8",
+        "nome": "Joseane Aparecida Garbuio Bettoni",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1103037",
+        "senha_hash": "7874fa6489d566f92f27c050bd278a2746ed58769fff305f900e8cc007fcee3d",
+        "nome": "Lizandra Cristina Müller",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1076635",
+        "senha_hash": "582650d096535730811e2d018d2e2724bd0eaa09aa1fd63ac6ef5d14a994d77e",
+        "nome": "Maíra Gesualdo de Oliveira",
+        "funcao": "Coordenado Ensino Fundamental",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1018258",
+        "senha_hash": "fff5ac3aec6643bd5f0dded1e527ab67ac9afc1033ec7df9d807256af715c127",
+        "nome": "Mara Fernanda Perussi Alves",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "718874",
+        "senha_hash": "e9ebb17d9bcfb9580490af7dc91fc5ff2f19eaaa8e18fdcda255bc9d44252b56",
+        "nome": "Marcia Cristina Gansella da Rocha Segnini",
+        "funcao": "Secretária",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1102149",
+        "senha_hash": "17bc63aca76157e8dc3ae59af11cf7d0a34b9ee1f10d8c4a0c4d5a2a5b1222d4",
+        "nome": "Maria Aparecida Andrade Guimarães dos Santos",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1030770",
+        "senha_hash": "ab445890ba32ec4d6add0227fde972835f3234499bc0dbcf1c4e756682decdaa",
+        "nome": "Maria Claudia Auad",
+        "funcao": "Secretária",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1074848",
+        "senha_hash": "15ee048219912b5ed9527677627fb5f5325a588844bbb49601e842ce57ebd681",
+        "nome": "Marlene Anjos dos Santos Toledo",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1071225",
+        "senha_hash": "420af8a4980f38ce5012fb8541d83607fc5b10af1568885207fdce5d401aa3a2",
+        "nome": "Matheus Victor Silva",
+        "funcao": "Professor",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1069866",
+        "senha_hash": "7bf0f517e85c675be4a2cb93b696034bbadd40f70012cd960e2b1570d4506401",
+        "nome": "Patricia Rodrigues",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1102230",
+        "senha_hash": "cef2144058459f1055e676f934d2b064f9f8a8376e3911f182eb9d47cbce21dd",
+        "nome": "Paulina Inácio da Silva",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1084448",
+        "senha_hash": "b56475123055e23cb5381e50864edb1b111860223b467d5d4824f147bd708209",
+        "nome": "Raísa Daniela Diniz Rodriguez",
+        "funcao": "Auxiliar Doscente",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1003762",
+        "senha_hash": "7f1c81c908a852387af871ce2e44e136d037d3b893cf34768ffb28b1ce32066e",
+        "nome": "Roberta Maria Biasioli Reis",
+        "funcao": "Coordenado Ensino Médio",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1092727",
+        "senha_hash": "173aa04b099109493986fb4e8d8273164a5cc17874afa32f6cf122fa6391465f",
+        "nome": "Rosana Cristina Aparecida Merola Rodrigues",
+        "funcao": "",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1006319",
+        "senha_hash": "43e7ea5fbf1086a0b8b143d4f7ce7cf2508c4e989b22fea83ec983850edc7aab",
+        "nome": "Samuel Conceição",
+        "funcao": "Bibliotecário",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1044608",
+        "senha_hash": "38e9642724a335a357af523a77e3c9771d68fafabbc18db3549a101605dea141",
+        "nome": "Silvia Sanches Kanno",
+        "funcao": "Manutenção",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1062333",
+        "senha_hash": "e49038230c2ea19ce6ed13692cbd42f47c9d2f8cf294b5b05a196212dafd7c78",
+        "nome": "Tassya Hemília Porto Bernardo",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1046411",
+        "senha_hash": "a7a173bb138a8dd9067bb38e1ee62dd203e820c0bf8a87a2c0a3a3ab794aad82",
+        "nome": "Thiago Mauricio Pacifico",
+        "funcao": "Professor",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1096047",
+        "senha_hash": "3e29bde98c4856f85405843edc4752f49ac1b0d97365335b9ba1d078b61cfb4b",
+        "nome": "Viviane de Matos Mazo",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1015361",
+        "senha_hash": "a909fba2120cd5b78586fcb271b4e28f6374ee2a54e2acc30306c25e0c0362b1",
+        "nome": "Zaias Bispo dos Santos",
+        "funcao": "Professor",
         "perfil": "viewer"
       }
     ]
