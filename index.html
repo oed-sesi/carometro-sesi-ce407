@@ -1012,6 +1012,159 @@
       .nav-item-logout { padding: 11px 10px; }
       .page-btn { min-width: 38px; min-height: 38px; }
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKELETON LOADING  (2.5)
+    ═══════════════════════════════════════════════════════════ */
+    .skeleton {
+      background: linear-gradient(90deg,
+        var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+    @keyframes skeletonShimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 12px 10px 10px; text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .skeleton-card { background: #1A1D23; border-color: #2A2F3D; }
+    [data-theme="dark"] .skeleton { background: linear-gradient(90deg, #2A2F3D 25%, #232836 50%, #2A2F3D 75%); background-size: 200% 100%; }
+    .skeleton-photo { width: 72px; height: 96px; margin: 0 auto 8px; }
+    .skeleton-text-lg { height: 12px; margin: 4px auto; }
+    .skeleton-text-sm { height: 9px; width: 60%; margin: 4px auto; }
+    .skeleton-stat {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--gray-200); padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .skeleton-stat { background: #1A1D23; border-color: #2A2F3D; }
+    .skeleton-stat-label { height: 10px; width: 55%; margin-bottom: 10px; }
+    .skeleton-stat-value { height: 32px; width: 40%; margin-bottom: 6px; }
+    .skeleton-stat-sub   { height: 9px; width: 70%; }
+
+    /* ═══════════════════════════════════════════════════════════
+       LIGHTBOX — foto em tela cheia  (2.1)
+    ═══════════════════════════════════════════════════════════ */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,.92);
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+      padding: 20px;
+      animation: lightboxIn .2s ease;
+    }
+    #lightbox.active { display: flex; }
+    @keyframes lightboxIn {
+      from { opacity:0; } to { opacity:1; }
+    }
+    #lightbox img {
+      max-width: min(480px, 90vw);
+      max-height: 70vh;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+      object-fit: contain;
+    }
+    .lightbox-name {
+      color: #fff; font-size: 1.1rem; font-weight: 700;
+      text-align: center; max-width: 480px;
+    }
+    .lightbox-meta {
+      color: rgba(255,255,255,.55); font-size: .86rem;
+      text-align: center;
+    }
+    .lightbox-close {
+      position: absolute; top: 16px; right: 20px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.2); }
+    .detail-photo { cursor: zoom-in; transition: transform .18s ease, box-shadow .18s; }
+    .detail-photo:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+
+    /* ═══════════════════════════════════════════════════════════
+       MODAL DE AVISO DE SESSÃO  (1.3)
+    ═══════════════════════════════════════════════════════════ */
+    #session-warning {
+      display: none; position: fixed; inset: 0; z-index: 8000;
+      background: rgba(0,0,0,.55);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    #session-warning.active { display: flex; }
+    .session-warning-card {
+      background: #fff; border-radius: 14px; padding: 28px 28px 24px;
+      max-width: 380px; width: 100%; text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      animation: modalPop .25s cubic-bezier(.34,1.4,.64,1);
+    }
+    [data-theme="dark"] .session-warning-card { background: #1A1D23; border: 1px solid #2A2F3D; }
+    @keyframes modalPop {
+      from { opacity:0; transform:scale(.88); }
+      to   { opacity:1; transform:scale(1); }
+    }
+    .session-warning-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #FEF3C7; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .session-warning-title { font-size: 1.05rem; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+    .session-warning-msg   { font-size: .88rem; color: var(--gray-500); margin-bottom: 6px; }
+    .session-countdown     { font-size: 2rem; font-weight: 900; color: var(--amber-500); margin: 10px 0; letter-spacing: -.04em; }
+    .session-warning-btns  { display: flex; gap: 10px; margin-top: 20px; }
+    .session-warning-btns .btn { flex: 1; }
+
+    /* ═══════════════════════════════════════════════════════════
+       ORDENAÇÃO DE TABELA  (2.2)
+    ═══════════════════════════════════════════════════════════ */
+    thead th.sortable { cursor: pointer; user-select: none; }
+    thead th.sortable:hover { background: var(--gray-100); }
+    [data-theme="dark"] thead th.sortable:hover { background: #20242E; }
+    .sort-icon { display: inline-flex; flex-direction: column; margin-left: 5px; gap: 1px; vertical-align: middle; opacity: .35; }
+    .sort-icon svg { display: block; }
+    thead th.sort-asc  .sort-icon { opacity: 1; }
+    thead th.sort-desc .sort-icon { opacity: 1; }
+    thead th.sort-asc  .sort-up   { opacity: 1; color: var(--sesi-red); }
+    thead th.sort-asc  .sort-down { opacity: .25; }
+    thead th.sort-desc .sort-down { opacity: 1; color: var(--sesi-red); }
+    thead th.sort-desc .sort-up   { opacity: .25; }
+
+    /* ═══════════════════════════════════════════════════════════
+       BUSCA NA VIEW DE TURMA  (2.4)
+    ═══════════════════════════════════════════════════════════ */
+    .turma-search-bar {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .turma-search-wrap {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff; border: 1px solid var(--gray-200);
+      border-radius: 8px; padding: 8px 12px;
+      flex: 1; max-width: 360px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    [data-theme="dark"] .turma-search-wrap { background: #1A1D23; border-color: #2A2F3D; }
+    .turma-search-wrap:focus-within {
+      border-color: var(--sesi-red);
+      box-shadow: 0 0 0 3px rgba(237,28,36,.1);
+    }
+    .turma-search-wrap input {
+      border: none; outline: none; background: none;
+      font-size: .9rem; color: var(--gray-800); width: 100%;
+    }
+    .turma-search-wrap input::placeholder { color: var(--gray-400); }
+    .turma-no-results {
+      text-align: center; padding: 32px 16px;
+      color: var(--gray-400); font-size: .9rem;
+    }
   </style>
 </head>
 <body>
@@ -1100,22 +1253,28 @@
     </div>
 
     <!-- ── Nav ─────────────────────────────────────────────────── -->
-    <nav class="sidebar-nav">
+    <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
       <div class="nav-section">
-        <div class="nav-section-label">Principal</div>
-        <a class="nav-item active" id="nav-dashboard" onclick="showView('dashboard')">
-          <i data-lucide="layout-dashboard" width="16" height="16"></i>
+        <div class="nav-section-label" aria-hidden="true">Principal</div>
+        <a class="nav-item active" id="nav-dashboard" role="menuitem"
+           onclick="showView('dashboard')" tabindex="0"
+           aria-current="page" aria-label="Dashboard">
+          <i data-lucide="layout-dashboard" width="16" height="16" aria-hidden="true"></i>
           <span>Dashboard</span>
         </a>
       </div>
       <div class="nav-section">
-        <div class="nav-section-label">Consultas</div>
-        <a class="nav-item" id="nav-alunos" onclick="showView('alunos')">
-          <i data-lucide="users" width="16" height="16"></i>
+        <div class="nav-section-label" aria-hidden="true">Consultas</div>
+        <a class="nav-item" id="nav-alunos" role="menuitem"
+           onclick="showView('alunos')" tabindex="0"
+           aria-label="Todos os Alunos">
+          <i data-lucide="users" width="16" height="16" aria-hidden="true"></i>
           <span>Todos os Alunos</span>
         </a>
-        <a class="nav-item" id="nav-turmas" onclick="showView('turmas')">
-          <i data-lucide="layers" width="16" height="16"></i>
+        <a class="nav-item" id="nav-turmas" role="menuitem"
+           onclick="showView('turmas')" tabindex="0"
+           aria-label="Por Turma">
+          <i data-lucide="layers" width="16" height="16" aria-hidden="true"></i>
           <span>Por Turma</span>
         </a>
       </div>
@@ -1261,7 +1420,7 @@
             <i data-lucide="search" width="14" height="14" style="color:var(--gray-400);flex-shrink:0;"></i>
             <input type="text" id="filter-search"
                    placeholder="Nome, matrícula, responsável…"
-                   oninput="applyFilters()">
+                   oninput="applyFiltersDebounced()">
           </div>
           <select class="form-select" id="filter-serie" onchange="applyFilters()">
             <option value="">Todas as séries</option>
@@ -1291,10 +1450,18 @@
             <thead>
               <tr>
                 <th>Foto</th>
-                <th>Nome</th>
-                <th>Matrícula</th>
-                <th>Série / Turma</th>
-                <th>Turno</th>
+                <th class="sortable" data-col="nome_completo" onclick="sortTable('nome_completo')" aria-sort="none" tabindex="0" role="columnheader">
+                  Nome <span class="sort-icon" aria-hidden="true"><svg class="sort-up" width="8" height="5" viewBox="0 0 8 5"><path d="M4 0l4 5H0z" fill="currentColor"/></svg><svg class="sort-down" width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0h8z" fill="currentColor"/></svg></span>
+                </th>
+                <th class="sortable" data-col="rm_estudante" onclick="sortTable('rm_estudante')" aria-sort="none" tabindex="0" role="columnheader">
+                  Matrícula <span class="sort-icon" aria-hidden="true"><svg class="sort-up" width="8" height="5" viewBox="0 0 8 5"><path d="M4 0l4 5H0z" fill="currentColor"/></svg><svg class="sort-down" width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0h8z" fill="currentColor"/></svg></span>
+                </th>
+                <th class="sortable" data-col="serie" onclick="sortTable('serie')" aria-sort="none" tabindex="0" role="columnheader">
+                  Série / Turma <span class="sort-icon" aria-hidden="true"><svg class="sort-up" width="8" height="5" viewBox="0 0 8 5"><path d="M4 0l4 5H0z" fill="currentColor"/></svg><svg class="sort-down" width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0h8z" fill="currentColor"/></svg></span>
+                </th>
+                <th class="sortable" data-col="turno" onclick="sortTable('turno')" aria-sort="none" tabindex="0" role="columnheader">
+                  Turno <span class="sort-icon" aria-hidden="true"><svg class="sort-up" width="8" height="5" viewBox="0 0 8 5"><path d="M4 0l4 5H0z" fill="currentColor"/></svg><svg class="sort-down" width="8" height="5" viewBox="0 0 8 5"><path d="M4 5L0 0h8z" fill="currentColor"/></svg></span>
+                </th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -1341,8 +1508,23 @@
           <!-- stats da turma -->
           <div class="stats-grid" id="turma-stats"
                style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));margin-bottom:16px;"></div>
+          <!-- busca na turma (2.4) -->
+          <div class="turma-search-bar">
+            <div class="turma-search-wrap">
+              <i data-lucide="search" width="15" height="15" style="color:var(--gray-400);flex-shrink:0;"></i>
+              <input type="text" id="turma-search-input"
+                     placeholder="Buscar aluno na turma…"
+                     oninput="filtrarTurma(this.value)"
+                     aria-label="Buscar aluno na turma">
+            </div>
+            <span id="turma-search-count" style="font-size:.82rem;color:var(--gray-400);"></span>
+          </div>
           <!-- grade -->
           <div class="student-grid" id="turma-grid"></div>
+          <div id="turma-no-results" class="turma-no-results" style="display:none;">
+            <i data-lucide="search-x" width="32" height="32" style="margin:0 auto 8px;color:var(--gray-300);display:block;"></i>
+            Nenhum aluno encontrado para esta busca.
+          </div>
           <div id="turma-empty" class="empty-state" style="display:none;">
             <i data-lucide="users-x" width="48" height="48" style="margin:0 auto;color:var(--gray-300);"></i>
             <h3>Nenhum aluno nesta turma</h3>
@@ -1363,6 +1545,43 @@
 <!-- Toast container -->
 <div id="toast-container"></div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     LIGHTBOX — foto em tela cheia  (2.1)
+═══════════════════════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Foto em tela cheia"
+     onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-name" id="lightbox-name"></div>
+  <div class="lightbox-meta" id="lightbox-meta"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MODAL — Aviso de sessão expirando  (1.3)
+═══════════════════════════════════════════════════════════ -->
+<div id="session-warning" role="alertdialog" aria-modal="true"
+     aria-labelledby="sw-title" aria-describedby="sw-msg">
+  <div class="session-warning-card">
+    <div class="session-warning-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <div class="session-warning-title" id="sw-title">Sessão expirando</div>
+    <div class="session-warning-msg" id="sw-msg">
+      Por inatividade, você será desconectado em:
+    </div>
+    <div class="session-countdown" id="session-countdown">2:00</div>
+    <div class="session-warning-btns">
+      <button class="btn btn-secondary" onclick="doLogout()">Sair agora</button>
+      <button class="btn btn-primary" onclick="renewSession()">Continuar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ═══════════════════════════════════════════════════════════════
    CARÔMETRO ESCOLAR — SESI 407
@@ -1373,26 +1592,40 @@
 
 /* ── Estado Global ────────────────────────────────────────────── */
 const APP = {
-  config:      null,
-  alunos:      [],
-  alunosFiltrados: [],
-  currentView: 'dashboard',
-  prevView:    null,
-  prevTurma:   null,
-  paginaAtual: 1,
-  itensPorPagina: 48,
-  viewAlunos:  'grid',
-  viewDash:    'cards',
-  sessionUser: null,
+  config:           null,
+  alunos:           [],
+  alunosFiltrados:  [],
+  currentView:      'dashboard',
+  prevView:         null,
+  prevTurma:        null,
+  paginaAtual:      1,
+  itensPorPagina:   48,
+  viewAlunos:       'grid',
+  viewDash:         'cards',
+  sessionUser:      null,
+  // Ordenação da tabela (2.2)
+  sortCol:          null,
+  sortDir:          'asc',
+  // Alunos da turma atual (2.4)
+  alunosTurmaAtual: [],
 };
 
 /* ── Inicialização ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   lucide.createIcons();
   checkSession();
+  // Navegação por teclado nos itens da sidebar (3.1)
+  document.querySelectorAll('.nav-item[role="menuitem"]').forEach(el => {
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+    });
+  });
 });
 
 async function initApp() {
+  // 2.5 — Mostrar skeleton enquanto carrega
+  renderSkeleton();
+
   try {
     const [cfgRes, alunosRes] = await Promise.all([
       fetch('data/config.json'),
@@ -1409,6 +1642,12 @@ async function initApp() {
   populateFilters();
   renderDashboard();
   updateUserUI();
+
+  // 1.2 — Navegar para hash da URL se existir
+  navegarPorHash();
+
+  // 1.3 — Iniciar monitoramento de sessão
+  iniciarMonitorSessao();
 
   lucide.createIcons();
 }
@@ -1607,28 +1846,63 @@ function updateUserUI() {
 }
 
 /* ── Navegação ────────────────────────────────────────────────── */
-function showView(view) {
+function showView(view, pushHash = true) {
   document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item[role="menuitem"]').forEach(n => {
+    n.classList.remove('active');
+    n.removeAttribute('aria-current');
+  });
 
   APP.currentView = view;
-  document.getElementById(`view-${view}`).classList.add('active');
+  const viewEl = document.getElementById(`view-${view}`);
+  if (viewEl) viewEl.classList.add('active');
+
   const navEl = document.getElementById(`nav-${view}`);
-  if (navEl) navEl.classList.add('active');
+  if (navEl) { navEl.classList.add('active'); navEl.setAttribute('aria-current', 'page'); }
 
   const titles = {
     dashboard: 'Dashboard',
-    alunos: 'Todos os Alunos',
-    turmas: 'Por Turma',
-    detalhe: 'Detalhes do Aluno',
+    alunos:    'Todos os Alunos',
+    turmas:    'Por Turma',
+    detalhe:   'Detalhes do Aluno',
   };
   document.getElementById('topbar-title').textContent = titles[view] || view;
+
+  // 1.2 — Atualizar hash da URL
+  if (pushHash && view !== 'detalhe') {
+    history.replaceState(null, '', `#${view}`);
+  }
 
   if (view === 'alunos') renderAlunos();
   if (view === 'turmas') renderTurmaSelector();
   if (window.innerWidth <= 768) closeSidebar();
   lucide.createIcons();
 }
+
+/* ── 1.2 · Navegação por URL hash ─────────────────────────────── */
+function navegarPorHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return;
+
+  if (['dashboard','alunos','turmas'].includes(hash)) {
+    showView(hash, false);
+    return;
+  }
+  // #aluno/006810 — deep link para aluno específico
+  if (hash.startsWith('aluno/')) {
+    const rm = hash.replace('aluno/', '');
+    showView('alunos', false);
+    setTimeout(() => openAluno(rm), 50);
+  }
+}
+
+// Listener para botão Voltar/Avançar do browser
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (['dashboard','alunos','turmas'].includes(hash)) {
+    showView(hash, false);
+  }
+});
 
 /* ── Sidebar ──────────────────────────────────────────────────── */
 function openSidebar() {
@@ -1843,10 +2117,13 @@ function renderAlunos() {
     <div class="stat-card"><div class="stat-label">Exibindo</div><div class="stat-value" style="font-size:1.4rem;">${Math.min(APP.itensPorPagina, total)}</div><div class="stat-sub">resultado(s)</div></div>
   `;
 
+  // 2.2 — Aplicar ordenação
+  const listaOrdenada = aplicarOrdenacao(lista);
+
   // Paginação
   const inicio = (APP.paginaAtual - 1) * APP.itensPorPagina;
   const fim = inicio + APP.itensPorPagina;
-  const pagina = lista.slice(inicio, fim);
+  const pagina = listaOrdenada.slice(inicio, fim);
 
   if (total === 0) {
     document.getElementById('alunos-grid').innerHTML = '';
@@ -1954,15 +2231,25 @@ function openTurma(serie, turma, turno) {
   const comFoto = alunos.filter(a => a.foto_coletada).length;
   const pct = alunos.length > 0 ? Math.round(comFoto/alunos.length*100) : 0;
 
-  // Se estiver na view turmas, mostrar alunos
-  if (APP.currentView !== 'turmas') showView('turmas');
+  // 2.4 — Salvar alunos da turma para filtragem posterior
+  APP.alunosTurmaAtual = alunos;
 
-  document.getElementById('turma-selector').style.display = 'none';
-  document.getElementById('turma-alunos').style.display = '';
-  document.getElementById('turmas-actions').style.display = '';
-  document.getElementById('turmas-title').textContent = `${serie} ${turma} — ${turno}`;
-  document.getElementById('turmas-subtitle').textContent =
+  if (APP.currentView !== 'turmas') showView('turmas', false);
+
+  document.getElementById('turma-selector').style.display  = 'none';
+  document.getElementById('turma-alunos').style.display    = '';
+  document.getElementById('turmas-actions').style.display  = '';
+  document.getElementById('turmas-title').textContent      = `${serie} ${turma} — ${turno}`;
+  document.getElementById('turmas-subtitle').textContent   =
     `${alunos.length} aluno(s) · ${comFoto} com foto · ${pct}% de cobertura`;
+
+  // 2.4 — Limpar campo de busca da turma
+  const searchInput = document.getElementById('turma-search-input');
+  if (searchInput) { searchInput.value = ''; }
+  const countEl = document.getElementById('turma-search-count');
+  if (countEl) { countEl.textContent = ''; }
+  const noRes = document.getElementById('turma-no-results');
+  if (noRes) { noRes.style.display = 'none'; }
 
   document.getElementById('turma-stats').innerHTML = `
     <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value">${alunos.length}</div></div>
@@ -1979,6 +2266,8 @@ function openTurma(serie, turma, turno) {
   }
 
   document.getElementById('topbar-title').textContent = `${serie} ${turma} — ${turno}`;
+  // 1.2 — Atualizar hash
+  history.replaceState(null, '', `#turmas`);
   APP.prevTurma = { serie, turma, turno };
   lucide.createIcons();
 }
@@ -2000,21 +2289,29 @@ function openAluno(rm) {
   document.getElementById('view-detalhe').classList.add('active');
   document.getElementById('topbar-title').textContent = aluno.nome_completo;
 
+  // 1.2 — Deep link para o aluno
+  history.replaceState(null, '', `#aluno/${rmKey}`);
+
   // Breadcrumb
   const prevLabel = { dashboard: 'Dashboard', alunos: 'Todos os Alunos', turmas: 'Por Turma' };
+  const prevView = APP.prevView || 'alunos';
   document.getElementById('detalhe-breadcrumb').innerHTML = `
-    <a href="#" onclick="showView('${APP.prevView||'alunos'}');return false;">
-      ${prevLabel[APP.prevView||'alunos']}
+    <a href="#${prevView}" onclick="showView('${prevView}');return false;">
+      ${prevLabel[prevView]}
     </a>
     <span class="breadcrumb-sep">/</span>
     <span class="breadcrumb-current">${esc(aluno.nome_completo)}</span>
   `;
 
-  // Foto
+  // Foto — com suporte a lightbox (2.1)
   const fotoSrc = `images/${rmKey}.jpg`;
+  const metaLightbox = `${esc(aluno.serie)} ${esc(aluno.turma)} · ${esc(aluno.turno)}`;
   const fotoHtml = aluno.foto_coletada
     ? `<img src="${fotoSrc}" alt="${esc(aluno.nome_completo)}"
            class="detail-photo"
+           loading="lazy"
+           onclick="openLightbox('${fotoSrc}','${esc(aluno.nome_completo)}','${metaLightbox}')"
+           title="Clique para ampliar"
            onerror="this.outerHTML='<div class=detail-photo-placeholder><i data-lucide=camera-off width=36 height=36></i><span style=font-size:.78rem>Foto não disponível</span></div>'">`
     : `<div class="detail-photo-placeholder">
         <i data-lucide="camera-off" width="36" height="36"></i>
@@ -2167,11 +2464,13 @@ function renderStudentCard(a) {
     ? `<img src="images/${rm}.jpg"
            alt="${esc(a.nome_completo)}"
            class="student-card-photo"
+           loading="lazy"
            onerror="this.outerHTML='<div class=student-card-nophoto><i data-lucide=camera-off width=22 height=22></i></div>'">`
     : `<div class="student-card-nophoto">
         <i data-lucide="camera-off" width="22" height="22"></i>
       </div>`;
-  return `<div class="student-card" onclick="openAluno('${rm}')">
+  return `<div class="student-card" onclick="openAluno('${rm}')"
+               role="button" tabindex="0" aria-label="${esc(a.nome_completo)}, ${esc(a.serie)} ${esc(a.turma)}">
     ${fotoHtml}
     <div class="student-card-name">${esc(a.nome_completo)}</div>
     <div class="student-card-meta">${esc(a.serie)} ${esc(a.turma)}</div>
@@ -2181,7 +2480,8 @@ function renderStudentCard(a) {
 function renderStudentRow(a) {
   const rm = a.rm_estudante || a.matricula;
   const mini = a.foto_coletada
-    ? `<img src="images/${rm}.jpg" alt="" style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
+    ? `<img src="images/${rm}.jpg" alt="" loading="lazy"
+           style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
            onerror="this.outerHTML='<div style=width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;><i data-lucide=camera-off width=14 height=14></i></div>'">`
     : `<div style="width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
         <i data-lucide="camera-off" width="14" height="14" style="color:var(--gray-400);"></i>
@@ -2189,7 +2489,8 @@ function renderStudentRow(a) {
   const statusBadge = a.status === 'Ativo'
     ? `<span class="badge badge-green" style="font-size:.65rem;">Ativo</span>`
     : `<span class="badge badge-gray" style="font-size:.65rem;">${esc(a.status)}</span>`;
-  return `<tr onclick="openAluno('${rm}')">
+  return `<tr onclick="openAluno('${rm}')" role="row" tabindex="0"
+              onkeydown="if(event.key==='Enter')openAluno('${rm}')">
     <td>${mini}</td>
     <td><strong>${esc(a.nome_completo)}</strong></td>
     <td style="font-family:monospace;font-size:.82rem;">${esc(rm)}</td>
@@ -2267,6 +2568,230 @@ function serieSort(a, b) {
   const ib = ordens.indexOf(b);
   if (ia >= 0 && ib >= 0) return ia - ib;
   return a.localeCompare(b);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   1.1 · DEBOUNCE + LAZY LOADING
+═══════════════════════════════════════════════════════════════ */
+function debounce(fn, delay) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+// Versão debounced da busca principal (250ms)
+const applyFiltersDebounced = debounce(applyFilters, 250);
+
+/* ═══════════════════════════════════════════════════════════════
+   1.3 · TIMEOUT AUTOMÁTICO DE SESSÃO
+═══════════════════════════════════════════════════════════════ */
+const SESSION = {
+  TIMEOUT_MIN:  30,   // minutos de inatividade → logout
+  WARNING_MIN:  2,    // minutos de aviso antes do logout
+  _timeoutId:   null,
+  _warningId:   null,
+  _countdownId: null,
+  _countdownSec: 0,
+};
+
+function iniciarMonitorSessao() {
+  const timeoutMin = APP.config?.auth?.session_timeout_min || SESSION.TIMEOUT_MIN;
+  const warningMin = SESSION.WARNING_MIN;
+
+  const resetarTimer = () => {
+    clearTimeout(SESSION._timeoutId);
+    clearTimeout(SESSION._warningId);
+    fecharAvisoSessao();
+
+    // Aviso antes do logout
+    SESSION._warningId = setTimeout(() => {
+      mostrarAvisoSessao(warningMin * 60);
+    }, (timeoutMin - warningMin) * 60 * 1000);
+
+    // Logout automático
+    SESSION._timeoutId = setTimeout(() => {
+      fecharAvisoSessao();
+      showToast('Sessão encerrada por inatividade.', 'warning', 4000);
+      setTimeout(doLogout, 1500);
+    }, timeoutMin * 60 * 1000);
+  };
+
+  // Eventos que resetam o timer
+  ['mousemove','keydown','click','touchstart','scroll'].forEach(evt => {
+    document.addEventListener(evt, resetarTimer, { passive: true });
+  });
+
+  resetarTimer();
+}
+
+function mostrarAvisoSessao(segundos) {
+  SESSION._countdownSec = segundos;
+  document.getElementById('session-warning').classList.add('active');
+  atualizarCountdown();
+  SESSION._countdownId = setInterval(() => {
+    SESSION._countdownSec--;
+    atualizarCountdown();
+    if (SESSION._countdownSec <= 0) {
+      clearInterval(SESSION._countdownId);
+    }
+  }, 1000);
+}
+
+function atualizarCountdown() {
+  const min = Math.floor(SESSION._countdownSec / 60);
+  const sec = SESSION._countdownSec % 60;
+  const el = document.getElementById('session-countdown');
+  if (el) el.textContent = `${min}:${String(sec).padStart(2,'0')}`;
+}
+
+function fecharAvisoSessao() {
+  clearInterval(SESSION._countdownId);
+  document.getElementById('session-warning').classList.remove('active');
+}
+
+function renewSession() {
+  fecharAvisoSessao();
+  // Disparar mousemove para resetar o timer
+  document.dispatchEvent(new Event('mousemove'));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2.1 · LIGHTBOX — foto em tela cheia
+═══════════════════════════════════════════════════════════════ */
+function openLightbox(src, nome, meta) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src  = src;
+  document.getElementById('lightbox-img').alt  = nome;
+  document.getElementById('lightbox-name').textContent = nome;
+  document.getElementById('lightbox-meta').textContent = meta || '';
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Fechar com ESC
+  const onKey = (e) => {
+    if (e.key === 'Escape') { closeLightbox(); document.removeEventListener('keydown', onKey); }
+  };
+  document.addEventListener('keydown', onKey);
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2.2 · ORDENAÇÃO DA TABELA
+═══════════════════════════════════════════════════════════════ */
+function sortTable(col) {
+  if (APP.sortCol === col) {
+    APP.sortDir = APP.sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    APP.sortCol = col;
+    APP.sortDir = 'asc';
+  }
+
+  // Atualizar ARIA nos cabeçalhos
+  document.querySelectorAll('thead th.sortable').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    th.setAttribute('aria-sort', 'none');
+  });
+  const thAtivo = document.querySelector(`thead th[data-col="${col}"]`);
+  if (thAtivo) {
+    thAtivo.classList.add(`sort-${APP.sortDir}`);
+    thAtivo.setAttribute('aria-sort', APP.sortDir === 'asc' ? 'ascending' : 'descending');
+  }
+
+  APP.paginaAtual = 1;
+  renderAlunos();
+}
+
+function aplicarOrdenacao(lista) {
+  if (!APP.sortCol) return lista;
+  return [...lista].sort((a, b) => {
+    let va = '', vb = '';
+    if (APP.sortCol === 'serie') {
+      va = `${a.serie} ${a.turma}`;
+      vb = `${b.serie} ${b.turma}`;
+    } else {
+      va = String(a[APP.sortCol] || '');
+      vb = String(b[APP.sortCol] || '');
+    }
+    const cmp = va.localeCompare(vb, 'pt-BR', { numeric: true });
+    return APP.sortDir === 'asc' ? cmp : -cmp;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2.4 · BUSCA NA VIEW "POR TURMA"
+═══════════════════════════════════════════════════════════════ */
+const filtrarTurmaDebounced = debounce(function(termo) {
+  const t = termo.toLowerCase().trim();
+  const grid = document.getElementById('turma-grid');
+  const noResults = document.getElementById('turma-no-results');
+  const countEl  = document.getElementById('turma-search-count');
+
+  const filtrados = t
+    ? APP.alunosTurmaAtual.filter(a =>
+        a.nome_completo.toLowerCase().includes(t) ||
+        (a.rm_estudante || a.matricula || '').includes(t) ||
+        (a.nu_chamada || '').includes(t)
+      )
+    : APP.alunosTurmaAtual;
+
+  if (filtrados.length === 0) {
+    grid.innerHTML = '';
+    noResults.style.display = '';
+    if (countEl) countEl.textContent = '';
+  } else {
+    noResults.style.display = 'none';
+    grid.innerHTML = filtrados.map(renderStudentCard).join('');
+    if (countEl) countEl.textContent = t ? `${filtrados.length} resultado(s)` : '';
+    lucide.createIcons();
+  }
+}, 200);
+
+function filtrarTurma(termo) {
+  filtrarTurmaDebounced(termo);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2.5 · SKELETON LOADING
+═══════════════════════════════════════════════════════════════ */
+function renderSkeleton() {
+  // Stats skeleton no dashboard
+  const statsEl = document.getElementById('dash-stats');
+  if (statsEl) {
+    statsEl.innerHTML = Array(4).fill(`
+      <div class="skeleton-stat">
+        <div class="skeleton skeleton-stat-label"></div>
+        <div class="skeleton skeleton-stat-value"></div>
+        <div class="skeleton skeleton-stat-sub"></div>
+      </div>`).join('');
+  }
+  // Cards skeleton no dashboard
+  const cardsEl = document.getElementById('dash-turmas-cards');
+  if (cardsEl) {
+    cardsEl.style.display = '';
+    cardsEl.innerHTML = Array(6).fill(`
+      <div class="tc-item" style="animation:none;opacity:1;transform:none;">
+        <div class="tc-header">
+          <div class="tc-header-left">
+            <div class="skeleton" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;"></div>
+            <div>
+              <div class="skeleton" style="width:50px;height:9px;margin-bottom:6px;"></div>
+              <div class="skeleton" style="width:90px;height:13px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="skeleton" style="width:100px;height:28px;margin-bottom:10px;"></div>
+          <div class="skeleton" style="height:5px;margin-bottom:10px;"></div>
+          <div class="skeleton" style="width:120px;height:22px;border-radius:99px;"></div>
+        </div>
+      </div>`).join('');
+  }
 }
 
 /* ── Toast ────────────────────────────────────────────────────── */
