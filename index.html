@@ -529,7 +529,7 @@
     .stat-card {
       background: #fff; border-radius: var(--radius);
       border: 1px solid var(--gray-200);
-      padding: 16px 18px; box-shadow: var(--shadow-sm);
+      padding: 16px 20px 14px; box-shadow: var(--shadow-sm);
       position: relative; overflow: hidden;
     }
     .stat-card::before {
@@ -540,9 +540,9 @@
     .stat-card.green::before { background: var(--green-500); }
     .stat-card.blue::before  { background: var(--blue-500); }
     .stat-card.amber::before { background: var(--amber-500); }
-    .stat-label { font-size: .75rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
-    .stat-value { font-size: 2rem; font-weight: 900; color: var(--gray-900); letter-spacing: -.04em; line-height: 1; }
-    .stat-sub   { font-size: .76rem; color: var(--gray-400); margin-top: 4px; }
+    .stat-label { font-size: .72rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+    .stat-value { font-size: 2.2rem; font-weight: 900; color: var(--gray-900); letter-spacing: -.05em; line-height: 1; }
+    .stat-sub   { font-size: .76rem; color: var(--gray-400); margin-top: 5px; }
 
     /* ── Buttons ───────────────────────────────────────────────── */
     .btn {
@@ -910,16 +910,50 @@
     }
     #sidebar-overlay.active { display: block; }
 
-    /* ── Breadcrumb ────────────────────────────────────────────── */
-    .breadcrumb {
-      display: flex; align-items: center; gap: 6px;
-      font-size: .82rem; color: var(--gray-400);
-      margin-bottom: 16px;
+    /* ── Botão Voltar — tela de detalhe ───────────────────────── */
+    .btn-voltar {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px 9px 12px;
+      background: #fff; border: 1px solid var(--gray-200);
+      border-radius: 8px; color: var(--gray-700);
+      font-size: .86rem; font-weight: 600;
+      box-shadow: var(--shadow-sm); cursor: pointer;
+      transition: all .15s ease;
+      text-decoration: none;
+      /* Touch target mínimo 44px */
+      min-height: 44px;
     }
-    .breadcrumb a { color: var(--sesi-red); }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb-sep { color: var(--gray-300); }
-    .breadcrumb-current { color: var(--gray-700); font-weight: 600; }
+    .btn-voltar:hover {
+      background: var(--gray-50);
+      border-color: var(--gray-300);
+      color: var(--sesi-red);
+      transform: translateX(-2px);
+    }
+    .btn-voltar svg { flex-shrink: 0; transition: transform .15s ease; }
+    .btn-voltar:hover svg { transform: translateX(-2px); }
+    [data-theme="dark"] .btn-voltar {
+      background: #1A1D23; border-color: #2A2F3D; color: var(--gray-600);
+    }
+    [data-theme="dark"] .btn-voltar:hover {
+      background: #20242E; border-color: #3A4055; color: #ED1C24;
+    }
+
+    /* Header da tela de detalhe */
+    .detalhe-header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px; gap: 12px; flex-wrap: wrap;
+    }
+    .detalhe-header-left {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .detalhe-titulo {
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--gray-900); line-height: 1.3;
+    }
+    .detalhe-subtitulo {
+      font-size: .82rem; color: var(--gray-400); margin-top: 1px;
+    }
 
     /* ── Alert ─────────────────────────────────────────────────── */
     .alert {
@@ -995,6 +1029,7 @@
       .topbar-search { display: none; }
       .page { padding: 14px 14px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      #dash-stats  { grid-template-columns: repeat(2,1fr) !important; }
       .detail-layout { grid-template-columns: 1fr; }
       .detail-photo-card { display: flex; gap: 16px; text-align: left; align-items: center; }
       .detail-photo, .detail-photo-placeholder { width: 80px; height: 106px; flex-shrink: 0; margin: 0; }
@@ -1349,7 +1384,7 @@
         </div>
 
         <div class="stats-grid" id="dash-stats"
-             style="grid-template-columns:repeat(auto-fill,minmax(min(100%,155px),1fr));">
+             style="grid-template-columns:repeat(4,1fr);">
           <div class="stat-card red">
             <div class="stat-label"><i data-lucide="users" width="13" height="13"></i> Total de Alunos</div>
             <div class="stat-value" id="stat-total">—</div>
@@ -1551,7 +1586,7 @@
 
       <!-- ── VIEW: DETALHE DO ALUNO ──────────────────────────── -->
       <div class="page-view" id="view-detalhe">
-        <div class="breadcrumb" id="detalhe-breadcrumb"></div>
+        <div class="detalhe-header" id="detalhe-header"></div>
         <div class="detail-layout" id="detalhe-content"></div>
       </div>
 
@@ -2312,15 +2347,32 @@ function openAluno(rm) {
   // 1.2 — Deep link para o aluno
   history.replaceState(null, '', `#aluno/${rmKey}`);
 
-  // Breadcrumb
+  // Breadcrumb + botão voltar
   const prevLabel = { dashboard: 'Dashboard', alunos: 'Todos os Alunos', turmas: 'Por Turma' };
   const prevView = APP.prevView || 'alunos';
-  document.getElementById('detalhe-breadcrumb').innerHTML = `
-    <a href="#${prevView}" onclick="showView('${prevView}');return false;">
-      ${prevLabel[prevView]}
-    </a>
-    <span class="breadcrumb-sep">/</span>
-    <span class="breadcrumb-current">${esc(aluno.nome_completo)}</span>
+  const prevNome = prevLabel[prevView] || 'Voltar';
+
+  // Se veio da view turmas, guardar referência da turma para o botão voltar funcionar corretamente
+  const voltarFn = prevView === 'turmas' && APP.prevTurma
+    ? `showView('turmas')`
+    : `showView('${prevView}')`;
+
+  document.getElementById('detalhe-header').innerHTML = `
+    <div class="detalhe-header-left">
+      <button class="btn-voltar" onclick="${voltarFn}"
+              aria-label="Voltar para ${prevNome}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        ${prevNome}
+      </button>
+      <div>
+        <div class="detalhe-titulo">${esc(aluno.nome_completo)}</div>
+        <div class="detalhe-subtitulo">${esc(aluno.serie)} ${esc(aluno.turma)} · ${esc(aluno.turno)} · RM ${esc(rmKey)}</div>
+      </div>
+    </div>
   `;
 
   // Foto — com suporte a lightbox (2.1)
