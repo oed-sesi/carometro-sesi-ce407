@@ -450,10 +450,12 @@
       min-height: 100vh;
       transition: margin-left .2s cubic-bezier(.4,0,.2,1);
     }
-    /* Empurra o main quando a sidebar expande (hover ou classe) */
-    .sidebar:hover ~ .main,
-    .sidebar.expanded ~ .main {
-      margin-left: var(--sidebar-w);
+    /* Empurra o main quando a sidebar expande (hover ou classe) — apenas desktop */
+    @media (min-width: 769px) {
+      .sidebar:hover ~ .main,
+      .sidebar.expanded ~ .main {
+        margin-left: var(--sidebar-w);
+      }
     }
 
     /* ── Topbar ────────────────────────────────────────────────── */
@@ -713,9 +715,9 @@
     /* ── Turma Cards Grid ──────────────────────────────────────── */
     .turma-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-      padding: 4px 2px 8px;   /* espaço para a sombra não ser cortada */
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+      gap: 16px;
+      padding: 4px 2px 8px;
     }
 
     /* Card individual */
@@ -1044,9 +1046,24 @@
       box-shadow: var(--shadow-sm);
     }
     [data-theme="dark"] .skeleton-stat { background: #1A1D23; border-color: #2A2F3D; }
-    .skeleton-stat-label { height: 10px; width: 55%; margin-bottom: 10px; }
-    .skeleton-stat-value { height: 32px; width: 40%; margin-bottom: 6px; }
-    .skeleton-stat-sub   { height: 9px; width: 70%; }
+    /* ── Skeleton pulse — aplica shimmer sobre elementos existentes ── */
+    .skeleton-pulse {
+      position: relative; overflow: hidden; pointer-events: none;
+    }
+    .skeleton-pulse > * { opacity: .15; }
+    .skeleton-pulse::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.4s infinite;
+    }
+    [data-theme="dark"] .skeleton-pulse::after {
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(255,255,255,.06) 50%, transparent 100%);
+      background-size: 200% 100%;
+    }
 
     /* ═══════════════════════════════════════════════════════════
        LIGHTBOX — foto em tela cheia  (2.1)
@@ -1332,7 +1349,7 @@
         </div>
 
         <div class="stats-grid" id="dash-stats"
-             style="grid-template-columns:repeat(4,1fr);">
+             style="grid-template-columns:repeat(auto-fill,minmax(min(100%,155px),1fr));">
           <div class="stat-card red">
             <div class="stat-label"><i data-lucide="users" width="13" height="13"></i> Total de Alunos</div>
             <div class="stat-value" id="stat-total">—</div>
@@ -1367,7 +1384,7 @@
               </button>
             </div>
           </div>
-          <div id="dash-turmas-cards" class="turma-cards-grid" style="padding:16px 16px 8px;"></div>
+          <div id="dash-turmas-cards" class="turma-cards-grid" style="padding:12px 12px 8px;"></div>
           <div id="dash-turmas-table" style="display:none;">
             <div class="table-wrap" style="border-radius:0;border:none;box-shadow:none;">
               <table>
@@ -1942,6 +1959,9 @@ function toggleTheme() {
 
 /* ── Dashboard ────────────────────────────────────────────────── */
 function renderDashboard() {
+  // Remover skeleton ao renderizar dados reais
+  removerSkeleton();
+
   const alunos = APP.alunos;
   const total = alunos.length;
   const comFoto = alunos.filter(a => a.foto_coletada).length;
@@ -2757,41 +2777,44 @@ function filtrarTurma(termo) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   2.5 · SKELETON LOADING
+   2.5 · SKELETON LOADING  — versão corrigida
+   Aplica shimmer sobre os elementos existentes (não substitui o HTML)
 ═══════════════════════════════════════════════════════════════ */
 function renderSkeleton() {
-  // Stats skeleton no dashboard
-  const statsEl = document.getElementById('dash-stats');
-  if (statsEl) {
-    statsEl.innerHTML = Array(4).fill(`
-      <div class="skeleton-stat">
-        <div class="skeleton skeleton-stat-label"></div>
-        <div class="skeleton skeleton-stat-value"></div>
-        <div class="skeleton skeleton-stat-sub"></div>
-      </div>`).join('');
-  }
-  // Cards skeleton no dashboard
+  // Aplicar shimmer nos stat-cards existentes (preserva os IDs internos)
+  document.querySelectorAll('#dash-stats .stat-card').forEach(card => {
+    card.classList.add('skeleton-pulse');
+  });
+
+  // Cards skeleton no dashboard — estes podem ser substituídos (não têm IDs internos)
   const cardsEl = document.getElementById('dash-turmas-cards');
   if (cardsEl) {
     cardsEl.style.display = '';
-    cardsEl.innerHTML = Array(6).fill(`
-      <div class="tc-item" style="animation:none;opacity:1;transform:none;">
+    cardsEl.innerHTML = Array(4).fill(`
+      <div class="tc-item" style="animation:none;opacity:1;transform:none;pointer-events:none;">
         <div class="tc-header">
           <div class="tc-header-left">
             <div class="skeleton" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;"></div>
-            <div>
-              <div class="skeleton" style="width:50px;height:9px;margin-bottom:6px;"></div>
-              <div class="skeleton" style="width:90px;height:13px;"></div>
+            <div style="flex:1;">
+              <div class="skeleton" style="width:50px;height:9px;margin-bottom:6px;border-radius:4px;"></div>
+              <div class="skeleton" style="width:90px;height:13px;border-radius:4px;"></div>
             </div>
           </div>
         </div>
         <div style="margin-top:14px;">
-          <div class="skeleton" style="width:100px;height:28px;margin-bottom:10px;"></div>
-          <div class="skeleton" style="height:5px;margin-bottom:10px;"></div>
+          <div class="skeleton" style="width:100px;height:28px;margin-bottom:10px;border-radius:6px;"></div>
+          <div class="skeleton" style="height:5px;margin-bottom:10px;border-radius:99px;"></div>
           <div class="skeleton" style="width:120px;height:22px;border-radius:99px;"></div>
         </div>
       </div>`).join('');
   }
+}
+
+function removerSkeleton() {
+  // Remover shimmer dos stat-cards
+  document.querySelectorAll('#dash-stats .skeleton-pulse').forEach(card => {
+    card.classList.remove('skeleton-pulse');
+  });
 }
 
 /* ── Toast ────────────────────────────────────────────────────── */
