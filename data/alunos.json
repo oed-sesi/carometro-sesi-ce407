@@ -107,9 +107,12 @@
     "pai_telefone": "(16) 98888-7780",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 126",
-    "observacoes": "Não se aplica",
+    "observacoes": "Dificuldade Escolar | Educação Inclusiva: Dificuldade Escolar",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade Escolar"
   },
   {
     "matricula": "006729",
@@ -191,9 +194,12 @@
     "pai_telefone": "(16) 98888-7783",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 129",
-    "observacoes": "Não se aplica",
+    "observacoes": "TEA, X frágil (investigação) | Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006815",
@@ -219,9 +225,12 @@
     "pai_telefone": "(16) 98888-7784",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 130",
-    "observacoes": "Não se aplica",
+    "observacoes": "TEA (nível 3 de suporte) | Educação Inclusiva: Transtorno do Espectro Autista - TEA, nível 3 de suporte.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, nível 3 de suporte."
   },
   {
     "matricula": "006782",
@@ -275,9 +284,12 @@
     "pai_telefone": "(16) 98888-7786",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 132",
-    "observacoes": "Não se aplica",
+    "observacoes": "PC, perda auditivo | Educação Inclusiva: Paralisia Cerebral - PC, Perda auditiva.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Paralisia Cerebral - PC, Perda auditiva."
   },
   {
     "matricula": "006804",
@@ -527,9 +539,12 @@
     "pai_telefone": "(16) 98888-7795",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 141",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006734",
@@ -555,9 +570,12 @@
     "pai_telefone": "(16) 98888-7796",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 142",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Fenda no Palato.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Fenda no Palato."
   },
   {
     "matricula": "006714",
@@ -611,9 +629,12 @@
     "pai_telefone": "(16) 98888-7798",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 144",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, Transtorno auditivo.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, Transtorno auditivo."
   },
   {
     "matricula": "006716",
@@ -1031,9 +1052,12 @@
     "pai_telefone": "(16) 98888-7813",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 159",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, Gagueira.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, Gagueira."
   },
   {
     "matricula": "006750",
@@ -1255,9 +1279,12 @@
     "pai_telefone": "(16) 98888-7821",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 167",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, nível 2 de suporte.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, nível 2 de suporte."
   },
   {
     "matricula": "006806",
@@ -1311,9 +1338,12 @@
     "pai_telefone": "(16) 98888-7823",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 169",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "006774",
@@ -1759,9 +1789,12 @@
     "pai_telefone": "(16) 98888-7839",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 185",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006720",
@@ -1983,9 +2016,12 @@
     "pai_telefone": "(16) 98888-7846",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 192",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005511",
@@ -2039,9 +2075,12 @@
     "pai_telefone": "(16) 98888-7848",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 194",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "006528",
@@ -2431,9 +2470,12 @@
     "pai_telefone": "(16) 98888-7862",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 208",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005680",
@@ -2797,7 +2839,18 @@
     "endereco": "Inserir Endereço, N 220",
     "observacoes": "Não se aplica",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [
+      {
+        "texto": "Afastado das atividades físicas",
+        "data_inicio": "2026-05-21",
+        "data_fim": "2026-07-20",
+        "tipo": "saude",
+        "criado_em": "2026-05-25"
+      }
+    ],
+    "educacao_inclusiva": false,
+    "diagnostico": ""
   },
   {
     "matricula": "006437",
@@ -3327,9 +3380,12 @@
     "pai_telefone": "(16) 98888-7893",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 239",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dificuldade de aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade de aprendizagem."
   },
   {
     "matricula": "006380",
@@ -3523,9 +3579,12 @@
     "pai_telefone": "(16) 98888-7900",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 246",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006378",
@@ -3607,9 +3666,12 @@
     "pai_telefone": "(16) 98888-7903",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 249",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno Opositor Desafiador - TOD.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno Opositor Desafiador - TOD."
   },
   {
     "matricula": "006458",
@@ -3943,9 +4005,12 @@
     "pai_telefone": "(16) 98888-7915",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 261",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006419",
@@ -3971,9 +4036,12 @@
     "pai_telefone": "(16) 98888-7916",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 262",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006440",
@@ -4027,9 +4095,12 @@
     "pai_telefone": "(16) 98888-7918",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 264",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dificuldade de aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade de aprendizagem."
   },
   {
     "matricula": "006929",
@@ -4363,9 +4434,12 @@
     "pai_telefone": "(16) 98888-7930",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 276",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006455",
@@ -4419,9 +4493,12 @@
     "pai_telefone": "(16) 98888-7932",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 278",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "006426",
@@ -4671,9 +4748,12 @@
     "pai_telefone": "(16) 98888-7941",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 287",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005421",
@@ -4755,9 +4835,12 @@
     "pai_telefone": "(16) 98888-7944",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 290",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005420",
@@ -4811,9 +4894,12 @@
     "pai_telefone": "(16) 98888-7946",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 292",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Déficit de Aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Déficit de Aprendizagem."
   },
   {
     "matricula": "005425",
@@ -4923,9 +5009,12 @@
     "pai_telefone": "(16) 98888-7950",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 296",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005428",
@@ -5203,9 +5292,12 @@
     "pai_telefone": "(16) 98888-7960",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 306",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005414",
@@ -5623,9 +5715,12 @@
     "pai_telefone": "(16) 98888-7975",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 321",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "006869",
@@ -6099,9 +6194,12 @@
     "pai_telefone": "(16) 98888-7992",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 338",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Transtorno Opositor Desafiador - TOD.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Transtorno Opositor Desafiador - TOD."
   },
   {
     "matricula": "005296",
@@ -6211,9 +6309,12 @@
     "pai_telefone": "(16) 98888-7996",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 342",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Ansiedade.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Ansiedade."
   },
   {
     "matricula": "005305",
@@ -6911,9 +7012,12 @@
     "pai_telefone": "(16) 98888-8021",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 367",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005810",
@@ -7191,9 +7295,12 @@
     "pai_telefone": "(16) 98888-8222",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 568",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005967",
@@ -7303,9 +7410,12 @@
     "pai_telefone": "(16) 98888-8128",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 474",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Ansiedade.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Ansiedade."
   },
   {
     "matricula": "005129",
@@ -8059,9 +8169,12 @@
     "pai_telefone": "(16) 98888-8041",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 387",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005658",
@@ -8115,9 +8228,12 @@
     "pai_telefone": "(16) 98888-8042",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 388",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Paralisia Cerebral - PC.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Paralisia Cerebral - PC."
   },
   {
     "matricula": "005901",
@@ -8339,9 +8455,12 @@
     "pai_telefone": "(16) 98888-8141",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 487",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Baixa visão - Cerotocome.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Baixa visão - Cerotocome."
   },
   {
     "matricula": "005196",
@@ -8367,9 +8486,12 @@
     "pai_telefone": "(16) 98888-8045",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 391",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005629",
@@ -8395,9 +8517,12 @@
     "pai_telefone": "(16) 98888-8236",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 582",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Hemiparesia na perna direita.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Hemiparesia na perna direita."
   },
   {
     "matricula": "005632",
@@ -9067,9 +9192,12 @@
     "pai_telefone": "(16) 98888-8053",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 399",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005923",
@@ -9095,9 +9223,12 @@
     "pai_telefone": "(16) 98888-8245",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 591",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA."
   },
   {
     "matricula": "005121",
@@ -9291,9 +9422,12 @@
     "pai_telefone": "(16) 98888-8247",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 593",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dificuldade de aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade de aprendizagem."
   },
   {
     "matricula": "005250",
@@ -9515,9 +9649,12 @@
     "pai_telefone": "(16) 98888-8250",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 596",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005195",
@@ -9543,9 +9680,12 @@
     "pai_telefone": "(16) 98888-8155",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 501",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Bipolaridade.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Bipolaridade."
   },
   {
     "matricula": "005187",
@@ -9571,9 +9711,12 @@
     "pai_telefone": "(16) 98888-8059",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 405",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Marfan.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Marfan."
   },
   {
     "matricula": "005912",
@@ -9795,9 +9938,12 @@
     "pai_telefone": "(16) 98888-8158",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 504",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Baixa visão - Cerotocome.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Baixa visão - Cerotocome."
   },
   {
     "matricula": "005246",
@@ -9879,9 +10025,12 @@
     "pai_telefone": "(16) 98888-8159",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 505",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Deficiência Intelectual, Sindrome de Dwon.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Deficiência Intelectual, Sindrome de Dwon."
   },
   {
     "matricula": "005641",
@@ -9963,9 +10112,12 @@
     "pai_telefone": "(16) 98888-8255",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 601",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005502",
@@ -10355,9 +10507,12 @@
     "pai_telefone": "(16) 98888-8069",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 415",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005001",
@@ -10719,9 +10874,12 @@
     "pai_telefone": "(16) 98888-8073",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 419",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005672",
@@ -10803,9 +10961,12 @@
     "pai_telefone": "(16) 98888-8074",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 420",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Discalculia.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Discalculia."
   },
   {
     "matricula": "005126",
@@ -11615,9 +11776,12 @@
     "pai_telefone": "(16) 98888-8275",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 621",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Distúrbio ou Transtorno do Processamento Auditivo Central - DPAC.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Distúrbio ou Transtorno do Processamento Auditivo Central - DPAC."
   },
   {
     "matricula": "005228",
@@ -12735,9 +12899,12 @@
     "pai_telefone": "(16) 98888-8097",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 443",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Glaucoma.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Glaucoma."
   },
   {
     "matricula": "005119",
@@ -12763,9 +12930,12 @@
     "pai_telefone": "(16) 98888-8193",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 539",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Deficiência Intelectual - DI.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH, Deficiência Intelectual - DI."
   },
   {
     "matricula": "005906",
@@ -12903,9 +13073,12 @@
     "pai_telefone": "(16) 98888-8195",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 541",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "006732",
@@ -12931,9 +13104,12 @@
     "pai_telefone": "(16) 98888-8099",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 445",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dislexia, Daltonismo.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dislexia, Daltonismo."
   },
   {
     "matricula": "005963",
@@ -13155,9 +13331,12 @@
     "pai_telefone": "(16) 98888-8198",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 544",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dificuldade de aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade de aprendizagem."
   },
   {
     "matricula": "006779",
@@ -13211,9 +13390,12 @@
     "pai_telefone": "(16) 98888-8294",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 640",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, Dislexia.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, Dislexia."
   },
   {
     "matricula": "006354",
@@ -13351,9 +13533,12 @@
     "pai_telefone": "(16) 98888-8104",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 450",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005937",
@@ -13463,9 +13648,12 @@
     "pai_telefone": "(16) 98888-8297",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 643",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Dificuldade de Aprendizagem.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Dificuldade de Aprendizagem."
   },
   {
     "matricula": "006429",
@@ -13547,9 +13735,12 @@
     "pai_telefone": "(16) 98888-8298",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 644",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Deficiência Intelectual - DI.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Deficiência Intelectual - DI."
   },
   {
     "matricula": "005644",
@@ -13743,9 +13934,12 @@
     "pai_telefone": "(16) 98888-8205",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 551",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Borderline.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Borderline."
   },
   {
     "matricula": "006764",
@@ -13967,9 +14161,12 @@
     "pai_telefone": "(16) 98888-8303",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 649",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005185",
@@ -14107,9 +14304,12 @@
     "pai_telefone": "(16) 98888-8113",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 459",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005647",
@@ -14135,9 +14335,12 @@
     "pai_telefone": "(16) 98888-8305",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 651",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Espectro Autista - TEA, Ansiedade.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Espectro Autista - TEA, Ansiedade."
   },
   {
     "matricula": "005122",
@@ -14639,9 +14842,12 @@
     "pai_telefone": "(16) 98888-8311",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 657",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "006786",
@@ -15087,9 +15293,12 @@
     "pai_telefone": "(16) 98888-8221",
     "pai_email": "emai.pai@email.com",
     "endereco": "Inserir Endereço, N 567",
-    "observacoes": "Não se aplica",
+    "observacoes": "Educação Inclusiva: Transtorno do Déficit de Atenção com Hiperatividade - TDAH.",
     "termo_autorizado": true,
-    "foto_coletada": true
+    "foto_coletada": true,
+    "avisos": [],
+    "educacao_inclusiva": true,
+    "diagnostico": "Transtorno do Déficit de Atenção com Hiperatividade - TDAH."
   },
   {
     "matricula": "005958",

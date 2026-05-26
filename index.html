@@ -910,7 +910,138 @@
     }
     #sidebar-overlay.active { display: block; }
 
-    /* ── Botão Voltar — tela de detalhe ───────────────────────── */
+    /* ═══════════════════════════════════════════════════════════
+       BADGES — AVISO e EDUCAÇÃO INCLUSIVA
+    ═══════════════════════════════════════════════════════════ */
+
+    /* ── Card com aviso ativo ─────────────────────────────────── */
+    .student-card.has-aviso {
+      border: 2px solid #ED1C24;
+      box-shadow: 0 0 0 3px rgba(237,28,36,.15), var(--shadow-sm);
+      animation: avisoGlow 2.4s ease-in-out infinite;
+    }
+    @keyframes avisoGlow {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(237,28,36,.15), var(--shadow-sm); }
+      50%       { box-shadow: 0 0 0 5px rgba(237,28,36,.30), var(--shadow-sm); }
+    }
+
+    /* ── Wrapper da foto com badges ───────────────────────────── */
+    .student-photo-wrap {
+      position: relative; display: inline-block;
+    }
+
+    /* ── Badge base ───────────────────────────────────────────── */
+    .badge-aviso,
+    .badge-ei {
+      position: absolute;
+      border-radius: 99px;
+      font-size: .58rem; font-weight: 800;
+      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      gap: 2px;
+      letter-spacing: .02em;
+      box-shadow: 0 1px 4px rgba(0,0,0,.25);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ── Badge aviso — canto superior direito ─────────────────── */
+    .badge-aviso {
+      top: 4px; right: 4px;
+      background: #ED1C24; color: #fff;
+      padding: 3px 6px;
+    }
+    .badge-aviso svg { flex-shrink: 0; }
+
+    /* ── Badge EI — canto inferior esquerdo ───────────────────── */
+    .badge-ei {
+      bottom: 4px; left: 4px;
+      background: #7C3AED; color: #fff;
+      padding: 3px 7px;
+    }
+
+    /* ── Card EI: borda sutil roxa ────────────────────────────── */
+    .student-card.is-ei {
+      border-left: 3px solid #7C3AED;
+    }
+
+    /* ── Linha de aviso inline no card ───────────────────────── */
+    .card-aviso-text {
+      font-size: .67rem; color: #ED1C24; font-weight: 600;
+      margin-top: 3px; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* ── Badges na tabela ─────────────────────────────────────── */
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: 3px;
+      border-radius: 99px; font-size: .65rem; font-weight: 700;
+      padding: 2px 7px; white-space: nowrap;
+    }
+    .badge-pill.aviso { background: #FEE2E2; color: #B91C1C; }
+    .badge-pill.ei    { background: #EDE9FE; color: #5B21B6; }
+    [data-theme="dark"] .badge-pill.aviso { background: rgba(237,28,36,.2); color: #FCA5A5; }
+    [data-theme="dark"] .badge-pill.ei    { background: rgba(124,58,237,.2); color: #C4B5FD; }
+
+    /* ── Bloco de aviso na tela de detalhe ────────────────────── */
+    .card-aviso-detalhe {
+      background: #FEF2F2; border: 1.5px solid #FECACA;
+      border-left: 4px solid #ED1C24;
+      border-radius: var(--radius); padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    [data-theme="dark"] .card-aviso-detalhe {
+      background: rgba(237,28,36,.08); border-color: rgba(237,28,36,.3);
+    }
+    .card-aviso-detalhe-title {
+      font-size: .78rem; font-weight: 800; color: #B91C1C;
+      text-transform: uppercase; letter-spacing: .05em;
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 8px;
+    }
+    .card-aviso-detalhe-item {
+      font-size: .88rem; color: var(--gray-800);
+      margin-bottom: 4px; line-height: 1.5;
+    }
+    .card-aviso-detalhe-periodo {
+      font-size: .76rem; color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    /* ── Bloco de EI na tela de detalhe ──────────────────────── */
+    .card-ei-detalhe {
+      background: #F5F3FF; border: 1.5px solid #DDD6FE;
+      border-left: 4px solid #7C3AED;
+      border-radius: var(--radius); padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    [data-theme="dark"] .card-ei-detalhe {
+      background: rgba(124,58,237,.08); border-color: rgba(124,58,237,.3);
+    }
+    .card-ei-detalhe-title {
+      font-size: .78rem; font-weight: 800; color: #5B21B6;
+      text-transform: uppercase; letter-spacing: .05em;
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 6px;
+    }
+    /* ── Badges de contagem na sidebar ────────────────────── */
+    .nav-badge-red,
+    .nav-badge-purple {
+      margin-left: auto;
+      font-size: .65rem; font-weight: 800;
+      padding: 1px 6px; border-radius: 99px;
+      line-height: 1.4;
+    }
+    .nav-badge-red    { background: #FEE2E2; color: #B91C1C; }
+    .nav-badge-purple { background: #EDE9FE; color: #5B21B6; }
+    [data-theme="dark"] .nav-badge-red    { background: rgba(237,28,36,.2); color: #FCA5A5; }
+    [data-theme="dark"] .nav-badge-purple { background: rgba(124,58,237,.2); color: #C4B5FD; }
+
+    .card-ei-detalhe-diag {
+      font-size: .9rem; color: var(--gray-800); line-height: 1.6;
+      margin-bottom: 2px;
+    }
     .btn-voltar {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 9px 16px 9px 12px;
@@ -1330,6 +1461,23 @@
           <span>Por Turma</span>
         </a>
       </div>
+      <div class="nav-section">
+        <div class="nav-section-label" aria-hidden="true">Informações</div>
+        <a class="nav-item" id="nav-avisos" role="menuitem"
+           onclick="showView('avisos')" tabindex="0"
+           aria-label="Avisos Ativos">
+          <i data-lucide="alert-triangle" width="16" height="16" aria-hidden="true"></i>
+          <span>Avisos</span>
+          <span id="nav-avisos-count" class="nav-badge-red" style="display:none;"></span>
+        </a>
+        <a class="nav-item" id="nav-inclusiva" role="menuitem"
+           onclick="showView('inclusiva')" tabindex="0"
+           aria-label="Educação Inclusiva">
+          <i data-lucide="heart-handshake" width="16" height="16" aria-hidden="true"></i>
+          <span>Educação Inclusiva</span>
+          <span id="nav-inclusiva-count" class="nav-badge-purple" style="display:none;"></span>
+        </a>
+      </div>
     </nav>
 
     <!-- ── Footer ──────────────────────────────────────────────── -->
@@ -1590,6 +1738,38 @@
         <div class="detail-layout" id="detalhe-content"></div>
       </div>
 
+      <!-- ── VIEW: AVISOS ──────────────────────────────────── -->
+      <div class="page-view" id="view-avisos">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Avisos Ativos</h2>
+            <p class="page-subtitle" id="avisos-subtitle"></p>
+          </div>
+        </div>
+        <div id="avisos-empty" class="empty-state" style="display:none;">
+          <i data-lucide="check-circle-2" width="48" height="48" style="margin:0 auto;color:var(--green-500);"></i>
+          <h3>Nenhum aviso ativo</h3>
+          <p>Todos os estudantes estão sem avisos no momento.</p>
+        </div>
+        <div class="student-grid" id="avisos-grid"></div>
+      </div>
+
+      <!-- ── VIEW: EDUCAÇÃO INCLUSIVA ─────────────────────── -->
+      <div class="page-view" id="view-inclusiva">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Educação Inclusiva</h2>
+            <p class="page-subtitle" id="inclusiva-subtitle"></p>
+          </div>
+        </div>
+        <div id="inclusiva-empty" class="empty-state" style="display:none;">
+          <i data-lucide="heart-handshake" width="48" height="48" style="margin:0 auto;color:var(--gray-300);"></i>
+          <h3>Nenhum estudante cadastrado</h3>
+          <p>Use o script insert_info.py para marcar estudantes da Educação Inclusiva.</p>
+        </div>
+        <div class="student-grid" id="inclusiva-grid"></div>
+      </div>
+
     </div><!-- /page -->
   </div><!-- /main -->
 </div><!-- /screen-app -->
@@ -1694,6 +1874,7 @@ async function initApp() {
   populateFilters();
   renderDashboard();
   updateUserUI();
+  atualizarBadgesSidebar();
 
   // 1.2 — Navegar para hash da URL se existir
   navegarPorHash();
@@ -1917,6 +2098,8 @@ function showView(view, pushHash = true) {
     alunos:    'Todos os Alunos',
     turmas:    'Por Turma',
     detalhe:   'Detalhes do Aluno',
+    avisos:    'Avisos Ativos',
+    inclusiva: 'Educação Inclusiva',
   };
   document.getElementById('topbar-title').textContent = titles[view] || view;
 
@@ -1925,8 +2108,10 @@ function showView(view, pushHash = true) {
     history.replaceState(null, '', `#${view}`);
   }
 
-  if (view === 'alunos') renderAlunos();
-  if (view === 'turmas') renderTurmaSelector();
+  if (view === 'alunos')    renderAlunos();
+  if (view === 'turmas')    renderTurmaSelector();
+  if (view === 'avisos')    renderAvisos();
+  if (view === 'inclusiva') renderInclusiva();
   if (window.innerWidth <= 768) closeSidebar();
   lucide.createIcons();
 }
@@ -1936,7 +2121,7 @@ function navegarPorHash() {
   const hash = window.location.hash.replace('#', '');
   if (!hash) return;
 
-  if (['dashboard','alunos','turmas'].includes(hash)) {
+  if (['dashboard','alunos','turmas','avisos','inclusiva'].includes(hash)) {
     showView(hash, false);
     return;
   }
@@ -1951,7 +2136,7 @@ function navegarPorHash() {
 // Listener para botão Voltar/Avançar do browser
 window.addEventListener('popstate', () => {
   const hash = window.location.hash.replace('#', '');
-  if (['dashboard','alunos','turmas'].includes(hash)) {
+  if (['dashboard','alunos','turmas','avisos','inclusiva'].includes(hash)) {
     showView(hash, false);
   }
 });
@@ -2455,9 +2640,59 @@ function openAluno(rm) {
       </div>`
     : '';
 
+  // ── Avisos ativos no detalhe ─────────────────────────────
+  const hoje2       = new Date().toISOString().split('T')[0];
+  const avisosAtivos = (aluno.avisos || []).filter(av => !av.data_fim || av.data_fim >= hoje2);
+  const tipoIcones  = { saude: '🏥', disciplinar: '⚠️', academico: '📚', geral: 'ℹ️' };
+
+  const blocoAvisos = avisosAtivos.length > 0 ? `
+    <div class="card-aviso-detalhe">
+      <div class="card-aviso-detalhe-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        AVISO${avisosAtivos.length > 1 ? 'S' : ''} ATIVO${avisosAtivos.length > 1 ? 'S' : ''}
+      </div>
+      ${avisosAtivos.map(av => {
+        const ic = { saude:'🏥', disciplinar:'⚠️', academico:'📚', geral:'ℹ️' }[av.tipo] || 'ℹ️';
+        const inicio = av.data_inicio
+          ? `<div class="card-aviso-detalhe-item">📅 Início: ${av.data_inicio}</div>` : '';
+        const fim = av.data_fim
+          ? `<div class="card-aviso-detalhe-item">📅 Término: ${av.data_fim}</div>` : '';
+        return `
+          <div class="card-aviso-detalhe-item">${ic} ${esc(av.texto)}</div>
+          ${inicio}${fim}`;
+      }).join('<div style="height:6px"></div>')}
+    </div>` : '';
+
+  const blocoEI = aluno.educacao_inclusiva ? (() => {
+    // Separar múltiplos diagnósticos por vírgula, ponto-e-vírgula ou "e"
+    const diag = (aluno.diagnostico || 'Diagnóstico não informado').trim();
+    const linhas = diag
+      .split(/,\s*(?=[A-ZÀÁÂÃ])|;\s*|(?<=\.)\s+(?=[A-ZÀÁÂÃ])/)
+      .map(d => d.trim())
+      .filter(Boolean);
+    const diagHtml = linhas.length > 1
+      ? linhas.map(l => `<div class="card-ei-detalhe-diag">• ${esc(l)}</div>`).join('')
+      : `<div class="card-ei-detalhe-diag">${esc(diag)}</div>`;
+    return `
+    <div class="card-ei-detalhe">
+      <div class="card-ei-detalhe-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        EDUCAÇÃO INCLUSIVA
+      </div>
+      ${diagHtml}
+    </div>`;
+  })() : '';
+
   document.getElementById('detalhe-content').innerHTML = `
-    <!-- Coluna foto -->
-    <div>
+    <!-- Coluna foto + avisos/EI -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
       <div class="detail-photo-card">
         ${fotoHtml}
         <div>
@@ -2470,6 +2705,8 @@ function openAluno(rm) {
           </div>
         </div>
       </div>
+      ${blocoAvisos}
+      ${blocoEI}
     </div>
 
     <!-- Coluna dados -->
@@ -2532,25 +2769,67 @@ function openAluno(rm) {
 /* ── Helpers de render ────────────────────────────────────────── */
 function renderStudentCard(a) {
   const rm = a.rm_estudante || a.matricula;
-  const fotoHtml = a.foto_coletada
-    ? `<img src="images/${rm}.jpg"
-           alt="${esc(a.nome_completo)}"
-           class="student-card-photo"
-           loading="lazy"
+
+  // ── Avisos ativos ────────────────────────────────────────
+  const hoje        = new Date().toISOString().split('T')[0];
+  const avisosAtiv  = (a.avisos || []).filter(av => !av.data_fim || av.data_fim >= hoje);
+  const temAviso    = avisosAtiv.length > 0;
+  const primeiroAv  = temAviso ? avisosAtiv[0] : null;
+
+  // ── EI ───────────────────────────────────────────────────
+  const isEI = !!a.educacao_inclusiva;
+
+  // ── Classes e badges ─────────────────────────────────────
+  const cardClasses = [
+    'student-card',
+    temAviso ? 'has-aviso' : '',
+    isEI     ? 'is-ei'     : '',
+  ].filter(Boolean).join(' ');
+
+  const badgeAviso = temAviso
+    ? `<span class="badge-aviso" title="${esc(primeiroAv.texto)}">
+        <svg width="8" height="8" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        AVISO
+      </span>` : '';
+
+  const badgeEI = isEI
+    ? `<span class="badge-ei" title="${esc(a.diagnostico || 'Educação Inclusiva')}">EI</span>`
+    : '';
+
+  // ── Foto ─────────────────────────────────────────────────
+  const fotoEl = a.foto_coletada
+    ? `<img src="images/${rm}.jpg" alt="${esc(a.nome_completo)}"
+           class="student-card-photo" loading="lazy"
            onerror="this.outerHTML='<div class=student-card-nophoto><i data-lucide=camera-off width=22 height=22></i></div>'">`
     : `<div class="student-card-nophoto">
         <i data-lucide="camera-off" width="22" height="22"></i>
       </div>`;
-  return `<div class="student-card" onclick="openAluno('${rm}')"
+
+  // ── Texto de aviso resumido — removido (mantém só badge + borda)
+
+  return `<div class="${cardClasses}" onclick="openAluno('${rm}')"
                role="button" tabindex="0" aria-label="${esc(a.nome_completo)}, ${esc(a.serie)} ${esc(a.turma)}">
-    ${fotoHtml}
+    <div class="student-photo-wrap">
+      ${fotoEl}
+      ${badgeAviso}
+      ${badgeEI}
+    </div>
     <div class="student-card-name">${esc(a.nome_completo)}</div>
     <div class="student-card-meta">${esc(a.serie)} ${esc(a.turma)}</div>
   </div>`;
 }
 
 function renderStudentRow(a) {
-  const rm = a.rm_estudante || a.matricula;
+  const rm   = a.rm_estudante || a.matricula;
+  const hoje = new Date().toISOString().split('T')[0];
+  const avisosAtiv = (a.avisos || []).filter(av => !av.data_fim || av.data_fim >= hoje);
+  const temAviso   = avisosAtiv.length > 0;
+  const isEI       = !!a.educacao_inclusiva;
+
   const mini = a.foto_coletada
     ? `<img src="images/${rm}.jpg" alt="" loading="lazy"
            style="width:32px;height:42px;object-fit:cover;border-radius:4px;border:1px solid var(--gray-200);"
@@ -2558,13 +2837,40 @@ function renderStudentRow(a) {
     : `<div style="width:32px;height:42px;border-radius:4px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;">
         <i data-lucide="camera-off" width="14" height="14" style="color:var(--gray-400);"></i>
       </div>`;
+
   const statusBadge = a.status === 'Ativo'
     ? `<span class="badge badge-green" style="font-size:.65rem;">Ativo</span>`
     : `<span class="badge badge-gray" style="font-size:.65rem;">${esc(a.status)}</span>`;
+
+  const avisoBadge = temAviso
+    ? `<span class="badge-pill aviso" title="${esc(avisosAtiv[0].texto)}">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Aviso
+      </span>` : '';
+
+  const eiBadge = isEI
+    ? `<span class="badge-pill ei" title="${esc(a.diagnostico || 'Educação Inclusiva')}">EI</span>`
+    : '';
+
+  const infoBadges = (avisoBadge || eiBadge)
+    ? `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:2px;">${avisoBadge}${eiBadge}</div>`
+    : '';
+
+  const rowStyle = temAviso
+    ? 'border-left: 3px solid #ED1C24;'
+    : (isEI ? 'border-left: 3px solid #7C3AED;' : '');
+
   return `<tr onclick="openAluno('${rm}')" role="row" tabindex="0"
+              style="${rowStyle}"
               onkeydown="if(event.key==='Enter')openAluno('${rm}')">
     <td>${mini}</td>
-    <td><strong>${esc(a.nome_completo)}</strong></td>
+    <td>
+      <strong>${esc(a.nome_completo)}</strong>
+      ${infoBadges}
+    </td>
     <td style="font-family:monospace;font-size:.82rem;">${esc(rm)}</td>
     <td>${esc(a.serie)} ${esc(a.turma)}</td>
     <td>${esc(a.turno)}</td>
@@ -2621,25 +2927,52 @@ function esc(str) {
 }
 
 function sortTurmas(turmas) {
-  const seriesOrdem = (APP.config?.series_ordem) || [];
-  return turmas.sort((a, b) => {
+  // Ordem canônica das séries — deve corresponder exatamente ao config.json
+  const ORDEM = [
+    '6º Ano', '7º Ano', '8º Ano', '9º Ano',
+    '1ª Série', '2ª Série', '3ª Série',
+  ];
+  // Fallback: usar series_ordem do config se existir
+  const seriesOrdem = (APP.config?.series_ordem?.length)
+    ? APP.config.series_ordem
+    : ORDEM;
+
+  return [...turmas].sort((a, b) => {
+    // 1ª chave: posição da série na ordem canônica
     const ia = seriesOrdem.indexOf(a.serie);
     const ib = seriesOrdem.indexOf(b.serie);
     const sa = ia >= 0 ? ia : 99;
     const sb = ib >= 0 ? ib : 99;
     if (sa !== sb) return sa - sb;
-    if (a.turma < b.turma) return -1;
-    if (a.turma > b.turma) return 1;
-    return a.turno.localeCompare(b.turno);
+
+    // 2ª chave: turma (A < B < C ...)
+    const ta = (a.turma || '').toUpperCase();
+    const tb = (b.turma || '').toUpperCase();
+    if (ta < tb) return -1;
+    if (ta > tb) return 1;
+
+    // 3ª chave: turno (Manhã < Tarde < Integral)
+    const TURNO_ORDEM = { 'Manhã': 0, 'Tarde': 1, 'Integral': 2 };
+    const toa = TURNO_ORDEM[a.turno] ?? 9;
+    const tob = TURNO_ORDEM[b.turno] ?? 9;
+    return toa - tob;
   });
 }
 
 function serieSort(a, b) {
-  const ordens = APP.config?.series_ordem || [];
+  const ORDEM = [
+    '6º Ano', '7º Ano', '8º Ano', '9º Ano',
+    '1ª Série', '2ª Série', '3ª Série',
+  ];
+  const ordens = (APP.config?.series_ordem?.length)
+    ? APP.config.series_ordem
+    : ORDEM;
   const ia = ordens.indexOf(a);
   const ib = ordens.indexOf(b);
   if (ia >= 0 && ib >= 0) return ia - ib;
-  return a.localeCompare(b);
+  if (ia >= 0) return -1;
+  if (ib >= 0) return 1;
+  return a.localeCompare(b, 'pt-BR');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2867,6 +3200,79 @@ function removerSkeleton() {
   document.querySelectorAll('#dash-stats .skeleton-pulse').forEach(card => {
     card.classList.remove('skeleton-pulse');
   });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VIEW: AVISOS ATIVOS
+═══════════════════════════════════════════════════════════════ */
+function renderAvisos() {
+  const hoje = new Date().toISOString().split('T')[0];
+  const comAviso = APP.alunos.filter(a =>
+    (a.avisos || []).some(av => !av.data_fim || av.data_fim >= hoje)
+  );
+
+  const subtitle = document.getElementById('avisos-subtitle');
+  if (subtitle) subtitle.textContent =
+    comAviso.length > 0
+      ? `${comAviso.length} estudante(s) com aviso ativo`
+      : 'Nenhum aviso ativo no momento';
+
+  const grid  = document.getElementById('avisos-grid');
+  const empty = document.getElementById('avisos-empty');
+
+  if (comAviso.length === 0) {
+    grid.innerHTML  = '';
+    empty.style.display = '';
+  } else {
+    empty.style.display = 'none';
+    grid.innerHTML = comAviso.map(renderStudentCard).join('');
+    lucide.createIcons();
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VIEW: EDUCAÇÃO INCLUSIVA
+═══════════════════════════════════════════════════════════════ */
+function renderInclusiva() {
+  const inclusivos = APP.alunos.filter(a => a.educacao_inclusiva);
+
+  const subtitle = document.getElementById('inclusiva-subtitle');
+  if (subtitle) subtitle.textContent =
+    inclusivos.length > 0
+      ? `${inclusivos.length} estudante(s) da Educação Inclusiva`
+      : 'Nenhum estudante cadastrado';
+
+  const grid  = document.getElementById('inclusiva-grid');
+  const empty = document.getElementById('inclusiva-empty');
+
+  if (inclusivos.length === 0) {
+    grid.innerHTML  = '';
+    empty.style.display = '';
+  } else {
+    empty.style.display = 'none';
+    grid.innerHTML = inclusivos.map(renderStudentCard).join('');
+    lucide.createIcons();
+  }
+}
+
+/* ── Atualizar badges de contagem na sidebar ───────────────── */
+function atualizarBadgesSidebar() {
+  const hoje = new Date().toISOString().split('T')[0];
+  const nAvisos = APP.alunos.filter(a =>
+    (a.avisos || []).some(av => !av.data_fim || av.data_fim >= hoje)
+  ).length;
+  const nEI = APP.alunos.filter(a => a.educacao_inclusiva).length;
+
+  const badgeAv = document.getElementById('nav-avisos-count');
+  if (badgeAv) {
+    badgeAv.textContent    = nAvisos;
+    badgeAv.style.display  = nAvisos > 0 ? '' : 'none';
+  }
+  const badgeEI = document.getElementById('nav-inclusiva-count');
+  if (badgeEI) {
+    badgeEI.textContent    = nEI;
+    badgeEI.style.display  = nEI > 0 ? '' : 'none';
+  }
 }
 
 /* ── Toast ────────────────────────────────────────────────────── */

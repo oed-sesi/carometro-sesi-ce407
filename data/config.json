@@ -377,13 +377,6 @@
         "nome": "Marcia Cristina Gansella da Rocha Segnini",
         "funcao": "Secretária",
         "perfil": "viewer"
-      },
-      {
-        "usuario": "1065452",
-        "senha_hash": "7dfcd654e7fa5814be891389571a03f5ccf6b16fa390813f1aaebaf72e497b12",
-        "nome": "Samuel Luiz Faria Marciano",
-        "funcao": "Analista Tecnico Educacional",
-        "perfil": "viewer"
       }
     ]
   },
@@ -392,8 +385,8 @@
     "7º Ano",
     "8º Ano",
     "9º Ano",
-    "1º EM",
-    "2º EM",
-    "3º EM"
+    "1ª Série",
+    "2ª Série",
+    "3ª Série"
   ]
 }

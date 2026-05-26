@@ -73,6 +73,10 @@ SCHEMA_V53: dict[str, object] = {
     "observacoes":      "",
     "termo_autorizado": False,
     "foto_coletada":    False,
+    # Campos especiais
+    "avisos":            [],
+    "educacao_inclusiva": False,
+    "diagnostico":       "",
 }
 
 CAMPOS_NOVOS = ["nu_chamada", "rg_estudante", "uf_rg", "org_emissor_rg", "cpf_estudante"]

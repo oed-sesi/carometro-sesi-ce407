@@ -441,6 +441,10 @@ def construir_aluno(row: dict, num_linha: int) -> dict | None:
         "observacoes":      clean(row.get("observacoes", "")),
         "termo_autorizado": parse_bool(row.get("termo_autorizado", "")),
         "foto_coletada":    parse_bool(row.get("foto_coletada", "")),
+        # ── Campos especiais ───────────────────────────────────
+        "avisos":            [],      # gerenciado via scripts/insert_info.py
+        "educacao_inclusiva": False,  # gerenciado via scripts/insert_info.py
+        "diagnostico":       "",     # gerenciado via scripts/insert_info.py
     }
 
 # ── Organizar imagens por turma ────────────────────────────────────────────────
