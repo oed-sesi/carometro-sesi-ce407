@@ -260,13 +260,6 @@
         "perfil": "viewer"
       },
       {
-        "usuario": "1069866",
-        "senha_hash": "7bf0f517e85c675be4a2cb93b696034bbadd40f70012cd960e2b1570d4506401",
-        "nome": "Patricia Rodrigues",
-        "funcao": "Inspetora",
-        "perfil": "viewer"
-      },
-      {
         "usuario": "1102230",
         "senha_hash": "cef2144058459f1055e676f934d2b064f9f8a8376e3911f182eb9d47cbce21dd",
         "nome": "Paulina Inácio da Silva",
@@ -376,6 +369,27 @@
         "senha_hash": "e9ebb17d9bcfb9580490af7dc91fc5ff2f19eaaa8e18fdcda255bc9d44252b56",
         "nome": "Marcia Cristina Gansella da Rocha Segnini",
         "funcao": "Secretária",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1109815",
+        "senha_hash": "b804968033f822b077d0421238485a0620d3d59982246582104e325fe99364ff",
+        "nome": "Bruna Gargarella",
+        "funcao": "Professora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1109895",
+        "senha_hash": "5a8b0fffb14538066f990a6b3557dbd2ef3871eafac2d78207df3e8f4b0eed99",
+        "nome": "Luna Fermino Nunes Pereira",
+        "funcao": "Inspetora",
+        "perfil": "viewer"
+      },
+      {
+        "usuario": "1109391",
+        "senha_hash": "d2b182f39cf8f11601918b3ea6288a3bfc33ece9105bb6165b78c114539a9fe4",
+        "nome": "Herus Alexandrin Oliveira",
+        "funcao": "Professor",
         "perfil": "viewer"
       }
     ]
